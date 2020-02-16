@@ -5,18 +5,18 @@ package com.sjl.community.model;
  * @create 2020/2/16 13:18
  */
 public class User {
-    private Integer id;
+    private Long id;
     private String accountId;
     private String name;
     private String token;
     private Long gmtCreate;
     private Long gmtModified;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

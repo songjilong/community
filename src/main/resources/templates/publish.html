@@ -6,6 +6,7 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/community.css">
     <script src="/js/bootstrap.min.js"></script>
 
 </head>
@@ -50,6 +51,37 @@
         </div>
     </div>
 </nav>
+
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-10 col-sm-12 col-xs-12">
+            <h3><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h3>
+            <hr>
+            <form action="/publish" method="post">
+                <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}">Hello</div>
+                <div class="form-group">
+                    <label for="title">问题标题（简单扼要）</label>
+                    <input type="text" class="form-control" id="title" name="title" th:value="${title}" placeholder="输入问题标题">
+                </div>
+                <div class="form-group">
+                    <label for="description">问题描述（必填，请根据右侧描述填写）</label>
+                    <textarea class="form-control" rows="10" id="description" name="description" th:text="${description}" placeholder="输入问题描述"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">添加标签</label>
+                    <input type="text" class="form-control" id="tags" name="tags" th:value="${tags}"  placeholder="输入标签，以逗号分隔">
+                </div>
+                <button type="submit" class="btn btn-success btn-publish">发布</button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-12 col-xs-12">
+            <h2>问题发起指南</h2>
+            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字<br>
+            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料<br>
+            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字<br>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
