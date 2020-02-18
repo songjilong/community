@@ -23,7 +23,7 @@ public class GithubProvider {
     /**
      * 获取AccessToken
      */
-    public String getAccessToken(AccessTokenDto accessTokenDto){
+    public String getAccessToken(AccessTokenDto accessTokenDto) {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         //将accessTokenDto转为json字符串传入参数
@@ -37,7 +37,7 @@ public class GithubProvider {
             //得到的是类似这样的字符串，我们需要将它分割，只要access_token部分
             //access_token=9566ba3483a556c610be42d44338f3fd16a3b8d1&scope=&token_type=bearer
             return str.split("&")[0].split("=")[1];
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -45,13 +45,14 @@ public class GithubProvider {
 
     /**
      * 根据access_token获取用户信息
+     *
      * @param access_token
      * @return
      */
-    public GithubUser getGithubUser(String access_token){
+    public GithubUser getGithubUser(String access_token) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(githubParams.getUser_uri()+"?access_token="+access_token)
+                .url(githubParams.getUser_uri() + access_token)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {

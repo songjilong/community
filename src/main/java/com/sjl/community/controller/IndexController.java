@@ -1,13 +1,13 @@
 package com.sjl.community.controller;
 
-import com.sjl.community.mapper.UserMapper;
-import com.sjl.community.model.User;
+import com.sjl.community.dto.PaginationDto;
+import com.sjl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -17,22 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
+
     @Autowired
-    private UserMapper userMapper;
+    private QuestionService questionService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request) {
-        for(Cookie cookie : request.getCookies()){
-            if("token".equals(cookie.getName())){
-                String token = cookie.getValue();
-                User user  = userMapper.findByToken(token);
-//                System.out.println(user);
-                if(user != null){
-                    request.getSession().setAttribute("user", user);
-                }
-                break;
-            }
-        }
+    public String index(HttpServletRequest request, Model model,
+                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+
+        //添加问题信息
+        PaginationDto pageInfo = questionService.findAll(pageNum, pageSize);
+
+        //添加到model作用域
+        model.addAttribute("pageInfo", pageInfo);
         return "index";
     }
 }

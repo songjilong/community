@@ -10,16 +10,16 @@
     <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div th:insert="top_navigation::top_nav"></div>
+<div th:insert="top_navigation::nav"></div>
 <div class="container-fluid main">
-    <div class="row">
+    <div class="row profile">
         <div class="col-lg-9 col-md-10 col-sm-12 col-xs-12">
-            <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;发现</h3>
+            <h3 th:text="${section}">我的提问</h3>
             <hr>
             <div class="media" th:each="info : ${pageInfo.list}">
                 <div class="media-left">
                     <a href="#">
-                        <img class="media-object img-rounded user_avatar" th:src="${info.user.avatarUrl} == null ? '' : ${info.user.avatarUrl}" alt="...">
+                        <img class="media-object img-rounded user_avatar" th:src="${info.user.avatarUrl}" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
@@ -31,8 +31,15 @@
             <div th:replace="page_navigation::page_nav"></div>
         </div>
         <div class="col-lg-3 col-md-2 col-sm-12 col-xs-12">
-            <h3>官方微信</h3>
-            <h3>热门标签</h3>
+            <div class="list-group section">
+                <a th:href="@{/profile/questions}" class="list-group-item" th:classappend="${section.equals('我的提问')} ?  'active' : ''">
+                    我的提问
+                </a>
+                <a th:href="@{/profile/replies}" class="list-group-item" th:classappend="${section.equals('最新回复')} ?  'active' : ''">
+                    <span class="badge">66</span>
+                    最新回复
+                </a>
+            </div>
         </div>
     </div>
 </div>

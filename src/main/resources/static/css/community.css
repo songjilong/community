@@ -1,5 +1,6 @@
 body{
     background-color: #EFEFEF;
+    background-image: url("/img/bg.jpg");
 }
 .main{
     margin: 40px;
@@ -8,4 +9,19 @@ body{
 .btn-publish{
     float: right;
     margin-bottom: 15px;
+}
+.user_avatar{
+    width: 40px;
+    height: 40px;
+}
+.question_info{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+.page-bar{
+    float: right;
+}
+.profile .select{
+    margin-top: 20px;
 }
