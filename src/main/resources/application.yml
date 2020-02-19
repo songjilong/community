@@ -1,6 +1,5 @@
 server:
   port: 8887
-
 #禁用Thymeleaf模板缓存
 spring:
   thymeleaf:

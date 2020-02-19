@@ -31,6 +31,8 @@ public class QuestionController {
         QuestionDto questionDto = questionService.findById(id);
         //存入model作用域
         model.addAttribute("questionDto", questionDto);
+        //增加阅读数
+        questionService.addViewCount(id);
         return "question";
     }
 }

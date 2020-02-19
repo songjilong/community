@@ -22,8 +22,10 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 [Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/)  
 [Mybatis官方文档](https://mybatis.org/mybatis-3/zh/index.html)  
 [Thymeleaf官方文档](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)  
+[Mybatis Generator官方文档](http://mybatis.org/generator/)   
 [MySQL菜鸟教程](https://www.runoob.com/mysql/mysql-tutorial.html)  
 [BootStrap官方教程](https://v3.bootcss.com/components/)  
+[springboot_learn，一个大佬写的关于Spring Boot各种实践demo](https://gitee.com/dalaoyang/springboot_learn)
 
 ## 常见问题解决
 [Github登录流程分析](https://www.cnblogs.com/songjilong/p/12309552.html)  

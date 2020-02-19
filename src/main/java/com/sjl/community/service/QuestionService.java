@@ -2,6 +2,7 @@ package com.sjl.community.service;
 
 import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
+import com.sjl.community.mapper.QuestionExtMapper;
 import com.sjl.community.mapper.QuestionMapper;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.Question;
@@ -27,6 +28,9 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     /**
      * 查询分页信息
@@ -140,5 +144,16 @@ public class QuestionService {
             questionExample.createCriteria().andIdEqualTo(question.getId());
             questionMapper.updateByExampleSelective(question, questionExample);
         }
+    }
+
+    /**
+     * 增加阅读数
+     * @param id
+     */
+    public void addViewCount(Long id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.addViewCount(question);
     }
 }
