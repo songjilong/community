@@ -1,14 +1,17 @@
 package com.sjl.community.controller;
 
+import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.mapper.QuestionMapper;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.Question;
 import com.sjl.community.model.User;
+import com.sjl.community.service.QuestionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,26 +23,38 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class PublishController {
-
     @Autowired
-    private QuestionMapper questionMapper;
-    @Autowired
-    private UserMapper userMapper;
+    private QuestionService questionService;
 
     @GetMapping("/publish")
     public String publish() {
         return "publish";
     }
 
+    /**
+     * 发布问题
+     * @param id
+     * @param title
+     * @param description
+     * @param tags
+     * @param model
+     * @param request
+     * @return
+     */
     @PostMapping("/publish")
     public String doPublish(
-            @RequestParam("title") String title,
-            @RequestParam("description") String description,
-            @RequestParam("tags") String tags,
+            @RequestParam(value = "id", required = false) Long id,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "tags", required = false) String tags,
             Model model,
             HttpServletRequest request) {
         //从session中获取user
         User user = (User) request.getSession().getAttribute("user");
+
+        model.addAttribute("title", title);
+        model.addAttribute("description", description);
+        model.addAttribute("tags", tags);
 
         //错误信息
         if (user == null) {
@@ -60,21 +75,35 @@ public class PublishController {
             return "publish";
         }
 
-        model.addAttribute("title", title);
-        model.addAttribute("description", description);
-        model.addAttribute("tags", tags);
-
         //添加数据
         Question question = new Question();
-        question.setTitle(title);
+        question.setId(id);
+        question.setTitle(title.trim());
         question.setDescription(description);
         question.setTags(tags);
         question.setCreator(user.getId());
-        question.setGmtCreate(System.currentTimeMillis());
-        question.setGmtModified(question.getGmtCreate());
-        //存入数据库
-        questionMapper.insertQuestion(question);
+
+        questionService.createOrUpdateQuestion(question);
+
         //发布成功，返回主页面
         return "redirect:/";
+    }
+
+
+    /**
+     * 修改问题
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("/publish/{id}")
+    public String edit(@PathVariable("id") Long id, Model model){
+        //通过问题id查找问题，存入作用域
+        QuestionDto question = questionService.findById(id);
+        model.addAttribute("id", question.getId());
+        model.addAttribute("title", question.getTitle());
+        model.addAttribute("description", question.getDescription());
+        model.addAttribute("tags", question.getTags());
+        return "publish";
     }
 }

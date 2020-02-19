@@ -1,9 +1,10 @@
 body{
-    background-color: #EFEFEF;
     background-image: url("/img/bg.jpg");
 }
 .main{
-    margin: 40px;
+    margin-top: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
     background-color: white;
 }
 .btn-publish{
@@ -19,9 +20,18 @@ body{
     font-weight: normal;
     color: #999;
 }
+.question_text{
+    font-size: 13px;
+    color: #999;
+}
 .page-bar{
     float: right;
 }
-.profile .select{
+.page_left{
+    border-right: 1px solid #D2D2D2;
+}
+.page_right{
+}
+.creator_card{
     margin-top: 20px;
 }

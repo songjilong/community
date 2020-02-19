@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>甲壳虫社区</title>
+    <title>甲壳虫社区-[[${sectionName}]]</title>
     <script src="/js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.css">
@@ -10,32 +10,24 @@
     <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div th:insert="top_navigation::nav"></div>
+<!--顶部导航栏-->
+<div th:insert="fragment_top_navigation::nav"></div>
 <div class="container-fluid main">
-    <div class="row profile">
-        <div class="col-lg-9 col-md-10 col-sm-12 col-xs-12">
-            <h3 th:text="${section}">我的提问</h3>
+    <div class="row">
+        <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
+            <h3 th:text="${sectionName}">我的提问</h3>
             <hr>
-            <div class="media" th:each="info : ${pageInfo.list}">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object img-rounded user_avatar" th:src="${info.user.avatarUrl}" alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading" th:text="${info.title}">怎么学习spring boot</h4>
-                    <span class="question_info">[[${info.tags}]] • [[${info.commentCount}]] 个评论 • [[${info.viewCount}]] 次浏览 • [[${#dates.format(info.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
-                    <hr>
-                </div>
-            </div>
-            <div th:replace="page_navigation::page_nav"></div>
+            <!--问题列表-->
+            <div th:replace="fragment_question_list::question_list"></div>
+            <!--分页栏-->
+            <div th:replace="fragment_page_navigation::page_nav"></div>
         </div>
-        <div class="col-lg-3 col-md-2 col-sm-12 col-xs-12">
-            <div class="list-group section">
-                <a th:href="@{/profile/questions}" class="list-group-item" th:classappend="${section.equals('我的提问')} ?  'active' : ''">
+        <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
+            <div class="list-group" style="margin-top: 20px">
+                <a th:href="@{/profile/questions}" class="list-group-item" th:classappend="${section.equals('questions')} ?  'active' : ''">
                     我的提问
                 </a>
-                <a th:href="@{/profile/replies}" class="list-group-item" th:classappend="${section.equals('最新回复')} ?  'active' : ''">
+                <a th:href="@{/profile/replies}" class="list-group-item" th:classappend="${section.equals('replies')} ?  'active' : ''">
                     <span class="badge">66</span>
                     最新回复
                 </a>

@@ -4,6 +4,7 @@ import com.sjl.community.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * @author song
@@ -20,4 +21,10 @@ public interface UserMapper {
 
     @Select("select * from user where id = #{id}")
     User findById(Long id);
+
+    @Select("select * from user where account_id = #{accountId}")
+    User findByAccountId(String accountId);
+
+    @Update("update user set name=#{name}, bio=#{bio}, token=#{token}, avatar_url=#{avatarUrl}, gmt_modified=#{gmtModified} where account_id=#{accountId}")
+    void updateUser(User dbUser);
 }

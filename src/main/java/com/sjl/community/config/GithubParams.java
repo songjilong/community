@@ -16,6 +16,4 @@ public class GithubParams {
     private String client_id;
     private String client_secret;
     private String redirect_uri;
-    private String token_uri;
-    private String user_uri;
 }

@@ -25,7 +25,5 @@ pagehelper:
 # 自定义参数配置
 github:
   client_id: b3118b6cffce13fd5b90
-  client_secret: 8563567bd5aaf80204420cf61002303fdce4f431
+  client_secret: 9f1aecb40972c18e89eab70f3612af47d3aa2272
   redirect_uri: http://localhost:8887/callback
-  token_uri: https://github.com/login/oauth/access_token
-  user_uri: https://api.github.com/user?access_token=

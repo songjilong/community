@@ -6,6 +6,7 @@ import com.sjl.community.dto.GithubUser;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.User;
 import com.sjl.community.provider.GithubProvider;
+import com.sjl.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,20 +23,18 @@ import java.util.UUID;
  */
 @Controller
 public class AuthoriseController {
-
     @Autowired
     private GithubProvider githubProvider;
-
     @Autowired
     private GithubParams githubParams;
-
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/callback")
     public String callback(@RequestParam("code") String code,
                            @RequestParam("state") String state,
-                           HttpServletRequest request,
                            HttpServletResponse response) {
         AccessTokenDto accessTokenDto = new AccessTokenDto();
         accessTokenDto.setClient_id(githubParams.getClient_id());
@@ -43,27 +42,27 @@ public class AuthoriseController {
         accessTokenDto.setCode(code);
         accessTokenDto.setRedirect_uri(githubParams.getRedirect_uri());
         accessTokenDto.setState(state);
+
         //获取access_token
         String access_token = githubProvider.getAccessToken(accessTokenDto);
         //根据accessToken获取用户信息
         GithubUser githubUser = githubProvider.getGithubUser(access_token);
-        if (githubUser != null) {
+
+        if (githubUser != null && access_token != null) {
             //设置user信息
             User user = new User();
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setName(githubUser.getName());
+            user.setBio(githubUser.getBio());
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatarUrl());
-            //将用户信息存入数据库
-            userMapper.insertUser(user);
+            userService.createOrUpdateUser(user);
             //将token存入cookie
             response.addCookie(new Cookie("token", token));
             return "redirect:/";
         } else {
-            return "redirect:/";
+            return "loginError";
         }
     }
 }

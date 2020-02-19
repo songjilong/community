@@ -13,6 +13,7 @@ public class User implements Serializable {
     private Long id;
     private String accountId;
     private String name;
+    private String bio;
     private String token;
     private Long gmtCreate;
     private Long gmtModified;

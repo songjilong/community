@@ -17,9 +17,6 @@ import java.io.IOException;
 @Component
 public class GithubProvider {
 
-    @Autowired
-    private GithubParams githubParams;
-
     /**
      * 获取AccessToken
      */
@@ -29,7 +26,7 @@ public class GithubProvider {
         //将accessTokenDto转为json字符串传入参数
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDto));
         Request request = new Request.Builder()
-                .url(githubParams.getToken_uri())
+                .url("https://github.com/login/oauth/access_token")
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
@@ -52,15 +49,15 @@ public class GithubProvider {
     public GithubUser getGithubUser(String access_token) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(githubParams.getUser_uri() + access_token)
+                .url("https://api.github.com/user")
+                .header("Authorization","token "+access_token)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             //得到的是json字符串，因此需要转为GithubUser对象
             return JSON.parseObject(response.body().string(), GithubUser.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }

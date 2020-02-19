@@ -1,7 +1,5 @@
 package com.sjl.community.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.mapper.QuestionMapper;
@@ -11,7 +9,6 @@ import com.sjl.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +73,13 @@ public class QuestionService {
         return pageInfo;
     }
 
+    /**
+     * 根据发起人id查询 问题分页信息
+     * @param pageNum
+     * @param pageSize
+     * @param id
+     * @return
+     */
     public PaginationDto findByCreatorId(Integer pageNum, Integer pageSize, Long id) {
         //问题列表信息
         List<QuestionDto> questionDtos = new ArrayList<>();
@@ -120,5 +124,38 @@ public class QuestionService {
         pageInfo.setList(questionDtos);
 
         return pageInfo;
+    }
+
+    /**
+     * 根据问题id查询 问题详情
+     * @param id
+     * @return
+     */
+    public QuestionDto findById(Long id) {
+        QuestionDto questionDto = new QuestionDto();
+        //查询问题信息
+        Question question = questionMapper.findById(id);
+        //放入返回结果对象
+        BeanUtils.copyProperties(question, questionDto);
+        //通过创建人id查出用户
+        User user = userMapper.findById(question.getCreator());
+        //放入返回结果
+        questionDto.setUser(user);
+        return questionDto;
+    }
+
+    /**
+     * 根据id是否存在，创建或修改问题
+     * @param question
+     */
+    public void createOrUpdateQuestion(Question question) {
+        if(question.getId() == null){
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.insertQuestion(question);
+        }else{
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.updateQuestion(question);
+        }
     }
 }

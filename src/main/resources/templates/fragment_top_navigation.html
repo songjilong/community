@@ -34,11 +34,11 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/profile/questions}">个人中心</a></li>
-                            <li><a href="#">退出登陆</a></li>
+                            <li><a th:href="@{/logout}">退出登录</a></li>
                         </ul>
                     </li>
                     <li th:if="${session.user == null}">
-                        <a href="https://github.com/login/oauth/authorize?client_id=b3118b6cffce13fd5b90&redirect_uri=http://localhost:8887/callback&state=1">登陆</a>
+                        <a href="https://github.com/login/oauth/authorize?client_id=b3118b6cffce13fd5b90&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
                     </li>
                 </ul>
             </div>
