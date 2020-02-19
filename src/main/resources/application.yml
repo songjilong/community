@@ -25,5 +25,5 @@ pagehelper:
 # 自定义参数配置
 github:
   client_id: b3118b6cffce13fd5b90
-  client_secret: 9f1aecb40972c18e89eab70f3612af47d3aa2272
+  client_secret: aaee4157466a3717487cc67db0885a9a3a45e1c6
   redirect_uri: http://localhost:8887/callback

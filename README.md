@@ -1,5 +1,5 @@
 ## 说明
-**甲壳虫问答社区（Beetle Community）**  
+**甲壳虫社区（Beetle Community）**  
 一个专注IT技术问答社区
 
 ## 使用技术
@@ -21,7 +21,7 @@ Flyway
 [MySQL菜鸟教程](https://www.runoob.com/mysql/mysql-tutorial.html)  
 [BootStrap官方教程](https://v3.bootcss.com/components/)  
 
-## 问题
+## 常见问题解决
 [Github登录流程分析](https://www.cnblogs.com/songjilong/p/12309552.html)  
 [Github更新官方推荐的使用access_token安全访问API的方式，用Authorization HTTP header代替query paramet，旧方式即将被废弃](https://blog.csdn.net/kuaileky/article/details/104217757)  
 
