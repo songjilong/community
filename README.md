@@ -11,7 +11,11 @@
 ## 工具
 Git  
 Lombok  
-Flyway  
+Flyway
+
+## 命令
+运行Flyway：`mvn flyway:migrate`  
+Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate`
 
 ## 参考
 [Github第三方登录官方教程](https://developer.github.com/apps/)  
@@ -24,4 +28,7 @@ Flyway
 ## 常见问题解决
 [Github登录流程分析](https://www.cnblogs.com/songjilong/p/12309552.html)  
 [Github更新官方推荐的使用access_token安全访问API的方式，用Authorization HTTP header代替query paramet，旧方式即将被废弃](https://blog.csdn.net/kuaileky/article/details/104217757)  
+[Mybatis Generator配置文件内容详解](https://www.jianshu.com/p/a8bfc14a3534)     
+[Springboot mybatis集成 Invalid bound statement (not found)](https://blog.csdn.net/qq_35981283/article/details/78590090)    
+[MyBatis Generator实现MySQL分页插件](https://blog.csdn.net/xiao__gui/article/details/51333693)    
 

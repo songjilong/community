@@ -2,8 +2,11 @@ package com.sjl.community.service;
 
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.User;
+import com.sjl.community.model.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author song
@@ -21,21 +24,26 @@ public class UserService {
      */
     public void createOrUpdateUser(User user) {
         //获取数据库里的user
-        User dbUser = userMapper.findByAccountId(user.getAccountId());
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andAccountIdEqualTo(user.getAccountId());
+        List<User> users = userMapper.selectByExample(userExample);
 
-        if(dbUser == null){
+        if(users.size() == 0){
             //创建，创建时间修改时间均设置为当前时间
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
-            userMapper.insertUser(user);
+            userMapper.insert(user);
         }else{
+            User dbUser = users.get(0);
             //更新修改时间和头像
             dbUser.setGmtModified(System.currentTimeMillis());
             dbUser.setName(user.getName());
             dbUser.setBio(user.getBio());
             dbUser.setToken(user.getToken());
             dbUser.setAvatarUrl(user.getAvatarUrl());
-            userMapper.updateUser(dbUser);
+            UserExample userExample1 = new UserExample();
+            userExample1.createCriteria().andIdEqualTo(dbUser.getId());
+            userMapper.updateByExampleSelective(dbUser, userExample1);
         }
     }
 }

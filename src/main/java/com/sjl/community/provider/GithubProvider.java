@@ -1,11 +1,9 @@
 package com.sjl.community.provider;
 
 import com.alibaba.fastjson.JSON;
-import com.sjl.community.config.GithubParams;
 import com.sjl.community.dto.AccessTokenDto;
 import com.sjl.community.dto.GithubUser;
 import okhttp3.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

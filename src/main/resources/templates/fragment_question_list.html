@@ -4,7 +4,7 @@
 <div th:fragment="question_list" class="media" th:each="info : ${pageInfo.list}">
     <div class="media-left">
         <a href="#">
-            <img class="media-object img-rounded user_avatar" th:src="${info.user.avatarUrl} == null ? '' : ${info.user.avatarUrl}" alt="...">
+            <img class="media-object img-rounded user_avatar" th:src="${info.user.avatarUrl} == null ? '' : ${info.user.avatarUrl}" alt="找不到了...">
         </a>
     </div>
     <div class="media-body">

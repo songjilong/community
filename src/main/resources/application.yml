@@ -10,19 +10,15 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+
 # 开启mybatis驼峰标识
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sjl.community.mapper
 
-#配置pagehelper
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: countSql
-
-# 自定义参数配置
+# Github登录需要的参数
 github:
   client_id: b3118b6cffce13fd5b90
   client_secret: aaee4157466a3717487cc67db0885a9a3a45e1c6
