@@ -40,9 +40,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/profile/questions}">个人中心</a></li>
-                            <li><a th:href="@{/logout}">退出登录</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a th:href="@{/logout}">退出登录</a></li>
                         </ul>
                     </li>
                     <li th:if="${session.user == null}">

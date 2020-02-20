@@ -11,20 +11,21 @@
 ## 工具
 Git  
 Lombok  
-Flyway
-
+Flyway  
+postman（插件版）(https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)网页版postman可以共享浏览器session，比较方便
 ## 命令
 运行Flyway：`mvn flyway:migrate`  
 Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate`
 
 ## 参考
-[Github第三方登录官方教程](https://developer.github.com/apps/)  
 [Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/)  
+[BootStrap官方教程](https://v3.bootcss.com/components/)  
+[Github第三方登录官方教程](https://developer.github.com/apps/)  
 [Mybatis官方文档](https://mybatis.org/mybatis-3/zh/index.html)  
 [Thymeleaf官方文档](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)  
 [Mybatis Generator官方文档](http://mybatis.org/generator/)   
 [MySQL菜鸟教程](https://www.runoob.com/mysql/mysql-tutorial.html)  
-[BootStrap官方教程](https://v3.bootcss.com/components/)  
+[Lombok官网](https://projectlombok.org/)  
 [springboot_learn，一个大佬写的关于Spring Boot各种实践demo](https://gitee.com/dalaoyang/springboot_learn)
 
 ## 常见问题解决

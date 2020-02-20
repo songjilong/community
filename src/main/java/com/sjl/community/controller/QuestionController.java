@@ -1,8 +1,6 @@
 package com.sjl.community.controller;
 
 import com.sjl.community.dto.QuestionDto;
-import com.sjl.community.exception.CustomizeErrorCode;
-import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
