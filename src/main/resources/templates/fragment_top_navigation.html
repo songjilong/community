@@ -23,6 +23,12 @@
                     <button type="submit" class="btn btn-default">搜索</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
+                    <li th:if="${session.user == null}">
+                        <a>本站源码</a>
+                    </li>
+                    <li th:if="${session.user != null}">
+                        <a href="https://github.com/songjilong/community">本站源码</a>
+                    </li>
                     <li th:if="${session.user != null}">
                         <a th:href="@{/publish}">提问</a>
                     </li>
@@ -35,6 +41,8 @@
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/profile/questions}">个人中心</a></li>
                             <li><a th:href="@{/logout}">退出登录</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
                         </ul>
                     </li>
                     <li th:if="${session.user == null}">

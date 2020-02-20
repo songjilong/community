@@ -3,7 +3,6 @@ package com.sjl.community.interceptor;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.User;
 import com.sjl.community.model.UserExample;
-import org.omg.PortableInterceptor.Interceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

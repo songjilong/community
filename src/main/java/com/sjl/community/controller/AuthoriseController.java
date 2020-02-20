@@ -3,6 +3,8 @@ package com.sjl.community.controller;
 import com.sjl.community.config.GithubParams;
 import com.sjl.community.dto.AccessTokenDto;
 import com.sjl.community.dto.GithubUser;
+import com.sjl.community.exception.CustomizeErrorCode;
+import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.User;
 import com.sjl.community.provider.GithubProvider;
@@ -61,7 +63,7 @@ public class AuthoriseController {
             response.addCookie(new Cookie("token", token));
             return "redirect:/";
         } else {
-            return "loginError";
+            throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
         }
     }
 }

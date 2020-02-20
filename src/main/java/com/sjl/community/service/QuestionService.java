@@ -2,6 +2,8 @@ package com.sjl.community.service;
 
 import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
+import com.sjl.community.exception.CustomizeErrorCode;
+import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.QuestionExtMapper;
 import com.sjl.community.mapper.QuestionMapper;
 import com.sjl.community.mapper.UserMapper;
@@ -34,27 +36,28 @@ public class QuestionService {
 
     /**
      * 查询分页信息
+     *
      * @param pageNum
      * @param pageSize
      * @param totalCount
      * @param id
      * @return
      */
-    public PaginationDto getPageInfo(Integer pageNum, Integer pageSize, int totalCount, Long id){
+    public PaginationDto getPageInfo(Integer pageNum, Integer pageSize, int totalCount, Long id) {
         //问题列表信息
         List<QuestionDto> questionDtos = new ArrayList<>();
         //返回的页面信息+分页信息
         PaginationDto pageInfo = new PaginationDto();
         //如果总记录数为0，直接返回一个空数据
-        if(totalCount == 0){
+        if (totalCount == 0) {
             return pageInfo;
         }
         //设置分页信息
         pageInfo.setInfo(totalCount, pageNum, pageSize);
         //限定当前页范围
-        if(pageNum < 1){
+        if (pageNum < 1) {
             pageNum = 1;
-        }else if(pageNum > pageInfo.getTotalPage()){
+        } else if (pageNum > pageInfo.getTotalPage()) {
             pageNum = pageInfo.getTotalPage();
         }
         //获取截取的位置
@@ -68,7 +71,7 @@ public class QuestionService {
         //添加分页
         questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offerIndex, pageSize));
         //先遍历获取所有的问题
-        for(Question question : questions){
+        for (Question question : questions) {
             QuestionDto questionDto = new QuestionDto();
             //根据问题的发起人id获取user对象
             User user = userMapper.selectByPrimaryKey(question.getCreator());
@@ -85,6 +88,7 @@ public class QuestionService {
 
     /**
      * 查询所有问题 的分页信息
+     *
      * @param pageNum
      * @param pageSize
      * @return
@@ -98,6 +102,7 @@ public class QuestionService {
 
     /**
      * 查询某个发起人的问题 的分页信息
+     *
      * @param pageNum
      * @param pageSize
      * @param id
@@ -113,13 +118,18 @@ public class QuestionService {
 
     /**
      * 根据问题id查询 问题详情
+     *
      * @param id
      * @return
      */
     public QuestionDto findById(Long id) {
-        QuestionDto questionDto = new QuestionDto();
         //查询问题信息
         Question question = questionMapper.selectByPrimaryKey(id);
+        if(question == null){
+            //找不到问题，抛出异常及信息
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
+        QuestionDto questionDto = new QuestionDto();
         //放入返回结果对象
         BeanUtils.copyProperties(question, questionDto);
         //通过创建人id查出用户
@@ -131,23 +141,28 @@ public class QuestionService {
 
     /**
      * 根据id是否存在，创建或修改问题
+     *
      * @param question
      */
     public void createOrUpdateQuestion(Question question) {
-        if(question.getId() == null){
+        if (question.getId() == null) {
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
             questionMapper.insert(question);
-        }else{
+        } else {
             question.setGmtModified(System.currentTimeMillis());
             QuestionExample questionExample = new QuestionExample();
             questionExample.createCriteria().andIdEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(question, questionExample);
+            int updated = questionMapper.updateByExampleSelective(question, questionExample);
+            if(updated != 1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 
     /**
      * 增加阅读数
+     *
      * @param id
      */
     public void addViewCount(Long id) {

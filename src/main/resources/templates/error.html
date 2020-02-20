@@ -12,12 +12,15 @@
 <body>
 <!--顶部导航栏-->
 <div th:insert="fragment_top_navigation::top_nav"></div>
-<div class="jumbotron errorPage">
-    <h1 class="display-4">404</h1>
-    <p class="lead">资源不存在！！！</p>
-    <hr class="my-4">
-    <p>点击按钮回到主页</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">回到主页</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron">
+            <h1 class="display-4">出错啦</h1>
+            <p class="lead" th:text="${message}">页面出了点问题</p>
+            <hr class="my-4">
+            <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">回到主页</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

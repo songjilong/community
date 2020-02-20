@@ -38,13 +38,8 @@
         </javaClientGenerator>
 
         <!--配置数据库表-->
-        <table tableName="user" domainObjectName="User" >
-            <!--主键-->
-            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
-        </table>
-        <table tableName="question" domainObjectName="Question" >
-            <!--主键-->
-            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
-        </table>
+        <!--<table tableName="user" domainObjectName="User" />
+        <table tableName="question" domainObjectName="Question" />-->
+        <table tableName="comment" domainObjectName="Comment" />
     </context>
 </generatorConfiguration>
