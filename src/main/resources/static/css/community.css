@@ -6,6 +6,11 @@ body{
     margin-left: 100px;
     margin-right: 100px;
     background-color: white;
+    box-shadow:5px 5px 10px gray;
+}
+.logo{
+    font-size: 25px;
+    text-shadow: gray 10px 10px 5px;
 }
 .btn-publish{
     float: right;
@@ -34,4 +39,26 @@ body{
 }
 .creator_card{
     margin-top: 20px;
+}
+.comment_context_section{
+    margin-top: 20px;
+}
+.comment_operating{
+    margin-top: 15px;
+}
+.comment_operating .btn{
+    font-size: 15px;
+    color: #999;
+}
+.comment_operating .btn:hover{
+    color: #155faa;
+}
+.comment_operating .time{
+    float: right;
+}
+.comment_count{
+    margin-top: 60px;
+}
+.comment_cut_line{
+    margin-top: 5px;
 }

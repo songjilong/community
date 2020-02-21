@@ -8,7 +8,16 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/community.js"></script>
 </head>
+<script type="application/javascript">
+    const closable = localStorage.getItem("closable");
+    if(closable == 1){
+        //关闭
+        window.close();
+        localStorage.removeItem("closable");
+    }
+</script>
 <body>
 <!--顶部导航栏-->
 <div th:insert="fragment_top_navigation::top_nav"></div>

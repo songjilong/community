@@ -8,9 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author song
@@ -33,17 +31,5 @@ public class IndexController {
         //添加到model作用域
         model.addAttribute("pageInfo", pageInfo);
         return "index";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response){
-        //清除session
-        request.getSession().removeAttribute("user");
-        //清除cookie
-        Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        //返回到主页
-        return "redirect:/";
     }
 }

@@ -1,7 +1,5 @@
 package com.sjl.community.enums;
 
-import com.sjl.community.dto.CommentDto;
-
 /**
  * @author song
  * @create 2020/2/20 19:35
