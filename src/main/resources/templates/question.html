@@ -32,6 +32,12 @@
             </div>
             <hr>
             <div>
+                <span th:each="tag : ${questionDto.tags.split('，')}">
+                    <span class="label label-primary glyphicon glyphicon-tag" th:text="${tag}"></span>
+                </span>
+            </div>
+            <hr>
+            <div>
                 <span class="question_text" th:text="${#dates.format(questionDto.gmtCreate, 'yyyy-MM-dd')}"></span>&emsp;
                 <a th:href="@{/publish/{id}(id=${questionDto.id})}" class="question_text"
                    th:if="${session.user != null && questionDto.creator==session.user.id}">
@@ -119,7 +125,17 @@
                 </div>
             </div>
             <hr>
+            <h4>推荐内容</h4>
+            <div>
+                <img src="https://images.cnblogs.com/cnblogs_com/songjilong/1648023/o_200215122229head1.jpg" alt="..." class="img-thumbnail">
+            </div>
+            <hr>
             <h4>相关问题</h4>
+            <ul class="related_question_list">
+                <li th:each="quesiton : ${questionByTags}">
+                    <a th:href="@{'/question/'+${quesiton.id}}" th:text="${quesiton.title}"></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

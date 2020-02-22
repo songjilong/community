@@ -72,3 +72,6 @@ body{
     border-radius: 5px;
     padding: 20px 20px 70px 20px;
 }
+.related_question_list{
+    padding-left: 20px;
+}

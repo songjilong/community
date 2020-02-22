@@ -36,4 +36,17 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="findByREGEXP" parameterType="com.sjl.community.model.Question" resultMap="BaseResultMap">
+        select * from QUESTION
+        <where>
+            <if test="id != null">
+                and id != #{id}
+            </if>
+            <if test="tags != null and tags != ''">
+                and tags regexp #{tags}
+            </if>
+        </where>
+        order by gmt_create desc limit 20
+    </select>
 </mapper>

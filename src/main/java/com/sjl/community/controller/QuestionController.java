@@ -3,6 +3,7 @@ package com.sjl.community.controller;
 import com.sjl.community.dto.CommentDto;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.enums.CommentTypeEnum;
+import com.sjl.community.model.Question;
 import com.sjl.community.service.CommentService;
 import com.sjl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,12 @@ public class QuestionController {
         QuestionDto questionDto = questionService.findById(id);
         //根据问题id查询评论详情
         List<CommentDto> commentDtos = commentService.findByQuestionId(id, CommentTypeEnum.TYPE_QUESTION);
+        //根据问题tags查询相关问题
+        List<QuestionDto> questionByTags = questionService.findByTags(questionDto);
         //存入model作用域
         model.addAttribute("questionDto", questionDto);
         model.addAttribute("commentDtos", commentDtos);
+        model.addAttribute("questionByTags", questionByTags);
         //增加阅读数
         questionService.addViewCount(id);
         return "question";

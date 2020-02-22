@@ -35,5 +35,5 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [Mybatis Generator配置文件内容详解](https://www.jianshu.com/p/a8bfc14a3534)     
 - [Springboot mybatis集成 Invalid bound statement (not found)](https://blog.csdn.net/qq_35981283/article/details/78590090)    
 - [MyBatis Generator实现MySQL分页插件](https://blog.csdn.net/xiao__gui/article/details/51333693)    
-- [git push报错连接超时443](https://blog.csdn.net/Hodors/article/details/103226958)    
+- [git push报错连接超时443](https://gist.github.com/laispace/666dd7b27e9116faece6)    
 

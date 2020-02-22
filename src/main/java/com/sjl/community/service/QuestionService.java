@@ -10,6 +10,7 @@ import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.Question;
 import com.sjl.community.model.QuestionExample;
 import com.sjl.community.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author song
@@ -67,6 +69,7 @@ public class QuestionService {
         QuestionExample questionExample = new QuestionExample();
         if (id != null) {
             questionExample.createCriteria().andCreatorEqualTo(id);
+            questionExample.setOrderByClause("gmt_create desc");
         }
         //添加分页
         questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offerIndex, pageSize));
@@ -170,5 +173,29 @@ public class QuestionService {
         question.setId(id);
         question.setViewCount(1);
         questionExtMapper.addViewCount(question);
+    }
+
+    /**
+     * 将tags转为正则表达式后查询问题
+     * @param queryQuestionDto
+     * @return
+     */
+    public List<QuestionDto> findByTags(QuestionDto queryQuestionDto) {
+        if(StringUtils.isBlank(queryQuestionDto.getTags())){
+            return new ArrayList<>();
+        }
+        Question question = new Question();
+        question.setId(queryQuestionDto.getId());
+        //将，转为|
+        String replaceTags = queryQuestionDto.getTags().replace("，", "|");
+        question.setTags(replaceTags);
+        //查出所有符合表达式的question
+        List<Question> questionList = questionExtMapper.findByREGEXP(question);
+        //赋值给questionDto
+        return questionList.stream().map(q -> {
+            QuestionDto questionDto = new QuestionDto();
+            BeanUtils.copyProperties(q, questionDto);
+            return questionDto;
+        }).collect(Collectors.toList());
     }
 }
