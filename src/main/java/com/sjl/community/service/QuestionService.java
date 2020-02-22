@@ -148,7 +148,7 @@ public class QuestionService {
         if (question.getId() == null) {
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.insert(question);
+            questionMapper.insertSelective(question);
         } else {
             question.setGmtModified(System.currentTimeMillis());
             QuestionExample questionExample = new QuestionExample();

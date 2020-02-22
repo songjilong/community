@@ -20,5 +20,5 @@ mybatis:
 # Github登录需要的参数
 github:
   client_id: aeb0d5116950de9541ab
-  client_secret: dc5da34bb2368c65e67b2d860a7f269b9373d741
+  client_secret: ff77def3f0aecb61c0544eb6296faf213cb13c11
   redirect_uri: http://localhost:8887/callback

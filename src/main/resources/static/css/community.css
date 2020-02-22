@@ -2,19 +2,18 @@ body{
     background-image: url("/img/bg.jpg");
 }
 .main{
-    margin-top: 40px;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin: 40px 100px;
     background-color: white;
-    box-shadow:5px 5px 10px gray;
+    box-shadow:10px 10px 10px gray;
 }
 .logo{
     font-size: 25px;
-    text-shadow: gray 10px 10px 5px;
+    font-style: italic;
+    text-shadow: grey 10px 10px 4px;
 }
 .btn-publish{
     float: right;
-    margin-bottom: 15px;
+    margin: 15px  0;
 }
 .user_avatar{
     width: 40px;
@@ -49,16 +48,27 @@ body{
 .comment_operating .btn{
     font-size: 15px;
     color: #999;
+    margin-left: 10px;
+    padding: 0;
 }
 .comment_operating .btn:hover{
-    color: #155faa;
+    color: #499EF3;
+}
+.comment_operating .active{
+    color: #499EF3;
 }
 .comment_operating .time{
     float: right;
 }
-.comment_count{
+.comment_count,.comment_commit{
     margin-top: 60px;
 }
 .comment_cut_line{
-    margin-top: 5px;
+    margin-top: 10px;
+}
+.sub_comments{
+    margin: 10px 50px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px 20px 70px 20px;
 }

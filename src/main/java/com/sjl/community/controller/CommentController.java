@@ -1,7 +1,9 @@
 package com.sjl.community.controller;
 
 import com.sjl.community.dto.CommentCreateDto;
+import com.sjl.community.dto.CommentDto;
 import com.sjl.community.dto.ResultDto;
+import com.sjl.community.enums.CommentTypeEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.model.Comment;
 import com.sjl.community.model.User;
@@ -9,11 +11,10 @@ import com.sjl.community.service.CommentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author song
@@ -27,7 +28,7 @@ public class CommentController {
 
     @PostMapping("/comment")
     @ResponseBody
-    public Object comment(@RequestBody CommentCreateDto commentDto, HttpServletRequest request){
+    public ResultDto insertComment(@RequestBody CommentCreateDto commentDto, HttpServletRequest request){
         //获取用户
         User user = (User) request.getSession().getAttribute("user");
         if(user == null){
@@ -46,5 +47,17 @@ public class CommentController {
         comment.setLikeCount(0L);
         commentService.insertComment(comment);
         return ResultDto.okOf();
+    }
+
+    /**
+     * 获取回复下的评论
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/comment/{id}")
+    public ResultDto<List<CommentDto>> getComments(@PathVariable("id") Long id){
+        List<CommentDto> commentDtos = this.commentService.findByQuestionId(id, CommentTypeEnum.TYPE_COMMENT);
+        return ResultDto.okOf(commentDtos);
     }
 }

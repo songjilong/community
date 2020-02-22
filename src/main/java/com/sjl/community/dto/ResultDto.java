@@ -10,13 +10,16 @@ import lombok.Data;
  * @create 2020/2/20 19:31
  */
 @Data
-@AllArgsConstructor
-public class ResultDto {
+public class ResultDto<T> {
     private Integer code;
     private String message;
+    private T data;
 
     public static ResultDto errorOf(Integer code, String message) {
-        return new ResultDto(code, message);
+        ResultDto resultDto = new ResultDto();
+        resultDto.setCode(code);
+        resultDto.setMessage(message);
+        return resultDto;
     }
 
     public static ResultDto errorOf(CustomizeErrorCode errorCode) {
@@ -27,7 +30,18 @@ public class ResultDto {
         return errorOf(e.getCode(), e.getMessage());
     }
 
-    public static Object okOf() {
-        return new ResultDto(2000, "请求成功");
+    public static ResultDto okOf() {
+        ResultDto resultDto = new ResultDto();
+        resultDto.setCode(2000);
+        resultDto.setMessage("请求成功");
+        return resultDto;
+    }
+
+    public static <T> ResultDto okOf(T t){
+        ResultDto<T> tResultDto = new ResultDto<>();
+        tResultDto.setCode(2000);
+        tResultDto.setMessage("请求成功");
+        tResultDto.setData(t);
+        return  tResultDto;
     }
 }

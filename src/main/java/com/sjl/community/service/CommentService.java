@@ -1,14 +1,10 @@
 package com.sjl.community.service;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.sjl.community.dto.CommentDto;
 import com.sjl.community.enums.CommentTypeEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
-import com.sjl.community.mapper.CommentMapper;
-import com.sjl.community.mapper.QuestionExtMapper;
-import com.sjl.community.mapper.QuestionMapper;
-import com.sjl.community.mapper.UserMapper;
+import com.sjl.community.mapper.*;
 import com.sjl.community.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -36,6 +31,9 @@ public class CommentService {
 
     @Autowired
     private QuestionExtMapper questionExtMapper;
+
+    @Autowired
+    private CommentExtMapper commentExtMapper;
 
     @Autowired
     private UserMapper userMapper;
@@ -68,23 +66,32 @@ public class CommentService {
             if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
+            Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
+            if (question == null) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
             //数据库插入评论
             commentMapper.insertSelective(comment);
+            //增加回复的评论数，也就是插入的评论的父id的评论数增加
+            Comment parentComment = new Comment();
+            parentComment.setCommentCount(1L);
+            parentComment.setId(comment.getParentId());
+            commentExtMapper.addCommentCount(parentComment);
         }
     }
 
     /**
-     * 根据问题id查询评论数据
+     * 根据id和类型查询评论数据
      *
      * @param id
      * @return
      */
-    public List<CommentDto> findByQuestionId(Long id) {
+    public List<CommentDto> findByQuestionId(Long id, CommentTypeEnum typeEnum) {
         //获取该问题的评论列表
         CommentExample example = new CommentExample();
         example.createCriteria()
                 .andParentIdEqualTo(id)
-                .andTypeEqualTo(CommentTypeEnum.TYPE_QUESTION.getType());
+                .andTypeEqualTo(typeEnum.getType());
         //根据创建时间降序排列
         example.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(example);

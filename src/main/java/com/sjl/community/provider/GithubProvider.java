@@ -19,20 +19,19 @@ public class GithubProvider {
      * 获取AccessToken
      */
     public String getAccessToken(AccessTokenDto accessTokenDto) {
-        OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        OkHttpClient client = new OkHttpClient();
         //将accessTokenDto转为json字符串传入参数
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDto));
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            String str = response.body().string();
+        try (Response response = client.newCall(request).execute()) {
+            String string = response.body().string();
             //得到的是类似这样的字符串，我们需要将它分割，只要access_token部分
             //access_token=9566ba3483a556c610be42d44338f3fd16a3b8d1&scope=&token_type=bearer
-            return str.split("&")[0].split("=")[1];
+            return string.split("&")[0].split("=")[1];
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,8 +54,11 @@ public class GithubProvider {
         try {
             Response response = client.newCall(request).execute();
             //得到的是json字符串，因此需要转为GithubUser对象
-            return JSON.parseObject(response.body().string(), GithubUser.class);
+            String str = response.body().string();
+            GithubUser githubUser = JSON.parseObject(str, GithubUser.class);
+            return githubUser;
         } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
