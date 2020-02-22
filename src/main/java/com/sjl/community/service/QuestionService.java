@@ -37,59 +37,6 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
 
     /**
-     * 查询分页信息
-     *
-     * @param pageNum
-     * @param pageSize
-     * @param totalCount
-     * @param id
-     * @return
-     */
-    public PaginationDto getPageInfo(Integer pageNum, Integer pageSize, int totalCount, Long id) {
-        //问题列表信息
-        List<QuestionDto> questionDtos = new ArrayList<>();
-        //返回的页面信息+分页信息
-        PaginationDto pageInfo = new PaginationDto();
-        //如果总记录数为0，直接返回一个空数据
-        if (totalCount == 0) {
-            return pageInfo;
-        }
-        //设置分页信息
-        pageInfo.setInfo(totalCount, pageNum, pageSize);
-        //限定当前页范围
-        if (pageNum < 1) {
-            pageNum = 1;
-        } else if (pageNum > pageInfo.getTotalPage()) {
-            pageNum = pageInfo.getTotalPage();
-        }
-        //获取截取的位置
-        int offerIndex = (pageNum - 1) * pageSize;
-        List<Question> questions;
-        //判断id存不存在，来决定分页的方式
-        QuestionExample questionExample = new QuestionExample();
-        if (id != null) {
-            questionExample.createCriteria().andCreatorEqualTo(id);
-            questionExample.setOrderByClause("gmt_create desc");
-        }
-        //添加分页
-        questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offerIndex, pageSize));
-        //先遍历获取所有的问题
-        for (Question question : questions) {
-            QuestionDto questionDto = new QuestionDto();
-            //根据问题的发起人id获取user对象
-            User user = userMapper.selectByPrimaryKey(question.getCreator());
-            //将数据放到questionDto对象
-            BeanUtils.copyProperties(question, questionDto);
-            questionDto.setUser(user);
-            //添加到集合
-            questionDtos.add(questionDto);
-        }
-        //添加问题信息
-        pageInfo.setList(questionDtos);
-        return pageInfo;
-    }
-
-    /**
      * 查询所有问题 的分页信息
      *
      * @param pageNum
@@ -197,5 +144,59 @@ public class QuestionService {
             BeanUtils.copyProperties(q, questionDto);
             return questionDto;
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * 查询分页信息
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param totalCount
+     * @param id
+     * @return
+     */
+    public PaginationDto getPageInfo(Integer pageNum, Integer pageSize, int totalCount, Long id) {
+        //问题列表信息
+        List<QuestionDto> questionDtos = new ArrayList<>();
+        //返回的页面信息+分页信息
+        PaginationDto pageInfo = new PaginationDto();
+        //如果总记录数为0，直接返回一个空数据
+        if (totalCount == 0) {
+            return pageInfo;
+        }
+        //设置分页信息
+        pageInfo.setInfo(totalCount, pageNum, pageSize);
+        //限定当前页范围
+        if (pageNum < 1) {
+            pageNum = 1;
+        } else if (pageNum > pageInfo.getTotalPage()) {
+            pageNum = pageInfo.getTotalPage();
+        }
+        //获取截取的位置
+        int offerIndex = (pageNum - 1) * pageSize;
+        List<Question> questions;
+        //判断id存不存在，来决定分页的方式
+        QuestionExample questionExample = new QuestionExample();
+        if (id != null) {
+            questionExample.createCriteria().andCreatorEqualTo(id);
+        }
+        //问题按时间倒序
+        questionExample.setOrderByClause("gmt_create desc");
+        //添加分页
+        questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offerIndex, pageSize));
+        //先遍历获取所有的问题
+        for (Question question : questions) {
+            QuestionDto questionDto = new QuestionDto();
+            //根据问题的发起人id获取user对象
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
+            //将数据放到questionDto对象
+            BeanUtils.copyProperties(question, questionDto);
+            questionDto.setUser(user);
+            //添加到集合
+            questionDtos.add(questionDto);
+        }
+        //添加问题信息
+        pageInfo.setList(questionDtos);
+        return pageInfo;
     }
 }
