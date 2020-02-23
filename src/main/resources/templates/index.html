@@ -27,7 +27,7 @@
             <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;发现</h3>
             <hr>
             <!--问题列表-->
-            <div th:replace="fragment_question_list::question_list"></div>
+            <div th:replace="fragment_question_list::question_list(false)"></div>
             <!--分页栏-->
             <div th:replace="fragment_page_navigation::page_nav"></div>
         </div>

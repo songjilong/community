@@ -5,6 +5,7 @@ body{
     margin: 40px 100px;
     background-color: white;
     box-shadow:10px 10px 10px gray;
+    min-height: 700px;
 }
 .logo{
     font-size: 25px;
@@ -51,7 +52,7 @@ body{
     margin-left: 10px;
     padding: 0;
 }
-.comment_operating .btn:hover{
+.comment_operating .oper-btn :hover{
     color: #499EF3;
 }
 .comment_operating .active{
@@ -75,3 +76,37 @@ body{
 .related_question_list{
     padding-left: 20px;
 }
+.tag-style{
+    font-size: 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    line-height: 2.3;
+}
+.publish-tab-tags{
+    margin-top: 15px;
+}
+.publish-tag-list{
+    margin-top: 15px;
+    display: none;
+}
+.tags-input-div{
+    display: flex;
+}
+.input-tag-btn{
+    margin: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.profile-canEdit{
+    margin-left: 10px;
+}
+.publish-tag-selected{
+    background-color: forestgreen;
+    cursor: unset;
+}
+.publish-tag-remove:hover{
+    color: red;
+}
+.publish-tag-select:hover{
+     color: pink;
+ }

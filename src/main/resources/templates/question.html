@@ -32,8 +32,9 @@
             </div>
             <hr>
             <div>
-                <span th:each="tag : ${questionDto.tags.split('，')}">
-                    <span class="label label-primary glyphicon glyphicon-tag" th:text="${tag}"></span>
+                <span class="label label-primary tag-style" th:each="tag : ${questionDto.tags.split(',')}">
+                    <span class="glyphicon glyphicon-tags"></span>
+                    <span th:text="${tag}"></span>
                 </span>
             </div>
             <hr>
@@ -66,10 +67,10 @@
                 </div>
                 <!--问题评论的操作-->
                 <div class="comment_operating">
-                    <span class="glyphicon glyphicon-thumbs-up btn" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-thumbs-down btn" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-comment btn" th:id="'sub_comment_btn-'+${commentDto.id}"
-                          aria-hidden="true" th:data-id="${commentDto.id}"
+                    <span class="glyphicon glyphicon-thumbs-up btn oper-btn"></span>
+                    <span class="glyphicon glyphicon-thumbs-down btn oper-btn"></span>
+                    <span class="glyphicon glyphicon-comment btn oper-btn"
+                          th:id="'sub_comment_btn-'+${commentDto.id}" th:data-id="${commentDto.id}"
                           onclick="show_or_close_subComment(this)">
                     </span>
                     <span class="question_text" th:text="${commentDto.commentCount}+'条回复'"></span>
@@ -127,7 +128,7 @@
             <hr>
             <h4>推荐内容</h4>
             <div>
-                <img src="https://images.cnblogs.com/cnblogs_com/songjilong/1648023/o_200215122229head1.jpg" alt="..." class="img-thumbnail">
+                <img src="/img/coder.jpg" class="img-thumbnail">
             </div>
             <hr>
             <h4>相关问题</h4>

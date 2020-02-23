@@ -106,29 +106,55 @@ function show_or_close_subComment(e) {
             });
         });
     }
-    /*
-<div th:each="commentDto : ${commentDtos}">
-    <div class="media">
-        <div class="media-left">
-            <a href="#">
-                <img class="media-object img-rounded user_avatar"
-                     th:src="${commentDto.user.avatarUrl} == null ? '' : ${commentDto.user.avatarUrl}"
-                     alt="...">
-            </a>
-        </div>
-        <div class="media-body">
-            <span class="media-heading question_text"
-                  th:text="${commentDto.user.name}">姓名</span><br>
-            <span th:text="${commentDto.content}"></span>
-        </div>
-    </div>
-    <!--子评论操作-->
-    <div class="comment_operating">
-        <span class="glyphicon glyphicon-thumbs-up btn" aria-hidden="true"></span>
-        <span class="question_text time"
-              th:text="${#dates.format(commentDto.gmtModified, 'yyyy-MM-dd')}">评论时间</span>
-    </div>
-    <hr class="comment_cut_line">
-</div>
-     */
+}
+
+let count = 0;//选择的标签数
+/*添加标签*/
+function selectTag(e) {
+    const value = e.getAttribute("data-tag");//获取标签的值
+    const previous = $("#tags_input").val();//获取输入框的值
+    //防止字串干扰
+    let arr = previous.split(',');
+    if(arr.indexOf(value) === -1 ){
+        if(++count > 5){
+            alert("最多选择5个标签");
+            $("#tags_input").attr("readOnly", "readOnly");
+            return;
+        }
+        $('#all-'+value).addClass("publish-tag-selected");
+        if(previous){
+            $("#tags_input").val(previous+ ',' +value);
+        }else{
+            $("#tags_input").val(value);
+        }
+    }else{
+        alert('不要再点啦，我已经选过了')
+    }
+}
+/*删除标签*/
+function deleteTag(e) {
+    const removeValue = e.getAttribute("data-tag");//获取待删除的值
+    const previous = $("#tags_input").val();//获取输入框的值
+    //防止字串干扰
+    let arr = previous.split(',');
+    if(arr.indexOf(removeValue) > -1){
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i] === removeValue){
+                arr.splice(i, 1);
+                $('#all-'+removeValue).removeClass("publish-tag-selected");
+                count--;
+                break;
+            }
+        }
+        $("#tags_input").val(arr.join(','));
+    }else{
+        alert('不要再点啦，我还没被选呢');
+    }
+}
+
+function showSelectTag() {
+    $("#tag-list").show();
+}
+function closeSelectTag() {
+    $("#tag-list").hide();
 }

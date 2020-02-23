@@ -134,7 +134,7 @@ public class QuestionService {
         Question question = new Question();
         question.setId(queryQuestionDto.getId());
         //将，转为|
-        String replaceTags = queryQuestionDto.getTags().replace("，", "|");
+        String replaceTags = queryQuestionDto.getTags().replace(",", "|");
         question.setTags(replaceTags);
         //查出所有符合表达式的question
         List<Question> questionList = questionExtMapper.findByREGEXP(question);

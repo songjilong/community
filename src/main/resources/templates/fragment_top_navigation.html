@@ -26,7 +26,7 @@
                     <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
                         <a>本站源码</a>
                     </li>
-                    <li th:if="${session.user != null}">
+                    <li th:if="${session.user != null}" data-toggle="tooltip" data-placement="bottom" title="给个star呗 ♥">
                         <a href="https://github.com/songjilong/community" target="_blank">本站源码</a>
                     </li>
                     <li th:if="${session.user != null}">

@@ -36,4 +36,5 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [Springboot mybatis集成 Invalid bound statement (not found)](https://blog.csdn.net/qq_35981283/article/details/78590090)    
 - [MyBatis Generator实现MySQL分页插件](https://blog.csdn.net/xiao__gui/article/details/51333693)    
 - [git push报错连接超时443](https://gist.github.com/laispace/666dd7b27e9116faece6)    
+- [thymeleaf向fragment中传入具体值](https://blog.csdn.net/u010999809/article/details/80724076)
 

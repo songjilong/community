@@ -1,6 +1,8 @@
 package com.sjl.community.controller;
 
+import com.sjl.community.cache.TagCache;
 import com.sjl.community.dto.QuestionDto;
+import com.sjl.community.dto.TagDto;
 import com.sjl.community.mapper.QuestionMapper;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.Question;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.HTML;
+import java.util.List;
 
 /**
  * @author song
@@ -27,7 +31,10 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        //获取所有标签
+        List<TagDto> tagDtos = TagCache.get();
+        model.addAttribute("tagDtos", tagDtos);
         return "publish";
     }
 

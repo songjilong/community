@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="question_list" class="media" th:each="info : ${pageInfo.list}">
+<div th:fragment="question_list(canEdit)" class="media" th:each="info : ${pageInfo.list}">
     <div class="media-left">
         <a href="#">
-            <img class="media-object img-rounded user_avatar" th:src="${info.user.avatarUrl} == null ? '' : ${info.user.avatarUrl}" alt="找不到了...">
+            <img class="media-object img-rounded user_avatar"
+                 th:src="${info.user.avatarUrl} == null ? '' : ${info.user.avatarUrl}">
         </a>
     </div>
     <div class="media-body">
         <h4 class="media-heading">
             <a th:href="@{'/question/'+${info.id}}" th:text="${info.title}">怎么学习spring boot</a>
         </h4>
-        <span class="question_info">[[${info.tags}]] • [[${info.commentCount}]] 个评论 • [[${info.viewCount}]] 次浏览 • [[${#dates.format(info.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
+        <span class="question_info">
+            [[${info.tags}]] •
+            [[${info.commentCount}]] 个评论 •
+            [[${info.viewCount}]] 次浏览 •
+            [[${#dates.format(info.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}]]
+        </span>
+        <span th:if="${canEdit}" class="profile-canEdit">
+            <a th:href="@{/publish/{id}(id=${info.id})}" class="question_text"
+               th:if="${session.user != null && info.creator==session.user.id}">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    编辑
+            </a>
+        </span>
         <hr>
     </div>
 </div>
