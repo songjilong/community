@@ -1,6 +1,9 @@
 package com.sjl.community.controller;
 
 import com.sjl.community.dto.PaginationDto;
+import com.sjl.community.dto.QuestionDto;
+import com.sjl.community.model.User;
+import com.sjl.community.service.NotificationService;
 import com.sjl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,13 +24,15 @@ public class IndexController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @GetMapping("/")
     public String index(HttpServletRequest request, Model model,
                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         //添加问题信息
-        PaginationDto pageInfo = questionService.findAll(pageNum, pageSize);
-
+        PaginationDto<QuestionDto> pageInfo = questionService.findAll(pageNum, pageSize);
         //添加到model作用域
         model.addAttribute("pageInfo", pageInfo);
         return "index";

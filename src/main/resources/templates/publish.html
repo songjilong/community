@@ -36,7 +36,7 @@
                     <label for="tags_input">添加标签</label>
                     <div class="tags-input-div">
                         <input type="text" class="form-control" id="tags_input" name="tags" placeholder="输入标签，以逗号分隔"
-                               th:value="${tags}" autocomplete="off" onclick="showSelectTag()">
+                               th:value="${tags}" autocomplete="off" onclick="showSelectTag()" readonly="readonly">
                         <span class="glyphicon glyphicon-menu-down input-tag-btn" onclick="showSelectTag()"></span>
                         <span class="glyphicon glyphicon-menu-up input-tag-btn" onclick="closeSelectTag()"></span>
                     </div>
@@ -58,9 +58,9 @@
                             <div role="tabpanel" class="tab-pane fade" th:classappend="${interStat.first} ? 'in active' : ''"
                                  th:each="tagDto,interStat : ${tagDtos}" th:id="${tagDto.categoryName}">
                              <span th:each="tag : ${tagDto.tags}">
-                                 <span th:id="'all-'+${tag}" class="label label-primary tag-style">
-                                    <span class="glyphicon glyphicon-tags publish-tag-select" onclick="selectTag(this)" th:data-tag="${tag}"></span>
-                                    <span class="publish-tag-select" th:id="${tag}" th:text="${tag}" onclick="selectTag(this)" th:data-tag="${tag}"></span>
+                                 <span th:id="'all-'+${tag}" class="label label-primary tag-style select">
+                                    <span class="glyphicon glyphicon-tags" onclick="selectTag(this)" th:data-tag="${tag}"></span>
+                                    <span th:id="${tag}" th:text="${tag}" onclick="selectTag(this)" th:data-tag="${tag}"></span>
                                     <span class="glyphicon glyphicon-remove publish-tag-remove" th:id="'remove-'+${tag}" onclick="deleteTag(this)" th:data-tag="${tag}"></span>
                                 </span>
                              </span>

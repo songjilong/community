@@ -118,7 +118,6 @@ function selectTag(e) {
     if(arr.indexOf(value) === -1 ){
         if(++count > 5){
             alert("最多选择5个标签");
-            $("#tags_input").attr("readOnly", "readOnly");
             return;
         }
         $('#all-'+value).addClass("publish-tag-selected");

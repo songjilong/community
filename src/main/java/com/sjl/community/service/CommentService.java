@@ -2,6 +2,8 @@ package com.sjl.community.service;
 
 import com.sjl.community.dto.CommentDto;
 import com.sjl.community.enums.CommentTypeEnum;
+import com.sjl.community.enums.NotificationStatusEnum;
+import com.sjl.community.enums.NotificationTypeEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.*;
@@ -37,9 +39,11 @@ public class CommentService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private NotificationMapper notificationMapper;
 
     @Transactional
-    public void insertComment(Comment comment) {
+    public void insertComment(Comment comment, User user) {
         //评论的父级不存在
         if (comment.getParentId() == 0 || comment.getParentId() == null) {
             throw new CustomizeException(CustomizeErrorCode.COMMENT_PARENT_NOT_EXIST);
@@ -48,7 +52,7 @@ public class CommentService {
         if (comment.getType() == null || CommentTypeEnum.isNotExist(comment.getType())) {
             throw new CustomizeException(CustomizeErrorCode.TYPE_NOT_EXIST);
         }
-        //问题的评论
+        //问题的回复
         if (comment.getType() == CommentTypeEnum.TYPE_QUESTION.getType()) {
             Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (dbQuestion == null) {
@@ -59,8 +63,11 @@ public class CommentService {
             dbQuestion.setCommentCount(1);
             //评论数+1
             questionExtMapper.addCommentCount(dbQuestion);
+
+            //创建通知
+            createNotification(comment.getCommentator(), user.getName(), dbQuestion.getCreator(), NotificationTypeEnum.REPLY_QUESTION.getType(), dbQuestion.getId(), dbQuestion.getTitle());
         }
-        //回复的评论
+        //评论的回复
         else {
             Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
             if (dbComment == null) {
@@ -72,12 +79,37 @@ public class CommentService {
             }
             //数据库插入评论
             commentMapper.insertSelective(comment);
-            //增加回复的评论数，也就是插入的评论的父id的评论数增加
+            //增加评论的回复数
             Comment parentComment = new Comment();
             parentComment.setCommentCount(1L);
             parentComment.setId(comment.getParentId());
             commentExtMapper.addCommentCount(parentComment);
+
+            //创建通知
+            createNotification(comment.getCommentator(), user.getName(), dbComment.getCommentator(), NotificationTypeEnum.REPLY_COMMENT.getType(), question.getId(), question.getTitle());
         }
+    }
+
+    /**
+     * 创建通知
+     * @param notifierId 发送人id
+     * @param notifyName 发送人姓名
+     * @param receiverId 接收人id
+     * @param type 通知类型
+     * @param targetId 问题id
+     * @param targetTitle 问题标题
+     */
+    public void createNotification(Long notifierId, String notifyName, Long receiverId, int type, Long targetId, String targetTitle){
+        Notification notification = new Notification();
+        notification.setNotifierId(notifierId);
+        notification.setNotifyName(notifyName);
+        notification.setReceiverId(receiverId);
+        notification.setTargetId(targetId);
+        notification.setTargetTitle(targetTitle);
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notification.setType(type);
+        notification.setGmtCreate(System.currentTimeMillis());
+        notificationMapper.insertSelective(notification);
     }
 
     /**

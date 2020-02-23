@@ -3,6 +3,7 @@ package com.sjl.community.interceptor;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.User;
 import com.sjl.community.model.UserExample;
+import com.sjl.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,6 +23,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -36,6 +39,9 @@ public class SessionInterceptor implements HandlerInterceptor {
                     if (users.size() != 0) {
                         //将user添加到session作用域
                         request.getSession().setAttribute("user", users.get(0));
+                        //获取未读数
+                        Long unreadCount = notificationService.getUnreadCountByReceiverId(users.get(0).getId());
+                        request.getSession().setAttribute("unreadCount", unreadCount);
                     }
                     break;
                 }

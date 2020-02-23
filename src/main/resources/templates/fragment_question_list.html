@@ -2,22 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="question_list(canEdit)" class="media" th:each="info : ${pageInfo.list}">
+    <!--头像-->
     <div class="media-left">
         <a href="#">
             <img class="media-object img-rounded user_avatar"
                  th:src="${info.user.avatarUrl} == null ? '' : ${info.user.avatarUrl}">
         </a>
     </div>
+    <!--内容-->
     <div class="media-body">
+        <!--标题-->
         <h4 class="media-heading">
             <a th:href="@{'/question/'+${info.id}}" th:text="${info.title}">怎么学习spring boot</a>
         </h4>
+        <!--信息-->
         <span class="question_info">
             [[${info.tags}]] •
             [[${info.commentCount}]] 个评论 •
             [[${info.viewCount}]] 次浏览 •
             [[${#dates.format(info.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}]]
         </span>
+        <!--编辑操作-->
         <span th:if="${canEdit}" class="profile-canEdit">
             <a th:href="@{/publish/{id}(id=${info.id})}" class="question_text"
                th:if="${session.user != null && info.creator==session.user.id}">

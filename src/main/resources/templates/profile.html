@@ -18,7 +18,13 @@
             <h3 th:text="${sectionName}">我的提问</h3>
             <hr>
             <!--问题列表-->
-            <div th:replace="fragment_question_list::question_list(true)"></div>
+            <div th:if="${section} == 'questions'">
+                <div th:replace="fragment_question_list::question_list(true)"></div>
+            </div>
+            <!--通知列表-->
+            <div th:if="${section} == 'replies'">
+                <div th:replace="fragment_reply_list::reply_list"></div>
+            </div>
             <!--分页栏-->
             <div th:replace="fragment_page_navigation::page_nav"></div>
         </div>
@@ -28,7 +34,7 @@
                     我的提问
                 </a>
                 <a th:href="@{/profile/replies}" class="list-group-item" th:classappend="${section.equals('replies')} ?  'active' : ''">
-                    <span class="badge">66</span>
+                    <span class="badge" th:text="${session.unreadCount}">66</span>
                     最新回复
                 </a>
             </div>

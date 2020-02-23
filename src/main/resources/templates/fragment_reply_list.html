@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="reply_list" class="reply-list" th:each="info : ${pageInfo.list}">
+    <div>
+        <span class="glyphicon glyphicon-comment"></span>
+        <span class="label label-info" th:if="${info.status == 0}">未读</span>
+        <span class="label label-success" th:unless="${info.status == 0}">已读</span>
+        <a href="#" th:text="${info.notifyName}"></a>
+        在问题
+        <a th:text="${info.targetTitle}" th:href="@{'/notification/'+${info.id}}"></a>
+        中
+        <span th:text="${info.typeDescription}"></span>
+        <span class="time question_text" th:text="${'time : '+#dates.format(info.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+    </div>
+    <hr>
+</div>
+</body>
+</html>

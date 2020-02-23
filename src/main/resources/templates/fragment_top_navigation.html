@@ -24,13 +24,22 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
-                        <a>本站源码</a>
+                        <a href="#">本站源码</a>
                     </li>
                     <li th:if="${session.user != null}" data-toggle="tooltip" data-placement="bottom" title="给个star呗 ♥">
                         <a href="https://github.com/songjilong/community" target="_blank">本站源码</a>
                     </li>
+                    <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
+                        <a href="#">提问</a>
+                    </li>
                     <li th:if="${session.user != null}">
                         <a th:href="@{/publish}">提问</a>
+                    </li>
+                    <li th:if="${session.user != null}">
+                        <a href="/profile/replies">
+                            通知
+                            <span class="badge top-notification" th:text="${session.unreadCount}">66</span>
+                        </a>
                     </li>
                     <li class="dropdown" th:if="${session.user != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

@@ -12,8 +12,8 @@
 Git  
 Lombok  
 Flyway  
-postman（插件版）(https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)网页版postman可以共享浏览器session，比较方便
-[moment JavaScript日期处理类库](http://momentjs.cn/)
+[postman（插件版）：可以共享浏览器session，比较方便](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
+[moment：JavaScript日期处理类库](http://momentjs.cn/)  
 ## 命令
 运行Flyway：`mvn flyway:migrate`  
 Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate`

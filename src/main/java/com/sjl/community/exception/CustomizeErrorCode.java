@@ -12,7 +12,10 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     TYPE_NOT_EXIST(2005, "评论的类型错误或不存在"),
     COMMENT_PARENT_NOT_EXIST(2006, "未选中任何问题或回复进行评论"),
     SYSTEM_ERROR(2007, "服务器冒烟儿了，稍后再试试吧~"),
-    CONTENT_IS_EMPTY(2008, "不能输入空的内容哦~");
+    CONTENT_IS_EMPTY(2008, "不能输入空的内容哦~"),
+    NOTIFICATION_TYPE_NOT_EXIST(2009, "不能输入空的内容哦~"),
+    READ_NOTIFICATION_FAIL(2010, "账号异常，请重新登陆！"),
+    ;
 
     private Integer code;
     private String message;

@@ -52,7 +52,7 @@ body{
     margin-left: 10px;
     padding: 0;
 }
-.comment_operating .oper-btn :hover{
+.comment_operating .oper-btn:hover{
     color: #499EF3;
 }
 .comment_operating .active{
@@ -85,6 +85,9 @@ body{
 .publish-tab-tags{
     margin-top: 15px;
 }
+.publish-tab-tags .select:hover {
+    color: pink;
+}
 .publish-tag-list{
     margin-top: 15px;
     display: none;
@@ -107,6 +110,13 @@ body{
 .publish-tag-remove:hover{
     color: red;
 }
-.publish-tag-select:hover{
-     color: pink;
- }
+
+.reply-list{
+    margin: 0 0;
+}
+.reply-list .time{
+    float: right;
+}
+.top-notification{
+    margin-left: 5px;
+}
