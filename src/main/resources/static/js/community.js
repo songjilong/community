@@ -38,14 +38,14 @@ function submit_comment_by_type(parent_id, type, content) {
     });
 }
 
-/*提交问题的评论*/
+/*提交问题的回复*/
 function submit_question_comment() {
     const id = $("#question_parent_id").val();
     const content = $("#question_comment_content").val();
     submit_comment_by_type(id, 1, content);
 }
 
-/*提交回复的评论*/
+/*提交评论的回复*/
 function submit_comment_comment(e) {
     const id = e.getAttribute("data-id");//获得回复的id
     const content = $("#input-" + id).val();//根据id获得评论内容

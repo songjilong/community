@@ -2,7 +2,6 @@ package com.sjl.community.controller;
 
 import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
-import com.sjl.community.model.User;
 import com.sjl.community.service.NotificationService;
 import com.sjl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

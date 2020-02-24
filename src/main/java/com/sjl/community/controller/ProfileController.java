@@ -3,8 +3,6 @@ package com.sjl.community.controller;
 import com.sjl.community.dto.NotificationDto;
 import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
-import com.sjl.community.mapper.UserMapper;
-import com.sjl.community.model.Notification;
 import com.sjl.community.model.User;
 import com.sjl.community.service.NotificationService;
 import com.sjl.community.service.QuestionService;
@@ -13,10 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**

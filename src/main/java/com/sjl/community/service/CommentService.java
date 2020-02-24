@@ -100,6 +100,9 @@ public class CommentService {
      * @param targetTitle 问题标题
      */
     public void createNotification(Long notifierId, String notifyName, Long receiverId, int type, Long targetId, String targetTitle){
+        if(notifierId == receiverId){
+            return;
+        }
         Notification notification = new Notification();
         notification.setNotifierId(notifierId);
         notification.setNotifyName(notifyName);

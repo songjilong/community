@@ -105,12 +105,11 @@
                 <div class="media-left media-middle">
                     <a href="#">
                         <img class="media-object img-rounded user_avatar"
-                             th:src="${questionDto.user.avatarUrl} == null ? '' : ${questionDto.user.avatarUrl}"
-                             alt="...">
+                             th:src="${session.user} == null ? '/images/default-avatar.png' : ${session.user.avatarUrl}">
                     </a>
                 </div>
                 <div class="media-body question_text">
-                    发起人：<span class="media-heading" th:text="${questionDto.user.name}"></span>
+                    发起人：<span class="media-heading" th:text="${session.user} == null ? '匿名用户' : ${session.user.name}"></span>
                 </div>
             </div>
             <input type="hidden" id="question_parent_id" th:value="${questionDto.id}">

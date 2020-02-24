@@ -29,6 +29,7 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [MySQL菜鸟教程](https://www.runoob.com/mysql/mysql-tutorial.html)  
 - [Lombok官网](https://projectlombok.org/)  
 - [springboot_learn，一个大佬写的关于Spring Boot各种实践demo](https://gitee.com/dalaoyang/springboot_learn)
+- [阿里云OSS使用教程](https://help.aliyun.com/document_detail/31883.html?spm=5176.8466010.bucket.4.7c451450a0B80C)
 
 ## 常见问题解决
 - [Github登录流程分析](https://www.cnblogs.com/songjilong/p/12309552.html)  
@@ -38,4 +39,5 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [MyBatis Generator实现MySQL分页插件](https://blog.csdn.net/xiao__gui/article/details/51333693)    
 - [git push报错连接超时443](https://gist.github.com/laispace/666dd7b27e9116faece6)    
 - [thymeleaf向fragment中传入具体值](https://blog.csdn.net/u010999809/article/details/80724076)
+- [阿里云OSS上传Object后如何获取访问URL？](https://www.alibabacloud.com/help/zh/doc-detail/39607.htm)
 

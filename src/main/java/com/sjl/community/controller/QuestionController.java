@@ -3,7 +3,6 @@ package com.sjl.community.controller;
 import com.sjl.community.dto.CommentDto;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.enums.CommentTypeEnum;
-import com.sjl.community.model.Question;
 import com.sjl.community.service.CommentService;
 import com.sjl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

@@ -1,7 +1,5 @@
 package com.sjl.community.controller;
 
-import com.sjl.community.dto.NotificationDto;
-import com.sjl.community.enums.NotificationStatusEnum;
 import com.sjl.community.enums.NotificationTypeEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;

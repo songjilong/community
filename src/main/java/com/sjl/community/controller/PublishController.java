@@ -3,8 +3,6 @@ package com.sjl.community.controller;
 import com.sjl.community.cache.TagCache;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.dto.TagDto;
-import com.sjl.community.mapper.QuestionMapper;
-import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.Question;
 import com.sjl.community.model.User;
 import com.sjl.community.service.QuestionService;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.HTML;
 import java.util.List;
 
 /**

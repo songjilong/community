@@ -19,6 +19,14 @@ mybatis:
 
 # Github登录需要的参数
 github:
-  client_id: aeb0d5116950de9541ab
-  client_secret: ff77def3f0aecb61c0544eb6296faf213cb13c11
-  redirect_uri: http://localhost:8887/callback
+  client-id: aeb0d5116950de9541ab
+  client-secret: ff77def3f0aecb61c0544eb6296faf213cb13c11
+  redirect-uri: http://localhost:8887/callback
+
+# 阿里云图片上传需要的参数
+aliyun:
+  endpoint: http://oss-cn-hangzhou.aliyuncs.com
+  accessKeyId: LTAI4FcQmixvAcadvrWzjFWX
+  accessKeySecret: Yo6pIhpahRINc1otp72Q2RtQIcZLxH
+  bucketName: beetle-community
+  firstKey: my-first-key
