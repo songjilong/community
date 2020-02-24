@@ -110,7 +110,6 @@ body{
 .publish-tag-remove:hover{
     color: red;
 }
-
 .reply-list{
     margin: 0 0;
 }
@@ -119,4 +118,10 @@ body{
 }
 .top-notification{
     margin-left: 5px;
+}
+.footer-word{
+    color: #666;
+    text-align: center;
+    padding: 30px 0 10px;
+    font-size: 12px;
 }

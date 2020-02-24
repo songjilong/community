@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author song
  * @create 2020/2/13 19:49
@@ -27,13 +25,26 @@ public class IndexController {
     private NotificationService notificationService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request, Model model,
+    public String index(Model model,
                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         //添加问题信息
         PaginationDto<QuestionDto> pageInfo = questionService.findAll(pageNum, pageSize);
         //添加到model作用域
         model.addAttribute("pageInfo", pageInfo);
+        return "index";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model,
+                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                         @RequestParam(value = "search", required = false) String search){
+        //添加问题信息
+        PaginationDto<QuestionDto> pageInfo = questionService.findBySearch(pageNum, pageSize, search);
+        //添加到model作用域
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("search", search);
         return "index";
     }
 }

@@ -47,7 +47,7 @@ public class QuestionService {
         //计算总记录数
         int totalCount = (int) questionMapper.countByExample(null);
         //查询所有的，不需要id
-        return getPageInfo(pageNum, pageSize, totalCount, null);
+        return getPageInfo(pageNum, pageSize, totalCount, null, null);
     }
 
     /**
@@ -63,11 +63,23 @@ public class QuestionService {
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreatorEqualTo(id);
         int totalCount = (int) questionMapper.countByExample(questionExample);
-        return getPageInfo(pageNum, pageSize, totalCount, id);
+        return getPageInfo(pageNum, pageSize, totalCount, id, null);
     }
 
     /**
-     * 查询分页信息
+     * 查询与输入搜索值匹配的问题 的分页信息
+     * @param pageNum
+     * @param pageSize
+     * @param search
+     * @return
+     */
+    public PaginationDto<QuestionDto> findBySearch(Integer pageNum, Integer pageSize, String search) {
+        search = StringUtils.replace(search, " ", "|");
+        int totalCount = questionExtMapper.countBySearch(search);
+        return getPageInfo(pageNum,pageSize, totalCount, null, search);
+    }
+    /**
+     * 根据传入的参数的不同，查询分页信息
      *
      * @param pageNum
      * @param pageSize
@@ -75,7 +87,7 @@ public class QuestionService {
      * @param id
      * @return
      */
-    public PaginationDto<QuestionDto> getPageInfo(Integer pageNum, Integer pageSize, int totalCount, Long id) {
+    public PaginationDto<QuestionDto> getPageInfo(Integer pageNum, Integer pageSize, Integer totalCount, Long id, String searchValue) {
         //问题列表信息
         List<QuestionDto> questionDtos = new ArrayList<>();
         //返回的页面信息+分页信息
@@ -94,16 +106,20 @@ public class QuestionService {
         }
         //获取截取的位置
         int offerIndex = (pageNum - 1) * pageSize;
+
         List<Question> questions;
-        //判断id存不存在，来决定分页的方式
-        QuestionExample questionExample = new QuestionExample();
-        if (id != null) {
-            questionExample.createCriteria().andCreatorEqualTo(id);
+        if(searchValue == null){
+            QuestionExample questionExample = new QuestionExample();
+            //id存在，增加id相等的条件
+            if (id != null) {
+                questionExample.createCriteria().andCreatorEqualTo(id);
+            }
+            //问题按时间倒序
+            questionExample.setOrderByClause("gmt_create desc");
+            questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offerIndex, pageSize));
+        }else{
+            questions = questionExtMapper.findBySearchREGEXP(searchValue, offerIndex, pageSize);
         }
-        //问题按时间倒序
-        questionExample.setOrderByClause("gmt_create desc");
-        //添加分页
-        questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offerIndex, pageSize));
         //先遍历获取所有的问题
         for (Question question : questions) {
             QuestionDto questionDto = new QuestionDto();
@@ -191,7 +207,7 @@ public class QuestionService {
         String replaceTags = queryQuestionDto.getTags().replace(",", "|");
         question.setTags(replaceTags);
         //查出所有符合表达式的question
-        List<Question> questionList = questionExtMapper.findByREGEXP(question);
+        List<Question> questionList = questionExtMapper.findByTagsREGEXP(question);
         //赋值给questionDto
         return questionList.stream().map(q -> {
             QuestionDto questionDto = new QuestionDto();
@@ -199,5 +215,4 @@ public class QuestionService {
             return questionDto;
         }).collect(Collectors.toList());
     }
-
 }

@@ -8,5 +8,9 @@ public interface QuestionExtMapper {
 
     void addCommentCount(Question question);
 
-    List<Question> findByREGEXP(Question question);
+    List<Question> findByTagsREGEXP(Question question);
+
+    List<Question> findBySearchREGEXP(String search, Integer offerIndex, Integer pageSize);
+
+    int countBySearch(String search);
 }

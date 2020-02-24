@@ -20,7 +20,7 @@
 </script>
 <body>
 <!--顶部导航栏-->
-<div th:insert="fragment_top_navigation::top_nav"></div>
+<div th:replace="fragment_top_navigation::top_nav"></div>
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
@@ -37,5 +37,7 @@
         </div>
     </div>
 </div>
+<!--页尾-->
+<div th:replace="fragment_footer::beetle_footer"></div>
 </body>
 </html>

@@ -8,7 +8,7 @@ import com.sjl.community.exception.CustomizeException;
  * @create 2020/2/23 17:22
  */
 public enum NotificationTypeEnum {
-    REPLY_QUESTION(1, "回复了你"),
+    REPLY_QUESTION(1, "回复了你的问题"),
     REPLY_COMMENT(2, "回复了你的评论");
 
     private Integer type;

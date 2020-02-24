@@ -37,7 +37,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="findByREGEXP" parameterType="com.sjl.community.model.Question" resultMap="BaseResultMap">
+    <select id="findByTagsREGEXP" parameterType="com.sjl.community.model.Question" resultMap="BaseResultMap">
         select * from QUESTION
         <where>
             <if test="id != null">
@@ -48,5 +48,24 @@
             </if>
         </where>
         order by gmt_create desc limit 20
+    </select>
+
+    <select id="countBySearch" parameterType="String" resultType="Integer">
+        select count(*) from QUESTION
+        <where>
+            <if test="search != null and search != ''">
+                and title regexp #{search}
+            </if>
+        </where>
+    </select>
+
+    <select id="findBySearchREGEXP" resultMap="BaseResultMap">
+        select * from QUESTION
+        <where>
+            <if test="search != null and search != ''">
+                and title regexp #{search}
+            </if>
+        </where>
+        limit #{offerIndex}, #{pageSize}
     </select>
 </mapper>
