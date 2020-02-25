@@ -5,9 +5,9 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:mysql://cdb-ourugxty.cd.tencentcdb.com:10110/db_community
+    url: jdbc:mysql://localhost:3306/db_community
     username: root
-    password: 0624songjilong
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
 
 # 开启mybatis驼峰标识
@@ -21,7 +21,7 @@ mybatis:
 github:
   client-id: aeb0d5116950de9541ab
   client-secret: ff77def3f0aecb61c0544eb6296faf213cb13c11
-  redirect-uri: http://121.36.34.135/callback
+  redirect-uri: http://localhost:8887/callback
 
 # 阿里云图片上传需要的参数
 aliyun:
@@ -29,7 +29,6 @@ aliyun:
   accessKeyId: LTAI4FcQmixvAcadvrWzjFWX
   accessKeySecret: Yo6pIhpahRINc1otp72Q2RtQIcZLxH
   bucketName: beetle-community
-  firstKey: my-first-key
 
 # 日志配置
 logging:

@@ -64,7 +64,6 @@ public class AuthoriseController {
             userService.createOrUpdateUser(user);
             //将token存入cookie
             response.addCookie(new Cookie("token", token));
-            log.error("获取的githubUser为空，{}",githubUser);
             return "redirect:/";
         } else {
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);

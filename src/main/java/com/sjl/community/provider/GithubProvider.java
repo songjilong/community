@@ -6,8 +6,6 @@ import com.sjl.community.dto.GithubUser;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import sun.rmi.runtime.Log;
-
 import java.io.IOException;
 
 /**
@@ -37,7 +35,6 @@ public class GithubProvider {
             return string.split("&")[0].split("=")[1];
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("获取github accessToken失败");
         }
         return null;
     }
@@ -62,7 +59,6 @@ public class GithubProvider {
             return JSON.parseObject(str, GithubUser.class);
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("获取GithubUser失败");
         }
         return null;
     }
