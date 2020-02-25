@@ -15,7 +15,11 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
-            <h3 th:text="${sectionName}">我的提问</h3>
+            <h3>
+                <img th:if="${section=='questions'}" src="/icons/question-square.svg" class="nav-title-icon">
+                <img th:if="${section=='replies'}" src="/icons/bell.svg" class="nav-title-icon">
+                &nbsp;[[${sectionName}]]
+            </h3>
             <hr>
             <!--问题列表-->
             <div th:if="${section} == 'questions'">
@@ -40,6 +44,9 @@
             </div>
         </div>
     </div>
+</div>
+<div>
+    <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
 </div>
 <!--页尾-->
 <div th:replace="fragment_footer::beetle_footer"></div>

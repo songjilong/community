@@ -1,20 +1,18 @@
 ## 说明
-**甲壳虫社区（Beetle Community）**  
-一个开源的问答社区
+甲壳虫社区（Beetle Community）  
+一个开源的问答社区，目前功能有第三方登陆、发布问题、回复问题、消息通知等，后续会不断更新完善，欢迎大家提供更好的建议
 
 ## 使用技术
-后端使用Spring Boot + Mybatis + Thymeleaf  
-前端页面用BootStrap搭建  
-数据库使用MySQL  
-使用Github作为第三方登录  
+Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL
 
 ## 工具
-Git  
-Lombok  
-Flyway  
+[Git](https://git-scm.com/)  
+[Lombok](https://projectlombok.org/)  
+[Flyway](https://flywaydb.org/)  
 [postman（插件版）：可以共享浏览器session，比较方便](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
 [moment：JavaScript日期处理类库](http://momentjs.cn/)  
-[免费开源markdown编辑器](https://pandao.github.io/editor.md/)
+[免费开源markdown编辑器](https://pandao.github.io/editor.md/)  
+
 ## 命令
 运行Flyway：`mvn flyway:migrate`  
 Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate`
@@ -42,4 +40,5 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [git push报错连接超时443](https://gist.github.com/laispace/666dd7b27e9116faece6)    
 - [thymeleaf向fragment中传入具体值](https://blog.csdn.net/u010999809/article/details/80724076)
 - [阿里云OSS上传Object后如何获取访问URL？](https://www.alibabacloud.com/help/zh/doc-detail/39607.htm)
+- [CentOs防火墙设置](https://support.huaweicloud.com/trouble-ecs/ecs_trouble_0402.html)
 

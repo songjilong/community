@@ -18,7 +18,10 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
-            <h3><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;发起</h3>
+            <h3>
+                <img src="/icons/cursor.svg" class="nav-title-icon">
+                &nbsp;发起
+            </h3>
             <hr>
             <form action="/publish" method="post">
                 <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}">Hello</div>
@@ -95,6 +98,9 @@
             • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字<br>
         </div>
     </div>
+</div>
+<div>
+    <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
 </div>
 <!--页尾-->
 <div th:replace="fragment_footer::beetle_footer"></div>

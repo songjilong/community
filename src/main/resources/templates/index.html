@@ -12,7 +12,7 @@
 </head>
 <script type="application/javascript">
     const closable = localStorage.getItem("closable");
-    if(closable == 1){
+    if (closable == 1) {
         //关闭
         window.close();
         localStorage.removeItem("closable");
@@ -24,7 +24,10 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
-            <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;发现</h3>
+            <h3>
+                <img src="/icons/display.svg" class="nav-title-icon">
+                &nbsp;发现
+            </h3>
             <hr>
             <!--问题列表-->
             <div th:replace="fragment_question_list::question_list(false)"></div>
@@ -32,29 +35,39 @@
             <div th:replace="fragment_page_navigation::page_nav"></div>
         </div>
         <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
-            <h3>热门标签</h3>
-            <svg class="bi bi-chevron-right" width="32" height="32" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z" clip-rule="evenodd"/></svg>
-
-            <hr>
-            <div class="row">
+            <div class="row one-day-module">
                 <div class="col-sm-12 col-md-12">
                     <div class="thumbnail">
                         <img id="one-day-img">
                         <div class="caption">
-                            <h3>每日一句</h3>
-                            <p id="one-day-time"></p>
+                            <h4>
+                                <img src="/icons/images.svg" class="nav-title-icon">
+                                每日一句
+                            </h4>
+                            <p><img src="/icons/calendar.svg">
+                            <p class="question_text" id="one-day-time"></p></p>
                             <p id="one-day-text-cn"></p>
+                            </p>
                         </div>
                     </div>
                 </div>
+                <h4>
+                    <img src="/icons/tag.svg" class="nav-title-icon">
+                    热门标签
+                </h4>
+                <hr>
+                <h4>
+                    <img src="/icons/rooter.svg" class="nav-title-icon">
+                    站长微信
+                </h4>
+                <img src="/images/wecat1.png" class="img-thumbnail img-wecat">
             </div>
-            <hr>
-            <h3>站长微信</h3>
-            <img src="/images/wecat1.png" class="img-thumbnail img-wecat">
         </div>
     </div>
-</div>
-<!--页尾-->
-<div th:replace="fragment_footer::beetle_footer"></div>
+    <div>
+        <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
+    </div>
+    <!--页尾-->
+    <div th:replace="fragment_footer::beetle_footer"></div>
 </body>
 </html>

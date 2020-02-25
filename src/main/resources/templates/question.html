@@ -22,7 +22,10 @@
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
             <!--问题详情-->
-            <h3 th:text="${questionDto.title}">问题标题</h3>
+            <h3>
+                <img src="/icons/question-square.svg" class="nav-title-icon">
+                &nbsp;[[${questionDto.title}]]
+            </h3>
             <span class="question_info">
                 标签：[[${questionDto.tags}]] |
                 作者：[[${questionDto.user.name}]] |
@@ -149,6 +152,9 @@
             </ul>
         </div>
     </div>
+</div>
+<div>
+    <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
 </div>
 <!--页尾-->
 <div th:replace="fragment_footer::beetle_footer"></div>

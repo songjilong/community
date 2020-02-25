@@ -12,6 +12,10 @@ body{
     font-style: italic;
     text-shadow: grey 10px 10px 4px;
 }
+.search-input{
+    background: url("/icons/search-input.svg") no-repeat;
+    padding-left: 30px;
+}
 .btn-publish{
     float: right;
     margin: 15px  0;
@@ -120,9 +124,6 @@ body{
 .reply-list .time{
     float: right;
 }
-.top-notification{
-    margin-left: 5px;
-}
 .footer-word{
     color: #666;
     text-align: center;
@@ -131,4 +132,32 @@ body{
 }
 .img-wecat{
     width: 100%;
+}
+.one-day-module{
+    margin-bottom: 5px;
+}
+#click-top-btn{
+    font-size: 20px;
+    top: unset;
+    bottom: 20px;
+    right: 20px;
+    position: fixed;
+    padding: 5px;
+    background-color: #eee;
+    cursor: pointer;
+}
+#click-top-btn:hover{
+    background-color: #aaa;
+}
+.user-oper-list{
+    text-align: center;
+    border-radius: 10px;
+}
+.user-oper-icon{
+    width: 20px;
+    height: 20px;
+}
+.nav-title-icon{
+    width: 30px;
+    height: 30px;
 }
