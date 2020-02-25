@@ -38,7 +38,7 @@
     </update>
 
     <select id="findByTagsREGEXP" parameterType="com.sjl.community.model.Question" resultMap="BaseResultMap">
-        select * from QUESTION
+        select * from question
         <where>
             <if test="id != null">
                 and id != #{id}
@@ -51,7 +51,7 @@
     </select>
 
     <select id="countBySearch" parameterType="String" resultType="Integer">
-        select count(*) from QUESTION
+        select count(*) from question
         <where>
             <if test="search != null and search != ''">
                 and title regexp #{search}
