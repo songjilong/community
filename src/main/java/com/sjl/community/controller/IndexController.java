@@ -27,7 +27,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model,
                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+                        @RequestParam(value = "pageSize", defaultValue = "8") Integer pageSize) {
         //添加问题信息
         PaginationDto<QuestionDto> pageInfo = questionService.findAll(pageNum, pageSize);
         //添加到model作用域
@@ -38,7 +38,7 @@ public class IndexController {
     @GetMapping("/search")
     public String search(Model model,
                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                         @RequestParam(value = "pageSize", defaultValue = "8:") Integer pageSize,
                          @RequestParam(value = "search", required = false) String search){
         //添加问题信息
         PaginationDto<QuestionDto> pageInfo = questionService.findBySearch(pageNum, pageSize, search);

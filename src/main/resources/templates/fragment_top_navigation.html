@@ -38,23 +38,25 @@
                     <li th:if="${session.user != null}">
                         <a href="/profile/replies">
                             通知
-                            <span class="badge top-notification" th:text="${session.unreadCount}">66</span>
+                            <span class="badge top-notification" th:text="${session.unreadCount}"></span>
                         </a>
                     </li>
                     <li class="dropdown" th:if="${session.user != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
-                            <span th:text="${session.user.getName()}">我的</span>
+                            <img th:src="${session.user.avatarUrl}" class="img-rounded user_login_avatar">
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/profile/questions}">个人中心</a></li>
-                            <li role="separator" class="divider"></li>
                             <li><a th:href="@{/logout}">退出登录</a></li>
                         </ul>
                     </li>
                     <li th:if="${session.user == null}">
-                        <a href="https://github.com/login/oauth/authorize?client_id=aeb0d5116950de9541ab&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
+                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='aeb0d5116950de9541ab',redirect_uri=${#httpServletRequest.getRequestURL()}+'callback',scope='user',state=1)}">登录</a>
+                    </li>
+                    <li>
+                        <img src="icons/brightness-high.svg" alt="" width="32" height="32">
                     </li>
                 </ul>
             </div>

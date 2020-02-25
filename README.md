@@ -27,9 +27,10 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [Thymeleaf官方文档](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)  
 - [Mybatis Generator官方文档](http://mybatis.org/generator/)   
 - [MySQL菜鸟教程](https://www.runoob.com/mysql/mysql-tutorial.html)  
-- [Lombok官网](https://projectlombok.org/)  
-- [springboot_learn，一个大佬写的关于Spring Boot各种实践demo](https://gitee.com/dalaoyang/springboot_learn)
-- [阿里云OSS使用教程](https://help.aliyun.com/document_detail/31883.html?spm=5176.8466010.bucket.4.7c451450a0B80C)
+- [Lombok官网](https://projectlombok.org/)   
+- [springboot_learn，一个大佬写的关于Spring Boot各种实践demo](https://gitee.com/dalaoyang/springboot_learn)  
+- [阿里云OSS使用教程](https://help.aliyun.com/document_detail/31883.html?spm=5176.8466010.bucket.4.7c451450a0B80C)  
+- [Spring Boot 日志配置](https://blog.csdn.net/Inke88/article/details/75007649)  
 
 ## 常见问题解决
 - [Github登录流程分析](https://www.cnblogs.com/songjilong/p/12309552.html)  

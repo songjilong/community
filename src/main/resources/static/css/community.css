@@ -16,6 +16,10 @@ body{
     float: right;
     margin: 15px  0;
 }
+.user_login_avatar{
+    width: 23px;
+    height: 23px;
+}
 .user_avatar{
     width: 40px;
     height: 40px;
@@ -124,4 +128,7 @@ body{
     text-align: center;
     padding: 30px 0 10px;
     font-size: 12px;
+}
+.img-wecat{
+    width: 100%;
 }

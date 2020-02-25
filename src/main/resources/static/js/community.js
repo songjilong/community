@@ -59,7 +59,7 @@ function show_or_close_subComment(e) {
     var subCommentContainer = $('#comment-' + id);
     subCommentContainer.toggleClass("in");
 
-    if(subCommentContainer.hasClass("in") && subCommentContainer.children().length === 1){
+    if (subCommentContainer.hasClass("in") && subCommentContainer.children().length === 1) {
         $.getJSON("/comment/" + id, function (data) {
             $.each(data.data.reverse(), function (index, comment) {
                 var mediaLeftElement = $("<div/>", {
@@ -94,7 +94,7 @@ function show_or_close_subComment(e) {
                 }));
 
                 var lineElement = $("<hr/>", {
-                    "class" : "comment_cut_line"
+                    "class": "comment_cut_line"
                 });
 
                 var commentElement = $("<div/>")
@@ -115,45 +115,61 @@ function selectTag(e) {
     const previous = $("#tags_input").val();//获取输入框的值
     //防止字串干扰
     let arr = previous.split(',');
-    if(arr.indexOf(value) === -1 ){
-        if(++count > 5){
+    if (arr.indexOf(value) === -1) {
+        if (++count > 5) {
             alert("最多选择5个标签");
             return;
         }
-        $('#all-'+value).addClass("publish-tag-selected");
-        if(previous){
-            $("#tags_input").val(previous+ ',' +value);
-        }else{
+        $('#all-' + value).addClass("publish-tag-selected");
+        if (previous) {
+            $("#tags_input").val(previous + ',' + value);
+        } else {
             $("#tags_input").val(value);
         }
-    }else{
+    } else {
         alert('不要再点啦，我已经选过了')
     }
 }
+
 /*删除标签*/
 function deleteTag(e) {
     const removeValue = e.getAttribute("data-tag");//获取待删除的值
     const previous = $("#tags_input").val();//获取输入框的值
     //防止字串干扰
     let arr = previous.split(',');
-    if(arr.indexOf(removeValue) > -1){
-        for(let i = 0; i < arr.length; i++){
-            if(arr[i] === removeValue){
+    if (arr.indexOf(removeValue) > -1) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === removeValue) {
                 arr.splice(i, 1);
-                $('#all-'+removeValue).removeClass("publish-tag-selected");
+                $('#all-' + removeValue).removeClass("publish-tag-selected");
                 count--;
                 break;
             }
         }
         $("#tags_input").val(arr.join(','));
-    }else{
+    } else {
         alert('不要再点啦，我还没被选呢');
     }
 }
 
+/*展示关闭标签*/
 function showSelectTag() {
     $("#tag-list").show();
 }
+
 function closeSelectTag() {
     $("#tag-list").hide();
 }
+
+/*每日一句*/
+$.getJSON("https://api.ooopn.com/ciba/api.php?type=json",
+    function(data){
+        $("#one-day-text-cn").text(data.ciba);
+        $("#one-day-time").text(data.date);
+        $("#one-day-img").attr("src", data.imgurl);
+    });
+$(function(){
+    $("#one-day-text-cn").click(function() {
+        $(this).select();
+    })
+});

@@ -3,8 +3,10 @@ package com.sjl.community.provider;
 import com.alibaba.fastjson.JSON;
 import com.sjl.community.dto.AccessTokenDto;
 import com.sjl.community.dto.GithubUser;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 
@@ -13,6 +15,7 @@ import java.io.IOException;
  * @create 2020/2/14 16:16
  */
 @Component
+@Slf4j
 public class GithubProvider {
 
     /**
@@ -34,6 +37,7 @@ public class GithubProvider {
             return string.split("&")[0].split("=")[1];
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("获取github accessToken失败");
         }
         return null;
     }
@@ -55,10 +59,10 @@ public class GithubProvider {
             Response response = client.newCall(request).execute();
             //得到的是json字符串，因此需要转为GithubUser对象
             String str = response.body().string();
-            GithubUser githubUser = JSON.parseObject(str, GithubUser.class);
-            return githubUser;
+            return JSON.parseObject(str, GithubUser.class);
         } catch (IOException e) {
             e.printStackTrace();
+            log.error("获取GithubUser失败");
         }
         return null;
     }

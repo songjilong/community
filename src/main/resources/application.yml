@@ -30,3 +30,12 @@ aliyun:
   accessKeySecret: Yo6pIhpahRINc1otp72Q2RtQIcZLxH
   bucketName: beetle-community
   firstKey: my-first-key
+
+# 日志配置
+logging:
+  level: info
+  level.com.sjl.community.mapper: debug
+  file:
+    name: log/community.log
+    max-size: 200MB
+    max-history: 30

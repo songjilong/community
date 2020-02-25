@@ -9,6 +9,7 @@ import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.User;
 import com.sjl.community.provider.GithubProvider;
 import com.sjl.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import java.util.UUID;
  * @author song
  * @create 2020/2/14 16:01
  */
+@Slf4j
 @Controller
 public class AuthoriseController {
     @Autowired
@@ -62,6 +64,7 @@ public class AuthoriseController {
             userService.createOrUpdateUser(user);
             //将token存入cookie
             response.addCookie(new Cookie("token", token));
+            log.error("获取的githubUser为空，{}",githubUser);
             return "redirect:/";
         } else {
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
