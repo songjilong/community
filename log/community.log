@@ -5117,3 +5117,65 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'db_community.Q
 2020-02-25 17:01:33.911 DEBUG 2416 --- [http-nio-8887-exec-3] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
 2020-02-25 17:01:33.911 DEBUG 2416 --- [http-nio-8887-exec-3] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
 2020-02-25 17:01:33.976 DEBUG 2416 --- [http-nio-8887-exec-3] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:29.822  INFO 10896 --- [main] com.sjl.community.CommunityApplication   : Starting CommunityApplication on LAPTOP-LFAOC6JB with PID 10896 (E:\idea\workspace2\community\target\classes started by Lenovo in E:\idea\workspace2\community)
+2020-02-25 17:06:29.824  INFO 10896 --- [main] com.sjl.community.CommunityApplication   : The following profiles are active: production
+2020-02-25 17:06:30.948  INFO 10896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8887 (http)
+2020-02-25 17:06:30.956  INFO 10896 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-25 17:06:30.956  INFO 10896 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-25 17:06:31.056  INFO 10896 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-25 17:06:31.056  INFO 10896 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1144 ms
+2020-02-25 17:06:31.529  INFO 10896 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-25 17:06:31.652  INFO 10896 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-25 17:06:31.818  INFO 10896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
+2020-02-25 17:06:31.821  INFO 10896 --- [main] com.sjl.community.CommunityApplication   : Started CommunityApplication in 2.447 seconds (JVM running for 3.467)
+2020-02-25 17:06:44.341  INFO 10896 --- [http-nio-8887-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-25 17:06:44.341  INFO 10896 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-25 17:06:44.347  INFO 10896 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-02-25 17:06:44.401  INFO 10896 --- [http-nio-8887-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-25 17:06:44.767  INFO 10896 --- [http-nio-8887-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (com.mysql.jdbc.JDBC4Connection.getNetworkTimeout()I)
+2020-02-25 17:06:44.832  INFO 10896 --- [http-nio-8887-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-25 17:06:44.841 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user WHERE ( token = ? ) 
+2020-02-25 17:06:44.852 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.mapper.UserMapper.selectByExample  : ==> Parameters: cd4bbfb7-d3f6-499c-bee4-6f1df5a42d5f(String)
+2020-02-25 17:06:44.892 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.mapper.UserMapper.selectByExample  : <==      Total: 0
+2020-02-25 17:06:44.910 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.QuestionMapper.countByExample    : ==>  Preparing: select count(*) from question 
+2020-02-25 17:06:44.910 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.QuestionMapper.countByExample    : ==> Parameters: 
+2020-02-25 17:06:44.943 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.QuestionMapper.countByExample    : <==      Total: 1
+2020-02-25 17:06:44.949 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.Q.selectByExampleWithRowbounds   : ==>  Preparing: select id, title, tags, gmt_create, gmt_modified, comment_count, like_count, view_count, creator from question order by gmt_create desc LIMIT ? 
+2020-02-25 17:06:44.950 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.Q.selectByExampleWithRowbounds   : ==> Parameters: 8(Integer)
+2020-02-25 17:06:44.985 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.Q.selectByExampleWithRowbounds   : <==      Total: 8
+2020-02-25 17:06:44.986 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:44.986 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.017 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:45.022 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:45.022 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.052 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:45.053 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:45.053 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.085 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:45.085 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:45.086 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.117 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:45.118 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:45.118 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.151 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:45.152 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:45.152 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.183 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:45.184 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:45.184 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.216 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:06:45.217 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:06:45.217 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 13(Long)
+2020-02-25 17:06:45.249 DEBUG 10896 --- [http-nio-8887-exec-1] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-25 17:07:31.202 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user WHERE ( token = ? ) 
+2020-02-25 17:07:31.202 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.mapper.UserMapper.selectByExample  : ==> Parameters: cd4bbfb7-d3f6-499c-bee4-6f1df5a42d5f(String)
+2020-02-25 17:07:31.237 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.mapper.UserMapper.selectByExample  : <==      Total: 0
+2020-02-25 17:07:31.238 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.QuestionMapper.countByExample    : ==>  Preparing: select count(*) from question 
+2020-02-25 17:07:31.238 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.QuestionMapper.countByExample    : ==> Parameters: 
+2020-02-25 17:07:31.272 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.QuestionMapper.countByExample    : <==      Total: 1
+2020-02-25 17:07:31.272 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.Q.selectByExampleWithRowbounds   : ==>  Preparing: select id, title, tags, gmt_create, gmt_modified, comment_count, like_count, view_count, creator from question order by gmt_create desc LIMIT ?, ? 
+2020-02-25 17:07:31.273 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.Q.selectByExampleWithRowbounds   : ==> Parameters: 16(Integer), 8(Integer)
+2020-02-25 17:07:31.305 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.Q.selectByExampleWithRowbounds   : <==      Total: 1
+2020-02-25 17:07:31.306 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-25 17:07:31.306 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 12(Long)
+2020-02-25 17:07:31.338 DEBUG 10896 --- [http-nio-8887-exec-2] c.s.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
