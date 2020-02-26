@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/community.js"></script>
 </head>
 <body>
 <!--顶部导航栏-->
@@ -35,13 +36,27 @@
         </div>
         <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
             <div class="list-group" style="margin-top: 20px">
-                <a th:href="@{/profile/questions}" class="list-group-item" th:classappend="${section.equals('questions')} ?  'active' : ''">
+                <!--<a th:href="@{/profile/questions}" class="list-group-item" th:classappend="${section.equals('questions')} ?  'active' : ''">
                     我的提问
                 </a>
                 <a th:href="@{/profile/replies}" class="list-group-item" th:classappend="${section.equals('replies')} ?  'active' : ''">
                     <span class="badge" th:text="${session.unreadCount}">66</span>
                     最新回复
-                </a>
+                </a>-->
+                <!--每日一图一句-->
+                <div class="row one-day-module">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="thumbnail">
+                            <img id="one-day-img">
+                            <div class="caption">
+                                <p><img src="/icons/calendar.svg">
+                                <p class="question_text" id="one-day-time"></p></p>
+                                <p id="one-day-text-cn"></p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

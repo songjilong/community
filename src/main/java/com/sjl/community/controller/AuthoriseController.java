@@ -55,7 +55,7 @@ public class AuthoriseController {
         if (githubUser != null && githubUser.getId() != null) {
             //设置user信息
             User user = new User();
-            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setAccountId("Github"+ githubUser.getId());
             user.setName(githubUser.getName());
             user.setBio(githubUser.getBio());
             String token = UUID.randomUUID().toString();

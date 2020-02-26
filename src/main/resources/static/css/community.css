@@ -10,7 +10,7 @@ body{
 .logo{
     font-size: 25px;
     font-style: italic;
-    text-shadow: grey 10px 10px 4px;
+    /*text-shadow: grey 10px 10px 4px;*/
 }
 .search-input{
     background: url("/icons/search-input.svg") no-repeat;
@@ -160,4 +160,10 @@ body{
 .nav-title-icon{
     width: 30px;
     height: 30px;
+}
+.publish-guide-ul{
+    display: contents;
+}
+.publish-guide-li{
+    margin-left: 15px;
 }
