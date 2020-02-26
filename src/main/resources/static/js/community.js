@@ -163,6 +163,7 @@ function deleteTag(e) {
 
 /*展示关闭标签*/
 function showSelectTag() {
+    $("#publish-error").hide();
     $("#tag-list").show();
 }
 

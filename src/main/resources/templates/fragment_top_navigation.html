@@ -86,12 +86,14 @@
                             <span class="caret"></span>
                             <ul class="dropdown-menu user-oper-list">
                                 <li>
-                                    <img class="user-oper-icon" src="/images/github.svg">
-                                    <a th:href="@{https://github.com/login/oauth/authorize(client_id=${@environment.getProperty('github.client-id')},redirect_uri=${@environment.getProperty('github.redirect-uri')},scope='user',state=10086)}">Github登录</a>
+                                    <a th:href="@{https://github.com/login/oauth/authorize(client_id=${@environment.getProperty('github.client-id')},redirect_uri=${@environment.getProperty('github.redirect-uri')},scope='user',state=10086)}">
+                                        Github登录
+                                    </a>
                                 </li>
                                 <li>
-                                    <img class="user-oper-icon" src="/images/qq-login.png">
-                                    <a th:href="@{https://graph.qq.com/oauth2.0/authorize(response_type='code',client_id=${@environment.getProperty('qq.client_id')},redirect_uri=${@environment.getProperty('qq.redirect_uri')},state=10087)}">QQ账号登录</a>
+                                    <a th:href="@{https://graph.qq.com/oauth2.0/authorize(response_type='code',client_id=${@environment.getProperty('qq.client_id')},redirect_uri=${@environment.getProperty('qq.redirect_uri')},state=10087)}">
+                                        QQ登录
+                                    </a>
                                 </li>
                             </ul>
                         </a>
