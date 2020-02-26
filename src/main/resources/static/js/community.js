@@ -3,6 +3,15 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+/*获取当前项目主机地址*/
+function getLocalhostPath() {
+    const curWwwPath = window.document.location.href;
+    const pathName=window.document.location.pathname;
+    const pos=curWwwPath.indexOf(pathName);
+    //获取主机地址，如： http://localhost:8083
+    return curWwwPath.substring(0,pos);
+}
+
 /*根据传递的类型提交评论*/
 function submit_comment_by_type(parent_id, type, content) {
     if (!content) {
@@ -27,9 +36,8 @@ function submit_comment_by_type(parent_id, type, content) {
                 if (result.code === 2004) {
                     const confirm = window.confirm(result.message);
                     if (confirm) {
-                        window.open("https://github.com/login/oauth/authorize?client_id=aeb0d5116950de9541ab&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
+                        window.open("https://github.com/login/oauth/authorize?client_id=aeb0d5116950de9541ab&redirect_uri="+getLocalhostPath()+"/callback&scope=user&state=1");
                         localStorage.setItem('closable', '1');//0：不关闭 1：关闭
-                        window
                     }
                 } else {
                     alert(result.message);

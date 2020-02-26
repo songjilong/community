@@ -1,12 +1,17 @@
 package com.sjl.community.provider;
 
 import com.alibaba.fastjson.JSON;
-import com.sjl.community.dto.AccessTokenDto;
-import com.sjl.community.dto.GithubUser;
+import com.sjl.community.config.QQLoginParams;
+import com.sjl.community.dto.QQUser;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * @author song
@@ -14,51 +19,56 @@ import java.io.IOException;
  */
 @Component
 @Slf4j
-public class GithubProvider {
+public class QQProvider {
+
+    @Autowired
+    private QQLoginParams params;
+
+    private OkHttpClient client = new OkHttpClient();
 
     /**
      * 获取AccessToken
      */
-    public String getAccessToken(AccessTokenDto accessTokenDto) {
-        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        OkHttpClient client = new OkHttpClient();
-        //将accessTokenDto转为json字符串传入参数
-        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDto));
+    public String getAccessToken(String code) throws IOException {
+        String redirect_uri = URLEncoder.encode(params.getRedirect_uri(), "UTF-8");
+        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id="+params.getClient_id()+"&client_secret="+params.getClient_secret()+"&code="+code+"redirect_uri="+redirect_uri;
         Request request = new Request.Builder()
-                .url("https://github.com/login/oauth/access_token")
-                .post(body)
+                .url(url)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            String string = response.body().string();
-            //得到的是类似这样的字符串，我们需要将它分割，只要access_token部分
-            //access_token=9566ba3483a556c610be42d44338f3fd16a3b8d1&scope=&token_type=bearer
-            return string.split("&")[0].split("=")[1];
-        } catch (Exception e) {
-            e.printStackTrace();
+            String str = response.body().string();
+            return str.split("&")[0].split("=")[1];
         }
-        return null;
+    }
+
+    /**
+     * 获取OpenId
+     */
+    public String getOpenId(String access_token) throws IOException {
+        String url = "https://graph.qq.com/oauth2.0/me?access_token="+access_token;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
     }
 
     /**
      * 根据access_token获取用户信息
-     *
-     * @param access_token
-     * @return
      */
-    public GithubUser getGithubUser(String access_token) {
-        OkHttpClient client = new OkHttpClient();
+    public QQUser getQQUser(String access_token, String openId) throws IOException {
+        String url = "https://graph.qq.com/user/get_user_info?access_token="+access_token+"&oauth_consumer_key="+params.getClient_id()+"&openid="+getOpenId(openId);
         Request request = new Request.Builder()
-                .url("https://api.github.com/user")
-                .header("Authorization", "token " + access_token)
+                .url(url)
                 .build();
-
-        try {
-            Response response = client.newCall(request).execute();
-            //得到的是json字符串，因此需要转为GithubUser对象
+        try(Response response = client.newCall(request).execute()) {
+            //得到的是json字符串，因此需要转为QQUser对象
             String str = response.body().string();
-            return JSON.parseObject(str, GithubUser.class);
+            return JSON.parseObject(str, QQUser.class);
         } catch (IOException e) {
             e.printStackTrace();
+            log.error("获取QQUser错误");
         }
         return null;
     }

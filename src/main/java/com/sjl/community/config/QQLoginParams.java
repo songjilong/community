@@ -9,11 +9,10 @@ import org.springframework.stereotype.Component;
  * @create 2020/2/14 17:50
  */
 @Component
-@ConfigurationProperties(prefix = "github")
+@ConfigurationProperties(prefix = "qq")
 @Data
-public class GithubParams {
-
+public class QQLoginParams {
     private String client_id;
-    private String client_secret;
     private String redirect_uri;
+    private String client_secret;
 }

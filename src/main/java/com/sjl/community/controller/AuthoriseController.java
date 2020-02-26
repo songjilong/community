@@ -37,7 +37,7 @@ public class AuthoriseController {
     private UserService userService;
 
     @GetMapping("/callback")
-    public String callback(@RequestParam("code") String code,
+    public String githubCallback(@RequestParam("code") String code,
                            @RequestParam("state") String state,
                            HttpServletResponse response) {
         AccessTokenDto accessTokenDto = new AccessTokenDto();
@@ -68,17 +68,5 @@ public class AuthoriseController {
         } else {
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
         }
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response){
-        //清除session
-        request.getSession().removeAttribute("user");
-        //清除cookie
-        Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        //返回到主页
-        return "redirect:/";
     }
 }
