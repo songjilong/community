@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author song
  * @create 2020/2/23 23:43
  */
-@Controller
+//@Controller
 public class FileController {
 
     @Autowired

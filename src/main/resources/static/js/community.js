@@ -29,6 +29,7 @@ function submit_comment_by_type(parent_id, type, content) {
                     if (confirm) {
                         window.open("https://github.com/login/oauth/authorize?client_id=aeb0d5116950de9541ab&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
                         localStorage.setItem('closable', '1');//0：不关闭 1：关闭
+                        window
                     }
                 } else {
                     alert(result.message);

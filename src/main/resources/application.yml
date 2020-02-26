@@ -25,10 +25,10 @@ github:
 
 # 阿里云图片上传需要的参数
 aliyun:
-  endpoint: http://oss-cn-hangzhou.aliyuncs.com
-  accessKeyId: LTAI4FcQmixvAcadvrWzjFWX
-  accessKeySecret: Yo6pIhpahRINc1otp72Q2RtQIcZLxH
-  bucketName: beetle-community
+  endpoint:
+  accessKeyId:
+  accessKeySecret:
+  bucketName:
 
 # 日志配置
 logging:

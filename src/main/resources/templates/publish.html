@@ -25,7 +25,6 @@
             </h3>
             <hr>
             <form action="/publish" method="post">
-                <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}">Hello</div>
                 <input type="hidden" name="id" th:value="${id}"/>
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）</label>
@@ -98,13 +97,14 @@
                 问题发起指南
             </h3>
             <hr>
-            <b>如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问。</b>
+            <b>※ 如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问。</b>
             <hr>
             <ul class="publish-guide-ul">
                 <li class="publish-guide-li"><b>问题标题:</b> 请用精简的语言描述您发布的问题，不超过25字</li>
                 <li class="publish-guide-li"><b>问题补充:</b> 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料</li>
                 <li class="publish-guide-li"><b>选择标签:</b> 选择最多5个符合题意的标签</li>
             </ul>
+            <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}"></div>
         </div>
     </div>
 </div>

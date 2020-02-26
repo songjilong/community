@@ -94,7 +94,7 @@ body{
     margin-top: 15px;
 }
 .publish-tab-tags .select:hover {
-    color: pink;
+    background-color: forestgreen;
 }
 .publish-tag-list{
     margin-top: 15px;
@@ -116,7 +116,7 @@ body{
     cursor: unset;
 }
 .publish-tag-remove:hover{
-    color: red;
+    color: #db2d20;
 }
 .reply-list{
     margin: 0 0;
@@ -131,7 +131,7 @@ body{
     font-size: 12px;
 }
 .img-wecat{
-    width: 100%;
+    width: 50%;
 }
 .one-day-module{
     margin-bottom: 5px;
@@ -166,4 +166,7 @@ body{
 }
 .publish-guide-li{
     margin-left: 15px;
+}
+.connect-webMaster{
+    display: flex;
 }
