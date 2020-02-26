@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>甲壳虫社区</title>
+    <link rel="shortcut icon" href="/images/beetle.ico" type="image/x-icon">
     <script src="/js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.css">
@@ -35,6 +36,11 @@
             <div th:replace="fragment_page_navigation::page_nav"></div>
         </div>
         <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
+            <!--<h4>
+                <img src="/icons/tag.svg" class="nav-title-icon">
+                热门标签
+            </h4>-->
+            <!--每日一图一句-->
             <div class="row one-day-module">
                 <div class="col-sm-12 col-md-12">
                     <div class="thumbnail">
@@ -51,23 +57,19 @@
                         </div>
                     </div>
                 </div>
-                <h4>
-                    <img src="/icons/tag.svg" class="nav-title-icon">
-                    热门标签
-                </h4>
-                <hr>
-                <h4>
-                    <img src="/icons/rooter.svg" class="nav-title-icon">
-                    站长微信
-                </h4>
-                <img src="/images/wecat1.png" class="img-thumbnail img-wecat">
             </div>
+            <h4>
+                <img src="/icons/rooter.svg" class="nav-title-icon">
+                站长微信
+            </h4>
+            <img src="/images/wecat1.png" class="img-thumbnail img-wecat">
         </div>
     </div>
     <div>
         <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
     </div>
-    <!--页尾-->
-    <div th:replace="fragment_footer::beetle_footer"></div>
+</div>
+<!--页尾-->
+<div th:replace="fragment_footer::beetle_footer"></div>
 </body>
 </html>

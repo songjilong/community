@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="beetle_footer" class="footer-word">
-    Copyright © 2020 · 甲壳虫社区 · 服务器赞助: 华为云 · 网站程序: Spring Boot · 豫ICP备888888号
+    Copyright © 2020 · <a th:href="@{${#httpServletRequest.getRequestURL()}}">甲壳虫社区</a> · 服务器赞助: <a href="https://homenew.console.aliyun.com/">阿里云</a> · 网站程序: Spring Boot · 豫ICP备888888号
 </div>
 </body>
 </html>
