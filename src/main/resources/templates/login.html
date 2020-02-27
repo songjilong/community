@@ -3,73 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>甲壳虫社区</title>
-    <link rel="shortcut icon" href="/images/beetle.ico" type="image/x-icon">
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="/css/community.css">
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/community.js"></script>
+    <head th:replace="import::common"></head>
 </head>
-<script type="application/javascript">
-    const closable = localStorage.getItem("closable");
-    if (closable == 1) {
-        //关闭
-        window.close();
-        localStorage.removeItem("closable");
-    }
-</script>
-<body>
-<!--顶部导航栏-->
-<div th:replace="fragment_top_navigation::top_nav"></div>
-<div class="container-fluid main">
-    <div class="row">
-        <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
-            <h3>
-                <img src="/icons/display.svg" class="nav-title-icon">
-                &nbsp;发现
-            </h3>
-            <hr>
-            <!--问题列表-->
-            <div th:replace="fragment_question_list::question_list(false)"></div>
-            <!--分页栏-->
-            <div th:replace="fragment_page_navigation::page_nav"></div>
-        </div>
-        <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
-            <!--<h4>
-                <img src="/icons/tag.svg" class="nav-title-icon">
-                热门标签
-            </h4>-->
-            <!--每日一图一句-->
-            <h4>
-                <img src="/icons/images.svg" class="nav-title-icon">
-                每日一图
-            </h4>
-            <div class="row one-day-module">
-                <div class="col-sm-12 col-md-12">
-                    <div class="thumbnail">
-                        <img id="one-day-img">
-                        <div class="caption">
-                            <p><img src="/icons/calendar.svg">
-                            <p class="question_text" id="one-day-time"></p></p>
-                            <p id="one-day-text-cn"></p>
-                            </p>
-                        </div>
-                    </div>
+<body class="login-body">
+<div class="login-main">
+    <div class="login-page container-fluid">
+        <div class="row login-page-main">
+            <div class="page_left col-lg-7 col-md-7 col-sm-8 col-xs-12" style="background-color: #eee;">
+                <div class="login-logo">
+                    <b><a class="navbar-brand logo" th:href="@{/}">Beetle</a></b>
                 </div>
+                <form class="login-form">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Check me out
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-publish">Submit</button>
+                </form>
             </div>
-            <h4>
-                <img src="/icons/rooter.svg" class="nav-title-icon">
-                联系站长
-            </h4>
-            <div class="connect-webMaster">
-                <img src="/images/wecat1.png" class="img-thumbnail img-wecat">
-                <img src="/images/qq2.jpg" class="img-thumbnail img-wecat">
+            <div class="page_right col-lg-5 col-md-5 col-sm-6 col-xs-12" style="background-color: #ddd;">
+                <spa>第三方登陆</spa>
             </div>
         </div>
-    </div>
-    <div>
-        <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
+        <div class="login-page-footer"></div>
     </div>
 </div>
 <!--页尾-->

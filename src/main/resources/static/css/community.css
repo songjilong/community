@@ -125,7 +125,7 @@ body{
     float: right;
 }
 .footer-word{
-    color: #666;
+    color: #999;
     text-align: center;
     padding: 30px 0 10px;
     font-size: 12px;
@@ -169,4 +169,37 @@ body{
 }
 .connect-webMaster{
     display: flex;
+}
+
+.login-body{
+    background-image: url("http://p2.qhimg.com/bdr/__100/t0109e3e5693e361870.jpg");
+}.login-logo{
+     display: flex;
+ }
+.login-form{
+    margin-top: 15px;
+}
+.login-main{
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.login-page{
+    width: 714px;
+    height: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+}
+.login-page-main{
+    padding: 50px;
+    height: 420px
+}
+.login-page-footer{
+    height: 70px;
+    line-height: 70px;
+    padding: 0 60px;
+    background-color: #eee;
 }

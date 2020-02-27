@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${questionDto.title}">甲壳虫社区</title>
-    <link rel="shortcut icon" href="/images/beetle.ico" type="image/x-icon">
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="/css/community.css">
-    <link rel="stylesheet" href="/css/editormd.preview.min.css"/>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/community.js"></script>
-    <script src="/js/moment.min.js"></script>
-    <script src="/js/editormd.min.js"></script>
-    <script src="/js/lib/marked.min.js"></script>
-    <script src="/js/lib/prettify.min.js"></script>
+    <head th:replace="import::common"></head>
+    <head th:replace="import::markdown"></head>
+    <head th:replace="import::markdownView"></head>
 </head>
 <body>
 <!--顶部导航栏-->
@@ -38,13 +29,7 @@
             <div id="question-view">
                 <textarea style="display:none;" th:text="${questionDto.description}"></textarea>
             </div>
-            <script type="text/javascript">
-                $(function() {
-                    var testView = editormd.markdownToHTML("question-view", {
 
-                    });
-                });
-            </script>
             <hr>
             <div>
                 <span class="label label-primary tag-style" th:each="tag : ${questionDto.tags.split(',')}">

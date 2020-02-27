@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>甲壳虫社区</title>
+    <link rel="shortcut icon" href="/images/beetle.ico" type="image/x-icon">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/community.js"></script>
+</head>
+<body>
+<!--顶部导航栏-->
+<div th:replace="fragment_top_navigation::top_nav"></div>
+<div>
+    <head th:insert="~{import :: head}"></head>
+    <head th:insert="~{import :: markdown}"></head>
+</div>
+<!--页尾-->
+<div th:replace="fragment_footer::beetle_footer"></div>
+</body>
+</html>

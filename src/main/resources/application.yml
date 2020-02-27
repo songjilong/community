@@ -19,8 +19,8 @@ mybatis:
 
 # Github登录需要的参数
 github:
-  client-id: aeb0d5116950de9541ab
-  client-secret: ff77def3f0aecb61c0544eb6296faf213cb13c11
+  client-id: e15804a8ca66dfd118c3
+  client-secret: 4f289ae5ab7650a5e88a3d8ded6e5a4fb4a89791
   redirect-uri: http://localhost:8887/callback
 
 # QQ登录需要的参数

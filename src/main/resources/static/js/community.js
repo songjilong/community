@@ -205,3 +205,14 @@ function FourLeafCloverZCEachScrollBy(eachHeight){
         }
     }
 }
+
+/*发布*/
+function checkPublishContent(error) {
+    if(error){
+        console.log(error);
+        alert(error);
+        return false;
+    }else{
+        return true;
+    }
+}
