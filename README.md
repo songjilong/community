@@ -13,6 +13,7 @@ Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL
 [postman（插件版）：可以共享浏览器session，比较方便](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
 [moment：JavaScript日期处理类库](http://momentjs.cn/)  
 [免费开源markdown编辑器](https://pandao.github.io/editor.md/)  
+[前端校验脚本](https://validator.niceue.com/)  
 
 ## 命令
 运行Flyway：`mvn flyway:migrate`  

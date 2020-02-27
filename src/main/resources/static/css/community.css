@@ -131,6 +131,22 @@ body {
     display: none;
 }
 
+.publish-error-nav {
+    display: flex;
+}
+
+.publish-error {
+    margin: auto auto 0 auto;
+    width: 300px;
+    line-height: 32px;
+    text-align: center;
+    padding: 0;
+}
+
+.publish-error span {
+    margin-right: 10px;
+}
+
 .tags-input-div {
     display: flex;
 }
@@ -290,4 +306,8 @@ body {
 
 .login-page-footer a:hover {
     text-decoration: none;
+}
+
+.get-source {
+    float: left;
 }

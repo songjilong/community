@@ -23,11 +23,10 @@
                     <button type="submit" class="btn btn-default">搜索</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
-                        <a href="#">本站源码</a>
-                    </li>
-                    <li th:if="${session.user != null}">
-                        <a href="https://github.com/songjilong/community" target="_blank">本站源码</a>
+                    <li>
+                        <a type="button"  data-toggle="modal" data-target="#myModal" style="cursor:pointer;">
+                            须知
+                        </a>
                     </li>
                     <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
                         <a href="#">提问</a>
@@ -82,7 +81,7 @@
                         </a>
                     </li>
                     <li class="dropdown" th:if="${session.user == null}">
-                        <a href="/login">去登录</a>
+                        <a href="/login">登录</a>
                     </li>
                 </ul>
             </div>

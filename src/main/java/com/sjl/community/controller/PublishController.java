@@ -60,6 +60,10 @@ public class PublishController {
         model.addAttribute("description", description);
         model.addAttribute("tags", tags);
 
+        //获取所有标签
+        List<TagDto> tagDtos = TagCache.get();
+        model.addAttribute("tagDtos", tagDtos);
+
         //错误信息
         if (user == null) {
             model.addAttribute("error", "用户未登陆");
@@ -108,6 +112,9 @@ public class PublishController {
         model.addAttribute("title", question.getTitle());
         model.addAttribute("description", question.getDescription());
         model.addAttribute("tags", question.getTags());
+        //获取所有标签
+        List<TagDto> tagDtos = TagCache.get();
+        model.addAttribute("tagDtos", tagDtos);
         return "publish";
     }
 }

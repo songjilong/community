@@ -1,7 +1,7 @@
 /*获取源码未登录提示*/
-$(function () {
+/*$(function () {
     $('[data-toggle="tooltip"]').tooltip()
-});
+});*/
 
 /*获取当前项目主机地址*/
 function getLocalhostPath() {
@@ -163,7 +163,6 @@ function deleteTag(e) {
 
 /*展示关闭标签*/
 function showSelectTag() {
-    $("#publish-error").hide();
     $("#tag-list").show();
 }
 
@@ -203,16 +202,5 @@ function FourLeafCloverZCEachScrollBy(eachHeight){
         }else{
             window.scrollBy(0,-30);
         }
-    }
-}
-
-/*发布*/
-function checkPublishContent(error) {
-    if(error){
-        console.log(error);
-        alert(error);
-        return false;
-    }else{
-        return true;
     }
 }

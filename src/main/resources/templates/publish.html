@@ -13,10 +13,15 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
-            <h3>
-                <img src="/icons/cursor.svg" class="nav-title-icon">
-                &nbsp;发起
-            </h3>
+            <div class="publish-error-nav">
+                <h3>
+                    <img src="/icons/cursor.svg" class="nav-title-icon">
+                    &nbsp;发起
+                </h3>
+                <div class="alert alert-danger publish-error" th:if="${error != null}">
+                    <span class="glyphicon glyphicon-warning-sign"></span>[[${error}]]！！！
+                </div>
+            </div>
             <hr>
             <form action="/publish" method="post">
                 <input type="hidden" name="id" th:value="${id}"/>
@@ -67,8 +72,8 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="alert alert-danger" th:if="${error != null}" th:text="" th:id="publish-error"></div>-->
-                <button type="submit" class="btn btn-success btn-publish" onsubmit="return checkPublishContent([[${error}]])">发布</button>
+                <!---->
+                <button type="submit" class="btn btn-success btn-publish">发布</button>
             </form>
         </div>
         <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">

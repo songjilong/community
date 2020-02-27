@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Modal -->
+<div th:fragment="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">用户须知</h4>
+            </div>
+            <div class="modal-body">
+                &emsp;&emsp;欢迎大家来到本站，为了您的良好体验，如果发现bug请务必联系管理员，
+                当然了，您也可以提出您对本站的建议，非常感谢,
+                你可以发送邮件到&nbsp;<b>coder.song@foxmail</b>，
+                或者扫描首页右下的二维码，通过微信或QQ联系（左边微信右边QQ），
+                顺便交个朋友~
+            </div>
+            <div class="modal-footer">
+                <span class="get-source">
+                    <b>获取本站源码：</b>
+                    <img src="images/github.svg" class="login-icon">
+                    <a href="https://github.com/songjilong/community">Github</a>
+                    &emsp;
+                    <img src="images/gitee.svg" class="login-icon">
+                    <a href="https://gitee.com/songjilong/community">Gitee</a>
+                </span>
+                <obutton type="button" class="btn btn-default" data-dismiss="modal">Close</obutton>
+                <!--<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+</html>
