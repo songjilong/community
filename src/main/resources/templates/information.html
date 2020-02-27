@@ -9,8 +9,8 @@
 <!--顶部导航栏-->
 <div th:replace="fragment/top_navigation::nav"></div>
 <div>
-    <head th:insert="~{fragment_import :: head}"></head>
-    <head th:insert="~{fragment_import :: markdown}"></head>
+    <h1>开发中♥~</h1>
+    <img th:src="${session.user.avatarUrl}">
 </div>
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>

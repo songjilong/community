@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
  * @create 2020/2/14 17:50
  */
 @Component
-@ConfigurationProperties(prefix = "github")
+@ConfigurationProperties(prefix = "gitee")
 @Data
-public class GithubParams {
+public class GiteeParams {
     private String client_id;
     private String client_secret;
     private String redirect_uri;
