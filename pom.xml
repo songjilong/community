@@ -19,7 +19,7 @@
     </properties>
 
     <profiles>
-        <!--开发-->
+        <!--开发环境-->
         <profile>
             <id>dev</id>
             <properties>
