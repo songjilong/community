@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="top_nav">
+<div th:fragment="nav">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -26,7 +26,7 @@
                     <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
                         <a href="#">本站源码</a>
                     </li>
-                    <li th:if="${session.user != null}" data-toggle="tooltip" data-placement="bottom" title="给个star呗 ♥">
+                    <li th:if="${session.user != null}">
                         <a href="https://github.com/songjilong/community" target="_blank">本站源码</a>
                     </li>
                     <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
@@ -35,9 +35,10 @@
                     <li th:if="${session.user != null}">
                         <a th:href="@{/publish}">提问</a>
                     </li>
-                    <li th:if="${session.user != null}" role="presentation">
-                        <a href="/profile/replies">消息
-                            <span class="badge" th:text="${session.unreadCount}"></span>
+                    <li th:if="${session.user != null}" role="presentation" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadCount}+条未读消息">
+                        <a href="/profile/replies">
+                            <img th:if="${session.unreadCount!=null&&session.unreadCount>0}" class="user-oper-icon" src="/icons/new-message.svg">
+                            <img th:unless="${session.unreadCount!=null&&session.unreadCount>0}" class="user-oper-icon" src="/icons/bell.svg">
                         </a>
                     </li>
                     <li class="dropdown" th:if="${session.user != null}">
@@ -50,6 +51,12 @@
                                     <a href="#">
                                         <img class="user-oper-icon" src="/icons/person.svg">
                                         我的资料
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/publish}">
+                                        <img class="user-oper-icon" src="/icons/cursor.svg">
+                                        发起问题
                                     </a>
                                 </li>
                                 <li>
@@ -66,12 +73,6 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/publish}">
-                                        <img class="user-oper-icon" src="/icons/cursor.svg">
-                                        发起问题
-                                    </a>
-                                </li>
-                                <li>
                                     <a th:href="@{/logout}">
                                         <img class="user-oper-icon" src="/icons/box-arrow-right.svg">
                                         退出登录
@@ -81,28 +82,7 @@
                         </a>
                     </li>
                     <li class="dropdown" th:if="${session.user == null}">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            登陆
-                            <span class="caret"></span>
-                            <ul class="dropdown-menu user-oper-list">
-                                <li>
-                                    <a th:href="@{https://github.com/login/oauth/authorize(client_id=${@environment.getProperty('github.client-id')},redirect_uri=${@environment.getProperty('github.redirect-uri')},scope='user',state=10086)}">
-                                        Github登录
-                                    </a>
-                                    <!--<a href="/login">
-                                        Github登录
-                                    </a>-->
-                                </li>
-                                <li>
-                                    <a th:href="@{https://graph.qq.com/oauth2.0/authorize(response_type='code',client_id=${@environment.getProperty('qq.client_id')},redirect_uri=${@environment.getProperty('qq.redirect_uri')},state=10087)}">
-                                        QQ登录
-                                    </a>
-                                </li>
-                            </ul>
-                        </a>
-                    </li>
-                    <li>
-                        <img src="/icons/brightness-high.svg" class="nav-title-icon">
+                        <a href="/login">去登录</a>
                     </li>
                 </ul>
             </div>

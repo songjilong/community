@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav th:fragment="page_nav" aria-label="Page navigation" class="page-bar">
+<nav th:fragment="nav" aria-label="Page navigation" class="page-bar">
     <ul class="pagination">
         <!--首页、上一页-->
         <li th:class="${pageInfo.hasPreviousPage} ? '': 'disabled'">

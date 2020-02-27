@@ -8,15 +8,9 @@
 <body>
 <!--顶部导航栏-->
 <div th:replace="fragment/top_navigation::nav"></div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="jumbotron">
-            <h1 class="display-4">出错啦</h1>
-            <p class="lead" th:text="${message}">页面出了点问题</p>
-            <hr class="my-4">
-            <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">回到主页</a>
-        </div>
-    </div>
+<div>
+    <head th:insert="~{fragment_import :: head}"></head>
+    <head th:insert="~{fragment_import :: markdown}"></head>
 </div>
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>

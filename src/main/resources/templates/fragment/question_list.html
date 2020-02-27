@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="question_list(canEdit)" class="media" th:each="info : ${pageInfo.list}">
+<div th:fragment="list(canEdit)" class="media" th:each="info : ${pageInfo.list}">
     <!--头像-->
     <div class="media-left">
         <a href="#">

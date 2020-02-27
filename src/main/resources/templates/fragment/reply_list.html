@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="reply_list" class="reply-list" th:each="info : ${pageInfo.list}">
+<div th:fragment="list" class="reply-list" th:each="info : ${pageInfo.list}">
     <div>
         <span class="glyphicon glyphicon-comment"></span>
         <span class="label label-danger" th:if="${info.status == 0}">未读</span>

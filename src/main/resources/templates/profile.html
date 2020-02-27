@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${sectionName}">甲壳虫社区</title>
-    <head th:replace="import::common"></head>
+    <head th:replace="fragment/import::common"></head>
 </head>
 <body>
 <!--顶部导航栏-->
-<div th:insert="fragment_top_navigation::nav"></div>
+<div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
@@ -19,14 +19,14 @@
             <hr>
             <!--问题列表-->
             <div th:if="${section} == 'questions'">
-                <div th:replace="fragment_question_list::question_list(true)"></div>
+                <div th:replace="fragment/question_list::list(true)"></div>
             </div>
             <!--通知列表-->
             <div th:if="${section} == 'replies'">
-                <div th:replace="fragment_reply_list::reply_list"></div>
+                <div th:replace="fragment/reply_list::list"></div>
             </div>
             <!--分页栏-->
-            <div th:replace="fragment_page_navigation::page_nav"></div>
+            <div th:replace="fragment/page_navigation::nav"></div>
         </div>
         <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
             <div class="list-group" style="margin-top: 20px">
@@ -59,6 +59,6 @@
     <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
 </div>
 <!--页尾-->
-<div th:replace="fragment_footer::beetle_footer"></div>
+<div th:replace="fragment/footer::beetle_footer"></div>
 </body>
 </html>

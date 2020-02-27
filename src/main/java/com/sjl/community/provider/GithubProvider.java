@@ -52,8 +52,7 @@ public class GithubProvider {
                 .header("Authorization", "token " + access_token)
                 .build();
 
-        try {
-            Response response = client.newCall(request).execute();
+        try (Response response = client.newCall(request).execute()){
             //得到的是json字符串，因此需要转为GithubUser对象
             String str = response.body().string();
             return JSON.parseObject(str, GithubUser.class);

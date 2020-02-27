@@ -2,42 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>甲壳虫社区</title>
-    <head th:replace="import::common"></head>
+    <title>登录 - 甲壳虫社区</title>
+    <head th:replace="fragment/import::common"></head>
 </head>
 <body class="login-body">
 <div class="login-main">
     <div class="login-page container-fluid">
         <div class="row login-page-main">
-            <div class="page_left col-lg-7 col-md-7 col-sm-8 col-xs-12" style="background-color: #eee;">
+            <div class="login-left col-lg-7 col-md-7 col-sm-8 col-xs-12">
                 <div class="login-logo">
-                    <b><a class="navbar-brand logo" th:href="@{/}">Beetle</a></b>
+                    <b><a class="logo" th:href="@{/}">Beetle Community</a></b>
                 </div>
                 <form class="login-form">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label for="exampleInputEmail1">邮箱</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
+                        <label for="exampleInputPassword1">密码</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> Check me out
+                            <input type="checkbox">记住我
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-publish">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-publish">登录</button>
                 </form>
             </div>
-            <div class="page_right col-lg-5 col-md-5 col-sm-6 col-xs-12" style="background-color: #ddd;">
-                <spa>第三方登陆</spa>
+            <div class="login-right col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                <div class="login-other-all">
+                    <h4>使用第三方账号登录</h4>
+                    <a th:href="@{https://github.com/login/oauth/authorize(client_id=${@environment.getProperty('github.client-id')},redirect_uri=${@environment.getProperty('github.redirect-uri')},scope='user',state=10086)}"
+                        class="login-other">
+                        <img src="images/github.svg" class="login-icon">
+                        Github登录
+                    </a>
+                    <a href=""
+                       class="login-other">
+                        <img src="images/gitee.svg" class="login-icon">
+                        Gitee登录
+                    </a>
+                    <a th:href="@{https://graph.qq.com/oauth2.0/authorize(response_type='code',client_id=${@environment.getProperty('qq.client_id')},redirect_uri=${@environment.getProperty('qq.redirect_uri')},state=10087)}"
+                       class="login-other">
+                        <img src="images/QQ.svg" class="login-icon">
+                        QQ登录
+                    </a>
+                </div>
+
             </div>
         </div>
-        <div class="login-page-footer"></div>
+        <div class="login-page-footer">
+            还没有账号? <a href="#">立即注册</a>或者<a href="/">以游客身份访问</a>
+        </div>
     </div>
 </div>
 <!--页尾-->
-<div th:replace="fragment_footer::beetle_footer"></div>
+<div th:replace="fragment/footer::beetle_footer"></div>
 </body>
 </html>

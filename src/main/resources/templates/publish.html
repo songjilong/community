@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>发布问题</title>
-    <head th:replace="import::common"></head>
-    <head th:replace="import::markdown"></head>
-    <head th:replace="import::markdownEdit"></head>
+    <head th:replace="fragment/import::common"></head>
+    <head th:replace="fragment/import::markdown"></head>
+    <head th:replace="fragment/import::markdownEdit"></head>
 </head>
 <body>
 <!--顶部导航栏-->
-<div th:insert="fragment_top_navigation::top_nav"></div>
+<div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
@@ -92,6 +92,6 @@
     <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
 </div>
 <!--页尾-->
-<div th:replace="fragment_footer::beetle_footer"></div>
+<div th:replace="fragment/footer::beetle_footer"></div>
 </body>
 </html>

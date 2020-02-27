@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>甲壳虫社区</title>
-    <head th:replace="import::common"></head>
+    <head th:replace="fragment/import::common"></head>
 </head>
 <script type="application/javascript">
     const closable = localStorage.getItem("closable");
@@ -15,7 +15,7 @@
 </script>
 <body>
 <!--顶部导航栏-->
-<div th:replace="fragment_top_navigation::top_nav"></div>
+<div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
         <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
@@ -25,9 +25,9 @@
             </h3>
             <hr>
             <!--问题列表-->
-            <div th:replace="fragment_question_list::question_list(false)"></div>
+            <div th:replace="fragment/question_list::list(false)"></div>
             <!--分页栏-->
-            <div th:replace="fragment_page_navigation::page_nav"></div>
+            <div th:replace="fragment/page_navigation::nav"></div>
         </div>
         <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
             <!--<h4>
@@ -67,6 +67,6 @@
     </div>
 </div>
 <!--页尾-->
-<div th:replace="fragment_footer::beetle_footer"></div>
+<div th:replace="fragment/footer::beetle_footer"></div>
 </body>
 </html>
