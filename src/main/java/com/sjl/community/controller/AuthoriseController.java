@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
@@ -50,7 +49,7 @@ public class AuthoriseController {
     private GiteeProvider giteeProvider;
 
     //Github授权
-    @GetMapping("/callback")
+    @GetMapping("/github/callback")
     public String githubCallback(@RequestParam("code") String code,
                                  @RequestParam("state") String state,
                                  HttpServletResponse response) {
