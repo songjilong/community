@@ -42,4 +42,5 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [thymeleaf向fragment中传入具体值](https://blog.csdn.net/u010999809/article/details/80724076)
 - [阿里云OSS上传Object后如何获取访问URL？](https://www.alibabacloud.com/help/zh/doc-detail/39607.htm)
 - [CentOs防火墙设置](https://support.huaweicloud.com/trouble-ecs/ecs_trouble_0402.html)
+- [git同步代码至github和gitee(码云)](https://zhuanlan.zhihu.com/p/71163868)
 
