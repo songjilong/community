@@ -12,7 +12,7 @@ body {
 
 .main {
     margin: 40px 200px;
-    background-color: white;
+    background-color: #fff;
     box-shadow: 6px 6px 10px gray;
     min-height: 700px;
     border-radius: 4px;
@@ -138,7 +138,7 @@ body {
     display: ruby;
     font-size: 12px;
     margin-right: 10px;
-    /*cursor: pointer;*/
+    cursor: pointer;
     line-height: 2.3;
 }
 
@@ -253,7 +253,7 @@ body {
 }
 
 .login-body {
-    background-image: url("https://gitee.com/songjilong/FigureBed/raw/master/img/od7537.jpg");
+    background-image: url("/images/login-bg.jpg");
 }
 
 .login-logo {
@@ -334,7 +334,7 @@ body {
 }
 
 .person-info-image {
-    background-image: url("https://gitee.com/songjilong/FigureBed/raw/master/img/45ov19.jpg");
+    background-image: url("/images/person-bg.jpg");
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
