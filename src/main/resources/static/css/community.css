@@ -206,10 +206,6 @@ body {
     font-size: 12px;
 }
 
-.img-wecat {
-    width: 50%;
-}
-
 .one-day-module {
     margin-bottom: 5px;
 }
@@ -250,10 +246,6 @@ body {
 
 .publish-guide-li {
     margin-left: 15px;
-}
-
-.connect-webMaster {
-    display: flex;
 }
 
 .login-body {
