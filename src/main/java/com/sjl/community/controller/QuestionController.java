@@ -1,10 +1,14 @@
 package com.sjl.community.controller;
 
+import com.github.pagehelper.util.StringUtil;
 import com.sjl.community.dto.CommentDto;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.enums.CommentTypeEnum;
+import com.sjl.community.exception.CustomizeErrorCode;
+import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.service.CommentService;
 import com.sjl.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,5 +50,16 @@ public class QuestionController {
         //增加阅读数
         questionService.addViewCount(id);
         return "question";
+    }
+
+    @GetMapping("question/{oper}/{id}")
+    public String setTop(@PathVariable("oper")String oper,@PathVariable("id")Long id){
+        if(StringUtils.isNotBlank(oper)){
+            //根据问题id查询详情
+            questionService.setTopQuestion(oper, id);
+            return "redirect:/";
+        }else{
+            throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
+        }
     }
 }

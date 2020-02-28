@@ -10,6 +10,7 @@ import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.Question;
 import com.sjl.community.model.QuestionExample;
 import com.sjl.community.model.User;
+import com.sjl.community.model.UserExample;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
@@ -109,14 +110,7 @@ public class QuestionService {
 
         List<Question> questions;
         if(searchValue == null){
-            QuestionExample questionExample = new QuestionExample();
-            //id存在，增加id相等的条件
-            if (id != null) {
-                questionExample.createCriteria().andCreatorEqualTo(id);
-            }
-            //问题按时间倒序
-            questionExample.setOrderByClause("gmt_create desc");
-            questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offerIndex, pageSize));
+            questions = questionExtMapper.findDescByTopAndGmt(id, offerIndex, pageSize);
         }else{
             questions = questionExtMapper.findBySearchREGEXP(searchValue, offerIndex, pageSize);
         }
@@ -214,5 +208,19 @@ public class QuestionService {
             BeanUtils.copyProperties(q, questionDto);
             return questionDto;
         }).collect(Collectors.toList());
+    }
+
+    public void setTopQuestion(String oper, Long id) {
+        Question question = questionMapper.selectByPrimaryKey(id);
+        if(question!=null){
+            if(StringUtils.equals(oper, "setTop")){
+                question.setTop(1);
+            }else{
+                question.setTop(0);
+            }
+            questionMapper.updateByPrimaryKeySelective(question);
+        }else{
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
     }
 }

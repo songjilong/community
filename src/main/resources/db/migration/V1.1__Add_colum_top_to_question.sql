@@ -1,0 +1,1 @@
+alter table `question` add top int(1) default 0 COMMENT '0不顶置 1顶置'

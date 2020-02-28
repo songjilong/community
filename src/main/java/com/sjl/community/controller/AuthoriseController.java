@@ -73,7 +73,6 @@ public class AuthoriseController {
             userService.createOrUpdateUser(user);
             //将token存入cookie
             response.addCookie(new Cookie("token", token));
-            request.getSession().setAttribute("user", user);
             return "redirect:/";
         } else {
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
@@ -101,7 +100,6 @@ public class AuthoriseController {
                 userService.createOrUpdateUser(user);
                 //将token存入cookie
                 response.addCookie(new Cookie("token", token));
-                request.getSession().setAttribute("user", user);
                 return "redirect:/";
             } else {
                 throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
@@ -131,7 +129,6 @@ public class AuthoriseController {
             userService.createOrUpdateUser(user);
             //将token存入cookie
             response.addCookie(new Cookie("token", user.getToken()));
-            request.getSession().setAttribute("user", user);
             //返回首页
             return "redirect:/";
         } else {

@@ -6,7 +6,7 @@
 body {
     width: 100%;
     height: 100%;
-   /* background-image: url("/images/bg.jpg");*/
+    /* background-image: url("/images/bg.jpg");*/
     background-image: url("/images/bg2.png");
 }
 
@@ -39,6 +39,10 @@ body {
     /* padding-left: 30px;*/
 }
 
+.to-right {
+    float: right;
+}
+
 .btn-publish {
     float: right;
     margin: 15px 0;
@@ -63,6 +67,10 @@ body {
 .question_text {
     font-size: 13px;
     color: #999;
+}
+
+.question-top {
+    font-size: 15px;
 }
 
 .page-bar {
@@ -130,14 +138,10 @@ body {
     display: ruby;
     font-size: 12px;
     margin-right: 10px;
-    cursor: pointer;
+    /*cursor: pointer;*/
     line-height: 2.3;
 }
 
-.question-list-tag {
-    cursor: pointer;
-    margin-right: 5px;
-}
 
 .publish-tab-tags {
     margin-top: 15px;

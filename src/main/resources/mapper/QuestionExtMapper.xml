@@ -68,4 +68,15 @@
         </where>
         limit #{offerIndex}, #{pageSize}
     </select>
+
+    <select id="findDescByTopAndGmt" resultMap="BaseResultMap">
+        select * from question
+        <where>
+            <if test="id != null">
+                and creator = #{id}
+            </if>
+        </where>
+        order by top desc, gmt_create desc
+        limit #{offerIndex}, #{pageSize}
+    </select>
 </mapper>

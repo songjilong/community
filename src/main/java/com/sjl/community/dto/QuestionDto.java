@@ -21,5 +21,6 @@ public class QuestionDto implements Serializable {
     private Integer commentCount;
     private Integer likeCount;
     private Integer viewCount;
+    private Integer top;
     private User user;
 }
