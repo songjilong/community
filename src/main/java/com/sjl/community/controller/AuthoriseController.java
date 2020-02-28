@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
@@ -52,7 +53,8 @@ public class AuthoriseController {
     @GetMapping("/github/callback")
     public String githubCallback(@RequestParam("code") String code,
                                  @RequestParam("state") String state,
-                                 HttpServletResponse response) {
+                                 HttpServletResponse response,
+                                 HttpServletRequest request) {
         AccessTokenDto accessTokenDto = getAccessTokenDto(code, state, githubParams.getClient_id(), githubParams.getClient_secret(), githubParams.getRedirect_uri());
         //获取access_token
         String access_token = githubProvider.getAccessToken(accessTokenDto);
@@ -71,6 +73,7 @@ public class AuthoriseController {
             userService.createOrUpdateUser(user);
             //将token存入cookie
             response.addCookie(new Cookie("token", token));
+            request.getSession().setAttribute("user", user);
             return "redirect:/";
         } else {
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
@@ -81,7 +84,8 @@ public class AuthoriseController {
     @GetMapping("/gitee/callback")
     public String giteeCallback(@RequestParam("code") String code,
                                 @RequestParam("state") String state,
-                                HttpServletResponse response) {
+                                HttpServletResponse response,
+                                HttpServletRequest request) {
         AccessTokenDto accessTokenDto = getAccessTokenDto(code, state, giteeParams.getClient_id(), giteeParams.getClient_secret(), giteeParams.getRedirect_uri());
         if (StringUtils.equals(state, "giteelogin")) {
             String accessToken = giteeProvider.getAccessToken(accessTokenDto);
@@ -97,6 +101,7 @@ public class AuthoriseController {
                 userService.createOrUpdateUser(user);
                 //将token存入cookie
                 response.addCookie(new Cookie("token", token));
+                request.getSession().setAttribute("user", user);
                 return "redirect:/";
             } else {
                 throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
@@ -110,7 +115,8 @@ public class AuthoriseController {
     @GetMapping("/qqcallback")
     public String qqCallback(HttpServletResponse response,
                              @RequestParam("code") String code,
-                             @RequestParam("state") String state) throws IOException {
+                             @RequestParam("state") String state,
+                             HttpServletRequest request) throws IOException {
         String accessToken = qqProvider.getAccessToken(code);
         String openId = qqProvider.getOpenId(accessToken);
         User user = new User();
@@ -125,6 +131,7 @@ public class AuthoriseController {
             userService.createOrUpdateUser(user);
             //将token存入cookie
             response.addCookie(new Cookie("token", user.getToken()));
+            request.getSession().setAttribute("user", user);
             //返回首页
             return "redirect:/";
         } else {
