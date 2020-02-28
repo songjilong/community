@@ -16,8 +16,8 @@ Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL
 [前端校验脚本](https://validator.niceue.com/)  
 
 ## 命令
-运行Flyway：`mvn flyway:migrate`  
-Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate`
+运行Flyway：`mvn flyway:migrate -P dev`  
+Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
 
 ## 参考
 - [Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/)  

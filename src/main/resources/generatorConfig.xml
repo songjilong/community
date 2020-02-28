@@ -5,15 +5,18 @@
 
 <generatorConfiguration>
 
+    <!--从application.yml导入属性配置-->
+    <properties resource="application.properties"/>
+
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <!--配置分页插件-->
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
 
         <!--配置jdbc连接信息-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/db_community"
-                        userId="root"
-                        password="root">
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
         </jdbcConnection>
 
         <!--类型转换-->
