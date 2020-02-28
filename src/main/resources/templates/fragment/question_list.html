@@ -16,8 +16,10 @@
             <a th:href="@{'/question/'+${info.id}}" th:text="${info.title}">怎么学习spring boot</a>
         </h4>
         <!--信息-->
+        <span class="label label-primary question-list-tag" th:each="tag : ${info.tags.split(',')}">
+            <span th:text="${tag}"></span>
+        </span>
         <span class="question_info">
-            [[${info.tags}]] •
             [[${info.commentCount}]] 个评论 •
             [[${info.viewCount}]] 次浏览 •
             [[${#dates.format(info.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}]]

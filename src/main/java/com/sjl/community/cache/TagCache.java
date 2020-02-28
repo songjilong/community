@@ -41,8 +41,8 @@ public class TagCache {
         tagDTOS.add(tool);
 
         TagDto other = new TagDto();
-        tool.setCategoryName("非技术");
-        tool.setTags(Arrays.asList("生活", "电影", "音乐", "书籍", "美食", "游戏", "科技", "理财", "交友", "找bug", "测试", "其他"));
+        tool.setCategoryName("其它");
+        tool.setTags(Arrays.asList("找bug", "测试", "交友", "生活", "电影", "音乐", "读书", "美食", "游戏", "科技", "数码", "理财"));
         tagDTOS.add(other);
         return tagDTOS;
     }

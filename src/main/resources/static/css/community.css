@@ -1,12 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-image: url("/images/bg.jpg");
+    width: 100%;
+    height: 100%;
+   /* background-image: url("/images/bg.jpg");*/
+    background-image: url("/images/bg2.png");
 }
 
 .main {
-    margin: 40px 100px;
+    margin: 40px 200px;
     background-color: white;
-    box-shadow: 10px 10px 10px gray;
+    box-shadow: 6px 6px 10px gray;
     min-height: 700px;
+    border-radius: 4px;
+}
+
+.top-nav {
+    padding-left: 198px;
+    padding-right: 179px;
+    margin-bottom: 0;
 }
 
 .logo {
@@ -20,8 +35,8 @@ body {
 }
 
 .search-input {
-    background: url("/icons/search-input.svg") no-repeat;
-    padding-left: 30px;
+    /*background: url("/icons/search-input.svg") no-repeat;*/
+    /* padding-left: 30px;*/
 }
 
 .btn-publish {
@@ -112,10 +127,16 @@ body {
 }
 
 .tag-style {
+    display: ruby;
     font-size: 12px;
     margin-right: 10px;
     cursor: pointer;
     line-height: 2.3;
+}
+
+.question-list-tag {
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 .publish-tab-tags {
@@ -210,7 +231,7 @@ body {
 
 .user-oper-list {
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .user-oper-icon {
@@ -236,7 +257,7 @@ body {
 }
 
 .login-body {
-    background-image: url("http://p2.qhimg.com/bdr/__100/t0109e3e5693e361870.jpg");
+    background-image: url("https://gitee.com/songjilong/FigureBed/raw/master/img/od7537.jpg");
 }
 
 .login-logo {
@@ -245,6 +266,10 @@ body {
 
 .login-form {
     margin-top: 15px;
+}
+
+.login-form div {
+    margin-right: 80px;
 }
 
 .login-main {
@@ -280,7 +305,7 @@ body {
 }
 
 .login-other-all {
-    padding: 42px 30px;
+    padding: 40px 24px;
 }
 
 .login-other {
@@ -311,3 +336,43 @@ body {
 .get-source {
     float: left;
 }
+
+.person-info-image {
+    background-image: url("https://gitee.com/songjilong/FigureBed/raw/master/img/45ov19.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+}
+
+.person-info-main {
+    width: 100%;
+    height: 240px;
+    background: #eee;
+    margin-bottom: 20px;
+}
+
+.person-info {
+    display: flex;
+    margin: 0 20px 24px;
+}
+
+.person-avatar {
+    margin-top: -25px;
+}
+
+.person-avatar img {
+    width: 160px;
+    height: 160px;
+}
+
+.person-content {
+    margin: 10px 30px;
+}
+
+.error-page {
+    background-color: #eee;
+    padding: 40px 210px;
+    height: 600px;
+}
+

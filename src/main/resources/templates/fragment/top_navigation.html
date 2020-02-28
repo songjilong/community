@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="nav">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default top-nav">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -29,7 +29,7 @@
                         </a>
                     </li>
                     <li th:if="${session.user == null}" data-toggle="tooltip" data-placement="bottom" title="请先登录">
-                        <a href="#">提问</a>
+                        <a>提问</a>
                     </li>
                     <li th:if="${session.user != null}">
                         <a th:href="@{/publish}">提问</a>

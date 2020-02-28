@@ -1,7 +1,7 @@
-/*获取源码未登录提示*/
-/*$(function () {
+/*未登录提示*/
+$(function () {
     $('[data-toggle="tooltip"]').tooltip()
-});*/
+});
 
 /*获取当前项目主机地址*/
 function getLocalhostPath() {
@@ -203,4 +203,8 @@ function FourLeafCloverZCEachScrollBy(eachHeight){
             window.scrollBy(0,-30);
         }
     }
+}
+
+function notOpen() {
+    alert("暂未开放，请使用第三方登录 ^-^")
 }

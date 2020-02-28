@@ -3,6 +3,8 @@ package com.sjl.community.controller;
 import com.sjl.community.cache.TagCache;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.dto.TagDto;
+import com.sjl.community.exception.CustomizeErrorCode;
+import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.model.Question;
 import com.sjl.community.model.User;
 import com.sjl.community.service.QuestionService;
@@ -105,9 +107,13 @@ public class PublishController {
      * @return
      */
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable("id") Long id, Model model){
+    public String edit(@PathVariable("id") Long id, Model model, HttpServletRequest request){
         //通过问题id查找问题，存入作用域
         QuestionDto question = questionService.findById(id);
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null || !question.getCreator().equals(user.getId())){
+            throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
+        }
         model.addAttribute("id", question.getId());
         model.addAttribute("title", question.getTitle());
         model.addAttribute("description", question.getDescription());

@@ -8,10 +8,32 @@
 <body>
 <!--顶部导航栏-->
 <div th:replace="fragment/top_navigation::nav"></div>
-<div>
-    <h1>开发中♥~</h1>
-    <img th:src="${session.user.avatarUrl}">
+
+<div class="container-fluid main">
+    <div class="row">
+        <!--图片-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 person-info-image"></div>
+        <!--个人信息-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 person-info-main">
+            <div class="person-info">
+                <div class="person-avatar">
+                    <img th:src="${session.user.avatarUrl}" class="img-thumbnail">
+                </div>
+                <div class="person-content">
+                    <div>
+                        <h3 th:text="${session.user.name}"></h3>
+                        <h4 th:text="${session.user.bio}"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <span class="glyphicon glyphicon-menu-up" id="click-top-btn" onclick="FourLeafCloverZCTopFunc()"></span>
+    </div>
 </div>
+<div th:replace="fragment/notice::modal"></div>
+
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>

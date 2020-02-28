@@ -16,6 +16,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     NOTIFICATION_TYPE_NOT_EXIST(2009, "不能输入空的内容哦~"),
     READ_NOTIFICATION_FAIL(2010, "账号异常，请重新登陆！"),
     UPLOAD_FILE_ERROR(2011, "上传出错了，请检查你的文件格式！"),
+    IS_NOT_LEGAL(2012, "非法入侵，请停止你的行为"),
     ;
 
     private Integer code;

@@ -8,14 +8,13 @@
 <body>
 <!--顶部导航栏-->
 <div th:replace="fragment/top_navigation::nav"></div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="jumbotron">
-            <h1 class="display-4">出错啦</h1>
-            <p class="lead" th:text="${message}">页面出了点问题</p>
-            <hr class="my-4">
-            <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">回到主页</a>
-        </div>
+<div class="error-page">
+    <div class="jumbotron">
+        <h1 class="display-4">出错啦</h1>
+        <br>
+        <p class="lead" th:text="${message}">页面出了点问题</p>
+        <br>
+        <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">回到主页</a>
     </div>
 </div>
 <!--页尾-->
