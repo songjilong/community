@@ -10,12 +10,16 @@
 <div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
+        <div class="page_left col-lg-9 col-md-9 col-sm-9 col-xs-9">
             <h3>
                 <img th:if="${section=='questions'}" src="/icons/question-square.svg" class="nav-title-icon">
                 <img th:if="${section=='replies'}" src="/icons/bell.svg" class="nav-title-icon">
                 &nbsp;[[${sectionName}]]
             </h3>
+            <span class="to-right">
+            <img src="/icons/check-circle.svg" class="user-oper-icon">
+            <a href="/notification/0" th:if="${section=='replies'}" class="a-no-line">一键已读</a>
+            </span>
             <hr>
             <!--问题列表-->
             <div th:if="${section} == 'questions'">
@@ -28,26 +32,20 @@
             <!--分页栏-->
             <div th:replace="fragment/page_navigation::nav"></div>
         </div>
-        <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
-            <div class="list-group" style="margin-top: 20px">
-                <!--<a th:href="@{/profile/questions}" class="list-group-item" th:classappend="${section.equals('questions')} ?  'active' : ''">
-                    我的提问
-                </a>
-                <a th:href="@{/profile/replies}" class="list-group-item" th:classappend="${section.equals('replies')} ?  'active' : ''">
-                    <span class="badge" th:text="${session.unreadCount}">66</span>
-                    最新回复
-                </a>-->
-                <!--每日一图一句-->
-                <div class="row one-day-module">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="thumbnail">
-                            <img id="one-day-img">
-                            <div class="caption">
-                                <p><img src="/icons/calendar.svg">
-                                <p class="question_text" id="one-day-time"></p></p>
-                                <p id="one-day-text-cn"></p>
-                                </p>
-                            </div>
+        <div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <h4>
+                <img src="/icons/images.svg" class="nav-title-icon">
+                每日一图
+            </h4>
+            <div class="row one-day-module">
+                <div class="col-sm-12 col-md-12">
+                    <div class="thumbnail">
+                        <img id="one-day-img">
+                        <div class="caption">
+                            <p><img src="/icons/calendar.svg">
+                            <p class="question_text" id="one-day-time"></p></p>
+                            <p id="one-day-text-cn"></p>
+                            </p>
                         </div>
                     </div>
                 </div>

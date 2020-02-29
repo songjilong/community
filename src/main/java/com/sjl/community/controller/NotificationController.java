@@ -29,12 +29,16 @@ public class NotificationController {
         if(user == null){
             throw new CustomizeException(CustomizeErrorCode.USER_NOT_LOGIN);
         }
+        if(id == 0){
+            this.notificationService.readAll(user.getId());
+            return "redirect:/profile/replies";
+        }
         Notification notification = this.notificationService.read(id, user);
         if(NotificationTypeEnum.REPLY_COMMENT.getType() == notification.getType() ||
         NotificationTypeEnum.REPLY_QUESTION.getType() == notification.getType()){
             return "redirect:/question/" + notification.getTargetId();
         }else{
-            return "redirect:/";
+            throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
         }
     }
 }

@@ -12,7 +12,7 @@
 <div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="page_left col-lg-9 col-md-10 col-sm-12 col-xs-12">
+        <div class="page_left col-lg-9 col-md-9 col-sm-9 col-xs-9">
             <!--问题详情-->
             <h3>
                 <img src="/icons/book.svg" class="nav-title-icon">
@@ -57,14 +57,15 @@
             <div th:each="commentDto : ${commentDtos}">
                 <div class="media">
                     <div class="media-left">
-                        <a href="#">
+                        <a th:href="@{/user/{id}(id=${commentDto.commentator})}">
                             <img class="media-object img-rounded user_avatar"
                                  th:src="${commentDto.user.avatarUrl} == null ? '' : ${commentDto.user.avatarUrl}"
                                  alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <span class="media-heading question_text" th:text="${commentDto.user.name}">姓名</span><br>
+                        <span class="media-heading question_text" th:text="${commentDto.user.name}"></span>
+                        <br>
                         <span th:text="${commentDto.content}"></span>
                     </div>
                 </div>
@@ -97,10 +98,8 @@
             <hr>
             <div class="media creator_card">
                 <div class="media-left media-middle">
-                    <a href="#">
-                        <img class="media-object img-rounded user_avatar"
-                             th:src="${session.user} == null ? '/images/default-avatar.png' : ${session.user.avatarUrl}">
-                    </a>
+                    <img class="media-object img-rounded user_avatar"
+                         th:src="${session.user} == null ? '/images/default-avatar.png' : ${session.user.avatarUrl}">
                 </div>
                 <div class="media-body question_text">
                     发起人：<span class="media-heading" th:text="${session.user} == null ? '匿名用户' : ${session.user.name}"></span>
@@ -113,7 +112,7 @@
             <button type="button" class="btn btn-success btn-publish" onclick="submit_question_comment()">提交</button>
         </div>
         <!--右边栏-->
-        <div class="page_right col-lg-3 col-md-2 col-sm-12 col-xs-12">
+        <div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
 
             <h4>
                 <img src="/icons/person.svg" class="nav-title-icon">
@@ -121,7 +120,7 @@
             </h4>
             <div class="media creator_card">
                 <div class="media-left media-middle">
-                    <a href="#">
+                    <a th:href="@{/user/{id}(id=${questionDto.user.id})}">
                         <img class="media-object img-rounded user_avatar"
                              th:src="${questionDto.user.avatarUrl} == null ? '' : ${questionDto.user.avatarUrl}"
                              alt="...">

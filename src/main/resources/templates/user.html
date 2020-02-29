@@ -17,12 +17,12 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 person-info-main">
             <div class="person-info">
                 <div class="person-avatar">
-                    <img th:src="${session.user.avatarUrl}" class="img-thumbnail">
+                    <img th:src="${userInfo.avatarUrl}" class="img-thumbnail">
                 </div>
                 <div class="person-content">
                     <div>
-                        <h3 th:text="${session.user.name}"></h3>
-                        <h4 th:text="${session.user.bio}"></h4>
+                        <h3 th:text="${userInfo.name}"></h3>
+                        <h4 th:text="${userInfo.bio}"></h4>
                     </div>
                 </div>
             </div>

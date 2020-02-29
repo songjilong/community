@@ -4,7 +4,7 @@
 <div th:fragment="list(canEdit)" class="media" th:each="info : ${pageInfo.list}">
     <!--头像-->
     <div class="media-left">
-        <a href="#">
+        <a th:href="@{/user/{id}(id=${info.user.id})}">
             <img class="media-object img-rounded user_avatar"
                  th:src="${info.user.avatarUrl} == null ? '' : ${info.user.avatarUrl}">
         </a>
@@ -13,8 +13,8 @@
     <div class="media-body">
         <!--标题-->
         <h4 class="media-heading">
-            <a th:href="@{'/question/'+${info.id}}" th:text="${info.title}">怎么学习spring boot</a>
-            <span class="to-right question-top" th:if="${session.user != null && (session.user.id == 1 || session.user.id == 2)}">
+            <a th:href="@{'/question/'+${info.id}}" th:text="${info.title}" class="a-no-line">怎么学习spring boot</a>
+            <span class="to-right question-top" th:if="${!canEdit && session.user != null && (session.user.id == 1 || session.user.id == 2)}">
                 <a th:if="${info.top == 0}" th:href="@{question/{oper}/{id}(id=${info.id}, oper='setTop')}">设为顶置</a>
                 <a th:if="${info.top == 1}" th:href="@{question/{oper}/{id}(id=${info.id}, oper='cancelTop')}">取消顶置</a>
             </span>

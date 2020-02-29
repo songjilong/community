@@ -1,12 +1,13 @@
-## 说明
+## 网站说明
 甲壳虫社区（Beetle Community） 
 一个开源的问答社区、论坛博客，您可以提出自己的问题、发布自己的文章、和其他用户交流  
-目前功能有第三方登陆、查看、发布、评论、消息通知等，后续会不断更新完善，欢迎大家提供更好的建议
+目前功能有第三方登陆、查看、发布、评论、消息通知、顶置、一键已读、搜索等
+后续会不断更新完善，欢迎大家提供更好的建议
 
 ## 使用技术
-Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL
+Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL等
 
-## 工具
+## 使用工具
 [Git](https://git-scm.com/)  
 [Lombok](https://projectlombok.org/)  
 [Flyway](https://flywaydb.org/)  
@@ -15,11 +16,11 @@ Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL
 [免费开源markdown编辑器](https://pandao.github.io/editor.md/)  
 [前端校验脚本](https://validator.niceue.com/)  
 
-## 命令
+## 执行命令
 运行Flyway：`mvn flyway:migrate -P dev`  
 Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
 
-## 参考
+## 参考文档
 - [Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/)  
 - [BootStrap官方教程](https://v3.bootcss.com/components/)  
 - [Github第三方登录官方教程](https://developer.github.com/apps/)  
@@ -34,7 +35,7 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 
 ## 常见问题解决
 - [Github登录流程分析](https://www.cnblogs.com/songjilong/p/12309552.html)  
-- [Github更新官方推荐的使用access_token安全访问API的方式，用Authorization HTTP header代替query paramet，旧方式即将被废弃](https://blog.csdn.net/kuaileky/article/details/104217757)  
+- [Github更新官方推荐的使用access_token安全访问API的方式](https://blog.csdn.net/kuaileky/article/details/104217757)  
 - [Mybatis Generator配置文件内容详解](https://www.jianshu.com/p/a8bfc14a3534)     
 - [Springboot mybatis集成 Invalid bound statement (not found)](https://blog.csdn.net/qq_35981283/article/details/78590090)    
 - [MyBatis Generator实现MySQL分页插件](https://blog.csdn.net/xiao__gui/article/details/51333693)    

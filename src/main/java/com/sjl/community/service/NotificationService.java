@@ -123,4 +123,24 @@ public class NotificationService {
 
         return dbNotification;
     }
+
+    /**
+     * 全部已读
+     * @param userId
+     * @return
+     */
+    public void readAll(Long userId) {
+        NotificationExample example = new NotificationExample();
+        example.createCriteria().andReceiverIdEqualTo(userId);
+        List<Notification> notifications = this.notificationMapper.selectByExample(example);
+        for (Notification notification : notifications) {
+            //设置为已读
+            notification.setStatus(NotificationStatusEnum.READ.getStatus());
+            NotificationExample example1 = new NotificationExample();
+            example1.createCriteria()
+                    .andIdEqualTo(notification.getId())
+                    .andReceiverIdEqualTo(notification.getReceiverId());
+            this.notificationMapper.updateByExampleSelective(notification, example1);
+        }
+    }
 }

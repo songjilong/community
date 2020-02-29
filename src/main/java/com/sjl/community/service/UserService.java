@@ -46,4 +46,8 @@ public class UserService {
             userMapper.updateByExampleSelective(dbUser, userExample1);
         }
     }
+
+    public User findById(Long id) {
+        return this.userMapper.selectByPrimaryKey(id);
+    }
 }

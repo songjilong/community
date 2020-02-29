@@ -33,7 +33,7 @@ public class ProfileController {
                           Model model,
                           HttpServletRequest request,
                           @RequestParam(value = "pageNum", defaultValue = "1", required = false) Integer pageNum,
-                          @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
+                          @RequestParam(value = "pageSize", defaultValue = "8", required = false) Integer pageSize) {
 
         //从session中获取user
         User user = (User) request.getSession().getAttribute("user");

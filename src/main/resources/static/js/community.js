@@ -74,7 +74,7 @@ function show_subComment(e) {
                 const mediaLeftElement = $("<div/>", {
                     "class": "media-left"
                 }).append($("<a/>", {
-                    "href": "#"
+                    "href": "/user/"+comment.user.id
                 })).append($("<img/>", {
                     "class": "media-object img-rounded user_avatar",
                     "src": comment.user.avatarUrl
