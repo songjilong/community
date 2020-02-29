@@ -62,7 +62,7 @@ function submit_comment_comment(e) {
 }
 
 /*显示或收起回复的评论*/
-function show_or_close_subComment(e) {
+function show_subComment(e) {
     const id = e.getAttribute("data-id");//获取评论id
     $('#sub_comment_btn-' + id).toggleClass("active");
     var subCommentContainer = $('#comment-' + id);
@@ -71,16 +71,16 @@ function show_or_close_subComment(e) {
     if (subCommentContainer.hasClass("in") && subCommentContainer.children().length === 1) {
         $.getJSON("/comment/" + id, function (data) {
             $.each(data.data.reverse(), function (index, comment) {
-                var mediaLeftElement = $("<div/>", {
+                const mediaLeftElement = $("<div/>", {
                     "class": "media-left"
                 }).append($("<a/>", {
                     "href": "#"
                 })).append($("<img/>", {
                     "class": "media-object img-rounded user_avatar",
-                    "src": comment.user.avatarUrl == null ? '' : comment.user.avatarUrl
+                    "src": comment.user.avatarUrl
                 }));
 
-                var mediaBodyElement = $("<div/>", {
+                const mediaBodyElement = $("<div/>", {
                     "class": "media-body"
                 }).append($("<span/>", {
                     "class": "media-heading question_text",
@@ -89,24 +89,25 @@ function show_or_close_subComment(e) {
                     "html": comment.content
                 }));
 
-                var mediaElement = $("<div/>", {
+                const mediaElement = $("<div/>", {
                     "class": "media"
                 }).append(mediaLeftElement).append(mediaBodyElement);
 
-                var operatingElement = $("<div/>", {
+                const time = moment(comment.gmtCreate).format('YYYYMMDD HHmmss');
+                const operatingElement = $("<div/>", {
                     "class": "comment_operating"
                 }).append($("<span/>", {
                     "class": "glyphicon glyphicon-thumbs-up btn"
                 })).append($("<span/>", {
-                    "class": "question_text time",
-                    "html": moment(comment.gmtCreate).format('YYYY-MM-DD')
+                    "class": "question_text to-right",
+                    "html": moment(time, "YYYYMMDD HHmmss").fromNow()
                 }));
 
-                var lineElement = $("<hr/>", {
+                const lineElement = $("<hr/>", {
                     "class": "comment_cut_line"
                 });
 
-                var commentElement = $("<div/>")
+                const commentElement = $("<div/>")
                     .append(mediaElement)
                     .append(operatingElement)
                     .append(lineElement);

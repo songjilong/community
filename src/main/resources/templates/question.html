@@ -73,16 +73,16 @@
                     <span class="glyphicon glyphicon-thumbs-up btn oper-btn"></span>
                     <span class="glyphicon glyphicon-comment btn oper-btn"
                           th:id="'sub_comment_btn-'+${commentDto.id}" th:data-id="${commentDto.id}"
-                          onclick="show_or_close_subComment(this)">
+                          onclick="show_subComment(this)">
                     </span>
                     <span class="question_text" th:text="${commentDto.commentCount}+'条回复'"></span>
-                    <span class="question_text time" th:text="${#dates.format(commentDto.gmtModified, 'yyyy-MM-dd')}">评论时间</span>
+                    <span class="question_text to-right" th:text="${#dates.format(commentDto.gmtModified, 'yyyy-MM-dd HH:mm:ss')}">评论时间</span>
                 </div>
                 <!--子评论的内容-->
                 <div th:id="'comment-'+${commentDto.id}" class="collapse sub_comments">
                     <!--提交子评论-->
                     <div>
-                        <input type="text" class="form-control" placeholder="请输入评论的内容" th:id="${'input-'+commentDto.id}">
+                        <input class="form-control" placeholder="请输入评论的内容" th:id="${'input-'+commentDto.id}">
                         <button type="button" class="btn btn-success btn-publish" th:data-id="${commentDto.id}" onclick="submit_comment_comment(this)">评论</button>
                     </div>
                 </div>

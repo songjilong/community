@@ -103,16 +103,12 @@ body {
     padding: 0;
 }
 
-.comment_operating .oper-btn:hover {
+.oper-btn:hover {
     color: #499EF3;
 }
 
 .comment_operating .active {
     color: #499EF3;
-}
-
-.comment_operating .time {
-    float: right;
 }
 
 .comment_count, .comment_commit {
