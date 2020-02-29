@@ -21,19 +21,19 @@ mybatis:
 github:
   client_id: e15804a8ca66dfd118c3
   client_secret: 4f289ae5ab7650a5e88a3d8ded6e5a4fb4a89791
-  redirect_uri: http://localhost:8887/github/callback
-
-# QQ登录需要的参数
-qq:
-  client_id: 101852195
-  client_secret: 12faca5851ca79d3af64352a8664cf32
-  redirect_uri: http://127.0.0.1:8887/qqLogin
+  redirect_uri: http://localhost:8887/githubCallback
 
 # Gitee登录需要的参数
 gitee:
   client_id: c7980442637435986a47c38feeee1aa3c9c714e2532a94e0ad57ad9bc596aed0
   client_secret: 0930212b171a2a9e25c28994097298050c60f8e6f7f038c360d8c030b6fbd7ca
-  redirect_uri: http://localhost:8887/gitee/callback
+  redirect_uri: http://localhost:8887/giteeCallback
+
+# QQ登录需要的参数
+qq:
+  client_id: 101852195
+  client_secret: 12faca5851ca79d3af64352a8664cf32
+  redirect_uri: http://127.0.0.1:8887/qqCallback
 
 # 阿里云图片上传需要的参数
 aliyun:

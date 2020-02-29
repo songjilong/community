@@ -15,7 +15,6 @@ import com.sjl.community.provider.GithubProvider;
 import com.sjl.community.provider.QQProvider;
 import com.sjl.community.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,102 +48,107 @@ public class AuthoriseController {
     @Autowired
     private GiteeProvider giteeProvider;
 
+    private AccessTokenDto accessTokenDto = new AccessTokenDto();
+
     //Github授权
-    @GetMapping("/github/callback")
+    @GetMapping("/githubCallback")
     public String githubCallback(@RequestParam("code") String code,
                                  @RequestParam("state") String state,
-                                 HttpServletResponse response,
-                                 HttpServletRequest request) {
-        AccessTokenDto accessTokenDto = getAccessTokenDto(code, state, githubParams.getClient_id(), githubParams.getClient_secret(), githubParams.getRedirect_uri());
+                                 HttpServletResponse response) {
+        setAccessTokenDto(code, state, githubParams.getClient_id(), githubParams.getClient_secret(), githubParams.getRedirect_uri());
         //获取access_token
         String access_token = githubProvider.getAccessToken(accessTokenDto);
         //根据accessToken获取用户信息
         GithubUser githubUser = githubProvider.getGithubUser(access_token);
 
         if (githubUser != null && githubUser.getId() != null) {
-            //设置user信息
-            User user = new User();
-            user.setAccountId("Github-" + githubUser.getId());
-            user.setName(githubUser.getName());
-            user.setBio(githubUser.getBio());
             String token = UUID.randomUUID().toString();
-            user.setToken(token);
-            user.setAvatarUrl(githubUser.getAvatarUrl());
-            userService.createOrUpdateUser(user);
-            //将token存入cookie
-            response.addCookie(new Cookie("token", token));
+            //设置user信息
+            setUserInfo(token, githubUser.getName(), githubUser.getAvatarUrl(), "Github-"+githubUser.getId(), githubUser.getBio());
+            addCookieForToken(response, token);
             return "redirect:/";
         } else {
+            log.error("githubUser获取失败");
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
         }
     }
 
     //Gitee授权
-    @GetMapping("/gitee/callback")
+    @GetMapping("/giteeCallback")
     public String giteeCallback(@RequestParam("code") String code,
                                 @RequestParam("state") String state,
-                                HttpServletResponse response,
-                                HttpServletRequest request) {
-        AccessTokenDto accessTokenDto = getAccessTokenDto(code, state, giteeParams.getClient_id(), giteeParams.getClient_secret(), giteeParams.getRedirect_uri());
-        if (StringUtils.equals(state, "giteelogin")) {
-            String accessToken = giteeProvider.getAccessToken(accessTokenDto);
-            GiteeUser giteeUser = giteeProvider.getGiteeUser(accessToken);
-            if (giteeUser != null && giteeUser.getId() != null) {
-                User user = new User();
-                user.setAccountId("Gitee-" + giteeUser.getId());
-                String token = UUID.randomUUID().toString();
-                user.setToken(token);
-                user.setAvatarUrl(giteeUser.getAvatarUrl());
-                user.setName(giteeUser.getName());
-                user.setBio(giteeUser.getBio());
-                userService.createOrUpdateUser(user);
-                //将token存入cookie
-                response.addCookie(new Cookie("token", token));
-                return "redirect:/";
-            } else {
-                throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
-            }
+                                HttpServletResponse response) {
+        setAccessTokenDto(code, state, giteeParams.getClient_id(), giteeParams.getClient_secret(), giteeParams.getRedirect_uri());
+        String accessToken = giteeProvider.getAccessToken(accessTokenDto);
+        GiteeUser giteeUser = giteeProvider.getGiteeUser(accessToken);
+        if (giteeUser != null && giteeUser.getId() != null) {
+            String token = UUID.randomUUID().toString();
+            //设置user信息
+            setUserInfo(token, giteeUser.getName(), giteeUser.getAvatarUrl(), "Gitee-"+giteeUser.getId(), giteeUser.getBio());
+            addCookieForToken(response, token);
+            return "redirect:/";
         } else {
+            log.error("giteeUser获取失败");
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
         }
     }
 
     //QQ授权
-    @GetMapping("/qqcallback")
+    @GetMapping("/qqCallback")
     public String qqCallback(HttpServletResponse response,
                              @RequestParam("code") String code,
-                             @RequestParam("state") String state,
-                             HttpServletRequest request) throws IOException {
+                             @RequestParam("state") String state) throws IOException {
         String accessToken = qqProvider.getAccessToken(code);
         String openId = qqProvider.getOpenId(accessToken);
-        User user = new User();
         QQUser qqUser = qqProvider.getQQUser(accessToken, openId);
         if (qqUser != null && qqUser.getRet() == 0) {
-            user.setAccountId("QQ-" + openId);
-            user.setToken(UUID.randomUUID().toString());
-            user.setName(qqUser.getNickname());
-            user.setAvatarUrl(qqUser.getFigureurl_qq_1());
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
-            userService.createOrUpdateUser(user);
-            //将token存入cookie
-            response.addCookie(new Cookie("token", user.getToken()));
+            String token = UUID.randomUUID().toString();
+            setUserInfo(token, qqUser.getNickname(), qqUser.getFigureurl_qq_1(), "QQ-"+openId, null);
+            addCookieForToken(response, token);
             //返回首页
             return "redirect:/";
         } else {
-            assert qqUser != null;
-            log.error("qqUser获取失败，返回的错误信息：{}", qqUser.getMsg());
+            log.error("qqUser获取失败");
             throw new CustomizeException(CustomizeErrorCode.LOGIN_CONNECT_ERROR);
         }
     }
 
-    private AccessTokenDto getAccessTokenDto(String code, String state, String client_id, String client_secret, String redirect_uri) {
-        AccessTokenDto accessTokenDto = new AccessTokenDto();
+
+    private void setAccessTokenDto(String code, String state, String client_id, String client_secret, String redirect_uri) {
         accessTokenDto.setClient_id(client_id);
         accessTokenDto.setClient_secret(client_secret);
         accessTokenDto.setCode(code);
         accessTokenDto.setRedirect_uri(redirect_uri);
         accessTokenDto.setState(state);
-        return accessTokenDto;
+    }
+
+    //将token添加到cookie
+    private void addCookieForToken(HttpServletResponse response, String token) {
+        Cookie cookie = new Cookie("token", token);
+        cookie.setMaxAge(60 * 60 * 24 * 7);//7天有效期
+        response.addCookie(cookie);
+    }
+
+    //设置用户信息
+    private void setUserInfo(String token, String name, String avatarUrl, String accountId, String bio){
+        User user = new User();
+        user.setToken(token);
+        user.setName(name);
+        user.setAvatarUrl(avatarUrl);
+        user.setAccountId(accountId);
+        user.setBio(bio);
+        userService.createOrUpdateUser(user);
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        //清除session
+        request.getSession().removeAttribute("user");
+        //清除cookie
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        //返回到主页
+        return "redirect:/";
     }
 }

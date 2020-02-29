@@ -6,19 +6,21 @@ import com.sjl.community.model.UserExample;
 import com.sjl.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
  * @author song
  * @create 2020/2/18 17:45
  */
-@Component
+@Service
 public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
@@ -37,11 +39,12 @@ public class SessionInterceptor implements HandlerInterceptor {
                     userExample.createCriteria().andTokenEqualTo(token);
                     List<User> users = userMapper.selectByExample(userExample);
                     if (users.size() != 0) {
+                        HttpSession session = request.getSession();
                         //将user添加到session作用域
-                        request.getSession().setAttribute("user", users.get(0));
+                        session.setAttribute("user", users.get(0));
                         //获取未读数
                         Long unreadCount = notificationService.getUnreadCountByReceiverId(users.get(0).getId());
-                        request.getSession().setAttribute("unreadCount", unreadCount);
+                        session.setAttribute("unreadCount", unreadCount);
                     }
                     break;
                 }
