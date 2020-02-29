@@ -368,6 +368,6 @@ body {
     height: 600px;
 }
 
-.a-no-line:hover{
+.a-no-line:hover, .a-no-line:active, .a-no-line:visited{
     text-decoration: none;
 }

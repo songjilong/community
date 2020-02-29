@@ -40,8 +40,8 @@
                     <label for="tags_input">添加标签</label>
                     <div class="tags-input-div">
                         <input type="text" class="form-control" id="tags_input" name="tags" placeholder="输入标签，以逗号分隔"
-                               th:value="${tags}" autocomplete="off" onclick="showSelectTag()" readonly="readonly">
-                        <span class="glyphicon glyphicon-menu-down input-tag-btn" onclick="showSelectTag()"></span>
+                               th:value="${tags}" autocomplete="off" th:onclick="showSelectTag([[${tagDtosJson}]])" readonly="readonly">
+                        <span class="glyphicon glyphicon-menu-down input-tag-btn" th:onclick="showSelectTag([[${tagDtosJson}]])"></span>
                         <span class="glyphicon glyphicon-menu-up input-tag-btn" onclick="closeSelectTag()"></span>
                     </div>
 
@@ -49,7 +49,7 @@
                     <div id="tag-list" class="publish-tag-list">
                         <!-- 标签类型 -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="" th:each="tagDto,interStat : ${tagDtos}"
+                            <li role="presentation" th:each="tagDto,interStat : ${tagDtos}"
                                 th:classappend="${interStat.first} ? 'active' : ''">
                                 <a th:href="'#'+${tagDto.categoryName}" aria-controls="home" role="tab" data-toggle="tab"
                                    th:text="${tagDto.categoryName}">

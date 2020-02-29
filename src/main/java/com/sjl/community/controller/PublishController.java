@@ -1,5 +1,6 @@
 package com.sjl.community.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sjl.community.cache.TagCache;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.dto.TagDto;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,6 +37,7 @@ public class PublishController {
         //获取所有标签
         List<TagDto> tagDtos = TagCache.get();
         model.addAttribute("tagDtos", tagDtos);
+        model.addAttribute("tagDtosJson", JSON.toJSONString(tagDtos));
         return "publish";
     }
 
@@ -65,6 +69,7 @@ public class PublishController {
         //获取所有标签
         List<TagDto> tagDtos = TagCache.get();
         model.addAttribute("tagDtos", tagDtos);
+        model.addAttribute("tagDtosJson", JSON.toJSONString(tagDtos));
 
         //错误信息
         if (user == null) {
@@ -121,6 +126,7 @@ public class PublishController {
         //获取所有标签
         List<TagDto> tagDtos = TagCache.get();
         model.addAttribute("tagDtos", tagDtos);
+        model.addAttribute("tagDtosJson", JSON.toJSONString(tagDtos));
         return "publish";
     }
 }

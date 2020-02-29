@@ -118,21 +118,49 @@ function show_subComment(e) {
     }
 }
 
+/*展示关闭标签*/
+function showSelectTag(tagDtosJson) {
+    const content = $("#tags_input").val();//获取输入框的值
+    let arr = content.split(",");
+    let list = Array.from(eval(tagDtosJson));
+    let map = list.map(Object.values);
+    console.log(map);
+    for(let i = 0; i < map.length; i++){
+        let temp = map[i];
+        for(let j = 1; j < temp.length; j++){
+            let tagArr = temp[j];
+            for(let k = 0; k < tagArr.length; k++){
+                for(let n = 0; n < arr.length; n++){
+                    if(arr[n] === tagArr[k]){
+                        $('#all-' + arr[n]).addClass("publish-tag-selected");
+                    }
+                }
+            }
+        }
+    }
+    $("#tag-list").show();
+}
+
+function closeSelectTag() {
+    $("#tag-list").hide();
+}
+
 let count = 0;//选择的标签数
 /*添加标签*/
 function selectTag(e) {
     const value = e.getAttribute("data-tag");//获取标签的值
-    const previous = $("#tags_input").val();//获取输入框的值
+    const content = $("#tags_input").val();//获取输入框的值
     //防止字串干扰
-    let arr = previous.split(',');
+    let arr = content.split(',');
+    count = arr.length;
     if (arr.indexOf(value) === -1) {
         if (++count > 5) {
             alert("最多选择5个标签");
             return;
         }
         $('#all-' + value).addClass("publish-tag-selected");
-        if (previous) {
-            $("#tags_input").val(previous + ',' + value);
+        if (content) {
+            $("#tags_input").val(content + ',' + value);
         } else {
             $("#tags_input").val(value);
         }
@@ -144,9 +172,10 @@ function selectTag(e) {
 /*删除标签*/
 function deleteTag(e) {
     const removeValue = e.getAttribute("data-tag");//获取待删除的值
-    const previous = $("#tags_input").val();//获取输入框的值
+    const content = $("#tags_input").val();//获取输入框的值
     //防止字串干扰
-    let arr = previous.split(',');
+    let arr = content.split(',');
+    count = arr.length;
     if (arr.indexOf(removeValue) > -1) {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === removeValue) {
@@ -160,15 +189,6 @@ function deleteTag(e) {
     } else {
         alert('不要再点啦，我还没被选呢');
     }
-}
-
-/*展示关闭标签*/
-function showSelectTag() {
-    $("#tag-list").show();
-}
-
-function closeSelectTag() {
-    $("#tag-list").hide();
 }
 
 /*每日一句*/
