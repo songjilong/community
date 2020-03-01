@@ -98,7 +98,7 @@ public class PublishController {
         question.setTags(tags);
         question.setCreator(user.getId());
 
-        questionService.createOrUpdateQuestion(question);
+        questionService.createOrUpdateQuestion(question, user);
 
         //发布成功，返回主页面
         return "redirect:/";

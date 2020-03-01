@@ -17,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -158,12 +159,17 @@ public class QuestionService {
      *
      * @param question
      */
-    public void createOrUpdateQuestion(Question question) {
+    public void createOrUpdateQuestion(Question question, User user) {
         if (question.getId() == null) {
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
             questionMapper.insertSelective(question);
         } else {
+
+            Question q = questionMapper.selectByPrimaryKey(question.getId());
+            if(!q.getCreator().equals(user.getId())){
+                throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
+            }
             question.setGmtModified(System.currentTimeMillis());
             QuestionExample questionExample = new QuestionExample();
             questionExample.createCriteria().andIdEqualTo(question.getId());
