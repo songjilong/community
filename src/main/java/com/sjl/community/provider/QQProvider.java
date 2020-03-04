@@ -29,15 +29,15 @@ public class QQProvider {
     /**
      * 获取AccessToken
      */
-    public String getAccessToken(String code) throws IOException {
-        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id="+params.getClient_id()+"&client_secret="+params.getClient_secret()+"&code="+code+"redirect_uri="+params.getRedirect_uri();
+    public String getAccessToken(String code) {
+        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=" + params.getClient_id() + "&client_secret=" + params.getClient_secret() + "&code=" + code + "redirect_uri=" + params.getRedirect_uri();
         Request request = new Request.Builder()
                 .url(url)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String str = response.body().string();
             return str.split("&")[0].split("=")[1];
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("获取access_token失败");
         }
         return null;
@@ -46,16 +46,17 @@ public class QQProvider {
     /**
      * 获取OpenId
      */
-    public String getOpenId(String access_token) throws IOException {
-        String url = "https://graph.qq.com/oauth2.0/me?access_token="+access_token;
+    public String getOpenId(String access_token) {
+        String url = "https://graph.qq.com/oauth2.0/me?access_token=" + access_token;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            JSONObject jsonObject = JSONObject.parseObject(string);
+            String jsonString = string.split(" ")[1].split(" ")[0];
+            JSONObject jsonObject = JSONObject.parseObject(jsonString);
             return jsonObject.getString("openid");
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("获取OpenId失败");
         }
         return null;
@@ -64,12 +65,12 @@ public class QQProvider {
     /**
      * 根据access_token获取用户信息
      */
-    public QQUser getQQUser(String access_token, String openId) throws IOException {
-        String url = "https://graph.qq.com/user/get_user_info?access_token="+access_token+"&oauth_consumer_key="+params.getClient_id()+"&openid="+getOpenId(openId);
+    public QQUser getQQUser(String access_token, String openId) {
+        String url = "https://graph.qq.com/user/get_user_info?access_token=" + access_token + "&oauth_consumer_key=" + params.getClient_id() + "&openid=" + openId;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        try(Response response = client.newCall(request).execute()) {
+        try (Response response = client.newCall(request).execute()) {
             //得到的是json字符串，因此需要转为QQUser对象
             String str = response.body().string();
             return JSON.parseObject(str, QQUser.class);
