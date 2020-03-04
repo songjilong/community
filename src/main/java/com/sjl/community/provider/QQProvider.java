@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 /**
  * @author song
@@ -30,8 +29,7 @@ public class QQProvider {
      * 获取AccessToken
      */
     public String getAccessToken(String code) throws IOException {
-        String redirect_uri = URLEncoder.encode(params.getRedirect_uri(), "UTF-8");
-        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id="+params.getClient_id()+"&client_secret="+params.getClient_secret()+"&code="+code+"redirect_uri="+redirect_uri;
+        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id="+params.getClient_id()+"&client_secret="+params.getClient_secret()+"&code="+code+"redirect_uri="+params.getRedirect_uri();
         Request request = new Request.Builder()
                 .url(url)
                 .build();
