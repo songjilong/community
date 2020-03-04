@@ -1,6 +1,7 @@
 package com.sjl.community.provider;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sjl.community.config.QQLoginParams;
 import com.sjl.community.dto.QQUser;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,10 @@ public class QQProvider {
         try (Response response = client.newCall(request).execute()) {
             String str = response.body().string();
             return str.split("&")[0].split("=")[1];
+        }catch (Exception e){
+            log.error("获取access_token失败");
         }
+        return null;
     }
 
     /**
@@ -48,8 +52,13 @@ public class QQProvider {
                 .url(url)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            String string = response.body().string();
+            JSONObject jsonObject = JSONObject.parseObject(string);
+            return jsonObject.getString("openid");
+        }catch (Exception e){
+            log.error("获取OpenId失败");
         }
+        return null;
     }
 
     /**
