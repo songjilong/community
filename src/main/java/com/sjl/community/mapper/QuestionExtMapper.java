@@ -10,9 +10,9 @@ public interface QuestionExtMapper {
 
     List<Question> findByTagsREGEXP(Question question);
 
-    List<Question> findDescByTopAndGmt(Long id, Integer offerIndex, Integer pageSize);
-
-    List<Question> findBySearchREGEXP(String search, Integer offerIndex, Integer pageSize);
-
     int countBySearch(String search);
+
+    int countByTag(String tag);
+
+    List<Question> findByCondition(Long id, String search, String tag, int offerIndex, Integer pageSize);
 }

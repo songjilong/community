@@ -59,21 +59,26 @@
         </where>
     </select>
 
-    <select id="findBySearchREGEXP" resultMap="BaseResultMap">
-        select * from question
+    <select id="countByTag" parameterType="String" resultType="Integer">
+        select count(*) from question
         <where>
-            <if test="search != null and search != ''">
-                and title regexp #{search}
+            <if test="tag != null and tag != ''">
+                and tags regexp #{tag}
             </if>
         </where>
-        limit #{offerIndex}, #{pageSize}
     </select>
 
-    <select id="findDescByTopAndGmt" resultMap="BaseResultMap">
+    <select id="findByCondition" resultMap="BaseResultMap">
         select * from question
         <where>
             <if test="id != null">
                 and creator = #{id}
+            </if>
+            <if test="search != null and search != ''">
+                and title regexp #{search}
+            </if>
+            <if test="tag != null and tag != ''">
+                and tags regexp #{tag}
             </if>
         </where>
         order by top desc, gmt_create desc

@@ -49,7 +49,7 @@ public class QuestionService {
         //计算总记录数
         int totalCount = (int) questionMapper.countByExample(null);
         //查询所有的，不需要id
-        return getPageInfo(pageNum, pageSize, totalCount, null, null);
+        return getPageInfo(pageNum, pageSize, totalCount, null, null, null);
     }
 
     /**
@@ -65,7 +65,7 @@ public class QuestionService {
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreatorEqualTo(id);
         int totalCount = (int) questionMapper.countByExample(questionExample);
-        return getPageInfo(pageNum, pageSize, totalCount, id, null);
+        return getPageInfo(pageNum, pageSize, totalCount, id, null, null);
     }
 
     /**
@@ -78,8 +78,22 @@ public class QuestionService {
     public PaginationDto<QuestionDto> findBySearch(Integer pageNum, Integer pageSize, String search) {
         search = StringUtils.replace(search, " ", "|");
         int totalCount = questionExtMapper.countBySearch(search);
-        return getPageInfo(pageNum,pageSize, totalCount, null, search);
+        return getPageInfo(pageNum,pageSize, totalCount, null, search, null);
     }
+
+
+    /**
+     * 查询传入标签下所有问题 的分页信息
+     * @param pageNum
+     * @param pageSize
+     * @param tag
+     * @return
+     */
+    public PaginationDto<QuestionDto> findByTag(Integer pageNum, Integer pageSize, String tag) {
+        int totalCount = questionExtMapper.countByTag(tag);
+        return getPageInfo(pageNum,pageSize, totalCount, null, null, tag);
+    }
+
     /**
      * 根据传入的参数的不同，查询分页信息
      *
@@ -87,9 +101,10 @@ public class QuestionService {
      * @param pageSize
      * @param totalCount
      * @param id
+     * @param tag
      * @return
      */
-    public PaginationDto<QuestionDto> getPageInfo(Integer pageNum, Integer pageSize, Integer totalCount, Long id, String searchValue) {
+    public PaginationDto<QuestionDto> getPageInfo(Integer pageNum, Integer pageSize, Integer totalCount, Long id, String searchValue, String tag) {
         //问题列表信息
         List<QuestionDto> questionDtos = new ArrayList<>();
         //返回的页面信息+分页信息
@@ -108,13 +123,8 @@ public class QuestionService {
         }
         //获取截取的位置
         int offerIndex = (pageNum - 1) * pageSize;
-
-        List<Question> questions;
-        if(searchValue == null){
-            questions = questionExtMapper.findDescByTopAndGmt(id, offerIndex, pageSize);
-        }else{
-            questions = questionExtMapper.findBySearchREGEXP(searchValue, offerIndex, pageSize);
-        }
+        //根据条件查询分页信息
+        List<Question> questions = questionExtMapper.findByCondition(id, searchValue, tag, offerIndex, pageSize);
         //先遍历获取所有的问题
         for (Question question : questions) {
             QuestionDto questionDto = new QuestionDto();

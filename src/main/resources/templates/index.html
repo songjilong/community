@@ -53,6 +53,19 @@
                 </div>
             </div>
             <h4>
+                <img src="/icons/hot.svg" class="nav-title-icon">
+                热门标签
+            </h4>
+            <div class="hot-tag-list">
+                <span class="label label-primary tag-style" th:each="tag : ${hotTags}">
+                    <a th:href="@{/tag(tag=${tag})}">
+                        <span class="glyphicon glyphicon-tags"></span>
+                        <span th:text="${tag}"></span>
+                    </a>
+                </span>
+            </div>
+            <hr>
+            <h4>
                 <img src="/icons/rooter.svg" class="nav-title-icon">
                 联系站长
             </h4>

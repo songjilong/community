@@ -44,9 +44,9 @@ aliyun:
 
 # 日志配置
 logging:
-  level: info
-  level.com.sjl.community.mapper: debug
   file:
     name: log/community.log
     max-size: 200MB
     max-history: 30
+  level:
+    root: info

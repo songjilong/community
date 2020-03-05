@@ -134,10 +134,18 @@ body {
     display: ruby;
     font-size: 12px;
     margin-right: 10px;
-    cursor: pointer;
     line-height: 2.3;
 }
+.tag-style:hover{
+    background-color: #337AEE;
+}
+.tag-style a{
+    color: #fff;
+}
 
+.tag-style a:hover, .tag-style a:visited{
+    text-decoration: none;
+}
 
 .publish-tab-tags {
     margin-top: 15px;
@@ -370,4 +378,8 @@ body {
 
 .a-no-line:hover, .a-no-line:active, .a-no-line:visited{
     text-decoration: none;
+}
+
+.hot-tag-list{
+    word-wrap: break-word;
 }
