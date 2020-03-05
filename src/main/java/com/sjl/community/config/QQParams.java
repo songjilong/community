@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "qq")
 @Data
-public class QQLoginParams {
+public class QQParams {
     private String client_id;
     private String redirect_uri;
     private String client_secret;

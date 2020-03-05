@@ -2,6 +2,7 @@ package com.sjl.community.controller;
 
 import com.sjl.community.config.GiteeParams;
 import com.sjl.community.config.GithubParams;
+import com.sjl.community.config.QQParams;
 import com.sjl.community.dto.AccessTokenDto;
 import com.sjl.community.dto.GiteeUser;
 import com.sjl.community.dto.GithubUser;
@@ -39,6 +40,8 @@ public class AuthoriseController {
     private GithubParams githubParams;
     @Autowired
     private GiteeParams giteeParams;
+    @Autowired
+    private QQParams qqParams;
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -98,7 +101,8 @@ public class AuthoriseController {
     public String qqCallback(HttpServletResponse response,
                              @RequestParam("code") String code,
                              @RequestParam("state") String state) throws IOException {
-        String accessToken = qqProvider.getAccessToken(code);
+        setAccessTokenDto(code, state, qqParams.getClient_id(), qqParams.getClient_secret(), qqParams.getRedirect_uri());
+        String accessToken = qqProvider.getAccessToken(accessTokenDto);
         String openId = qqProvider.getOpenId(accessToken);
         QQUser qqUser = qqProvider.getQQUser(accessToken, openId);
         if (qqUser != null && qqUser.getRet() == 0) {

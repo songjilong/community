@@ -31,8 +31,8 @@ gitee:
 
 # QQ登录需要的参数
 qq:
-  client_id: 101852195
-  client_secret: 12faca5851ca79d3af64352a8664cf32
+  client_id: 101858012
+  client_secret: 4b468371eb54def6021927a534cb6ce3
   redirect_uri: http://127.0.0.1:8887/qqCallback
 
 # 阿里云图片上传需要的参数

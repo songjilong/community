@@ -1,6 +1,7 @@
 package com.sjl.community.provider;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sjl.community.config.GiteeParams;
 import com.sjl.community.dto.AccessTokenDto;
 import com.sjl.community.dto.GiteeUser;
@@ -25,7 +26,6 @@ public class GiteeProvider {
 
     /**
      * 获取AccessToken
-     *&code={code}&client_id={client_id}&redirect_uri={redirect_uri}&client_secret={client_secret}
      */
     public String getAccessToken(AccessTokenDto accessTokenDto) {
         MediaType mediaType = MediaType.parse("application/json;charset=utf-8");
@@ -37,7 +37,7 @@ public class GiteeProvider {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String str = response.body().string();
-            return str.split(",")[0].split(":")[1].replace("\"","");
+            return JSONObject.parseObject(str).getString("access_token");
         } catch (IOException e) {
             e.printStackTrace();
             log.error("Gitee获取access_token失败");
@@ -47,7 +47,6 @@ public class GiteeProvider {
 
     /**
      * 根据access_token获取用户信息
-     *
      */
     public GiteeUser getGiteeUser(String access_token) {
         Request request = new Request.Builder()

@@ -2,12 +2,11 @@ package com.sjl.community.provider;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sjl.community.config.QQLoginParams;
+import com.sjl.community.config.QQParams;
+import com.sjl.community.dto.AccessTokenDto;
 import com.sjl.community.dto.QQUser;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,17 +21,20 @@ import java.io.IOException;
 public class QQProvider {
 
     @Autowired
-    private QQLoginParams params;
+    private QQParams params;
 
     private OkHttpClient client = new OkHttpClient();
 
     /**
      * 获取AccessToken
      */
-    public String getAccessToken(String code) {
-        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=" + params.getClient_id() + "&client_secret=" + params.getClient_secret() + "&code=" + code + "redirect_uri=" + params.getRedirect_uri();
+    public String getAccessToken(AccessTokenDto accessTokenDto) {
+        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
+        String content = "grant_type=authorization_code&client_id=" + accessTokenDto.getClient_id() + "&client_secret=" + accessTokenDto.getClient_secret() + "&code=" + accessTokenDto.getCode() + "redirect_uri=" + accessTokenDto.getRedirect_uri();
+        RequestBody body = RequestBody.create(mediaType, content);
         Request request = new Request.Builder()
-                .url(url)
+                .url("https://graph.qq.com/oauth2.0/token")
+                .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String str = response.body().string();
