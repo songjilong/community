@@ -131,19 +131,22 @@ body {
 }
 
 .tag-style {
-    display: ruby;
+    display: inline-block;
     font-size: 12px;
     margin-right: 10px;
-    line-height: 2.3;
+    margin-top: 8px;
+    cursor: pointer;
 }
-.tag-style:hover{
+
+.tag-style:hover {
     background-color: #337AEE;
 }
-.tag-style a{
+
+.tag-style a {
     color: #fff;
 }
 
-.tag-style a:hover, .tag-style a:visited{
+.tag-style a:hover, .tag-style a:visited {
     text-decoration: none;
 }
 
@@ -376,10 +379,10 @@ body {
     height: 600px;
 }
 
-.a-no-line:hover, .a-no-line:active, .a-no-line:visited{
+.a-no-line:hover, .a-no-line:active, .a-no-line:visited {
     text-decoration: none;
 }
 
-.hot-tag-list{
+.hot-tag-list {
     word-wrap: break-word;
 }
