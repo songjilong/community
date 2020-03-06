@@ -100,9 +100,8 @@ public class AuthoriseController {
     @GetMapping("/qqCallback")
     public String qqCallback(HttpServletResponse response,
                              @RequestParam("code") String code,
-                             @RequestParam("state") String state) throws IOException {
-        setAccessTokenDto(code, state, qqParams.getClient_id(), qqParams.getClient_secret(), qqParams.getRedirect_uri());
-        String accessToken = qqProvider.getAccessToken(accessTokenDto);
+                             @RequestParam("state") String state) {
+        String accessToken = qqProvider.getAccessToken(code);
         String openId = qqProvider.getOpenId(accessToken);
         QQUser qqUser = qqProvider.getQQUser(accessToken, openId);
         if (qqUser != null && qqUser.getRet() == 0) {

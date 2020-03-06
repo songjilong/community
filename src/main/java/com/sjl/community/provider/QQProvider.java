@@ -28,17 +28,16 @@ public class QQProvider {
     /**
      * 获取AccessToken
      */
-    public String getAccessToken(AccessTokenDto accessTokenDto) {
-        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
-        String content = "grant_type=authorization_code&client_id=" + accessTokenDto.getClient_id() + "&client_secret=" + accessTokenDto.getClient_secret() + "&code=" + accessTokenDto.getCode() + "redirect_uri=" + accessTokenDto.getRedirect_uri();
-        RequestBody body = RequestBody.create(mediaType, content);
+    public String getAccessToken(String code) {
+        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id="+params.getClient_id()+"&client_secret="+params.getClient_secret()+"&code="+code+"&redirect_uri="+params.getRedirect_uri();
         Request request = new Request.Builder()
-                .url("https://graph.qq.com/oauth2.0/token")
-                .post(body)
+                .url(url)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String str = response.body().string();
-            return str.split("&")[0].split("=")[1];
+            String res = str.split("&")[0].split("=")[1];
+            System.out.println(res);
+            return res;
         } catch (Exception e) {
             log.error("获取access_token失败");
         }
@@ -54,10 +53,8 @@ public class QQProvider {
                 .url(url)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            String string = response.body().string();
-            String jsonString = string.split(" ")[1].split(" ")[0];
-            JSONObject jsonObject = JSONObject.parseObject(jsonString);
-            return jsonObject.getString("openid");
+            String str = response.body().string().split(" ")[1];
+            return JSONObject.parseObject(str).getString("openid");
         } catch (Exception e) {
             log.error("获取OpenId失败");
         }
