@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -141,17 +139,5 @@ public class AuthoriseController {
         user.setAccountId(accountId);
         user.setBio(bio);
         userService.createOrUpdateUser(user);
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        //清除session
-        request.getSession().removeAttribute("user");
-        //清除cookie
-        Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        //返回到主页
-        return "redirect:/";
     }
 }
