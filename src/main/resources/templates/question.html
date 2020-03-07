@@ -33,7 +33,7 @@
             <hr>
             <div>
                 <span class="label label-primary tag-style" th:each="tag : ${questionDto.tags.split(',')}">
-                    <a th:href="@{/tag(tag=${tag})}">
+                    <a th:href="@{/(tag=${tag})}">
                         <span class="glyphicon glyphicon-tags"></span>
                         <span th:text="${tag}"></span>
                     </a>

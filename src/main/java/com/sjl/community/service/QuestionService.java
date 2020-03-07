@@ -2,6 +2,8 @@ package com.sjl.community.service;
 
 import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
+import com.sjl.community.dto.QuestionQueryDto;
+import com.sjl.community.enums.SortEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.QuestionExtMapper;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,80 +42,46 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
 
     /**
-     * 查询所有问题 的分页信息
-     *
-     * @param pageNum
-     * @param pageSize
+     * 根据条件查询
+     * @param queryDto
      * @return
      */
-    public PaginationDto<QuestionDto> findAll(Integer pageNum, Integer pageSize) {
-        //计算总记录数
-        int totalCount = (int) questionMapper.countByExample(null);
-        //查询所有的，不需要id
-        return getPageInfo(pageNum, pageSize, totalCount, null, null, null);
+    public PaginationDto<QuestionDto> findByCondition(QuestionQueryDto queryDto) {
+        Long time = null;
+        String sort = queryDto.getSort();
+        for(SortEnum sortEnum : SortEnum.values()){
+            if(sortEnum.name().toLowerCase().equals(sort)){
+                if(sort.equals("hot7")){
+                    time = System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 7;
+                }else if(sort.equals("hot30")){
+                    time = System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 30;
+                }
+                queryDto.setTime(time);
+                break;
+            }
+        }
+        //根据条件获取记录数
+        int totalCount = questionExtMapper.countByCondition(queryDto);
+        return getPageInfo(totalCount, queryDto);
     }
 
     /**
-     * 查询某个发起人的问题 的分页信息
-     *
-     * @param pageNum
-     * @param pageSize
-     * @param id
-     * @return
-     */
-    public PaginationDto<QuestionDto> findByCreatorId(Integer pageNum, Integer pageSize, Long id) {
-        //计算总记录数
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.createCriteria().andCreatorEqualTo(id);
-        int totalCount = (int) questionMapper.countByExample(questionExample);
-        return getPageInfo(pageNum, pageSize, totalCount, id, null, null);
-    }
-
-    /**
-     * 查询与输入搜索值匹配的问题 的分页信息
-     * @param pageNum
-     * @param pageSize
-     * @param search
-     * @return
-     */
-    public PaginationDto<QuestionDto> findBySearch(Integer pageNum, Integer pageSize, String search) {
-        search = StringUtils.replace(search, " ", "|");
-        int totalCount = questionExtMapper.countBySearch(search);
-        return getPageInfo(pageNum,pageSize, totalCount, null, search, null);
-    }
-
-
-    /**
-     * 查询传入标签下所有问题 的分页信息
-     * @param pageNum
-     * @param pageSize
-     * @param tag
-     * @return
-     */
-    public PaginationDto<QuestionDto> findByTag(Integer pageNum, Integer pageSize, String tag) {
-        int totalCount = questionExtMapper.countByTag(tag);
-        return getPageInfo(pageNum,pageSize, totalCount, null, null, tag);
-    }
-
-    /**
-     * 根据传入的参数的不同，查询分页信息
-     *
-     * @param pageNum
-     * @param pageSize
+     * 获取分页信息
      * @param totalCount
-     * @param id
-     * @param tag
+     * @param queryDto
      * @return
      */
-    public PaginationDto<QuestionDto> getPageInfo(Integer pageNum, Integer pageSize, Integer totalCount, Long id, String searchValue, String tag) {
-        //问题列表信息
+    public PaginationDto<QuestionDto> getPageInfo(Integer totalCount, QuestionQueryDto queryDto) {
+
         List<QuestionDto> questionDtos = new ArrayList<>();
-        //返回的页面信息+分页信息
         PaginationDto<QuestionDto> pageInfo = new PaginationDto<>();
+
         //如果总记录数为0，直接返回一个空数据
         if (totalCount == 0) {
             return pageInfo;
         }
+        int pageNum = queryDto.getPageNum();
+        int pageSize = queryDto.getPageSize();
         //设置分页信息
         pageInfo.setInfo(totalCount, pageNum, pageSize);
         //限定当前页范围
@@ -121,23 +90,25 @@ public class QuestionService {
         } else if (pageNum > pageInfo.getTotalPage()) {
             pageNum = pageInfo.getTotalPage();
         }
+
         //获取截取的位置
         int offerIndex = (pageNum - 1) * pageSize;
+        queryDto.setOfferIndex(offerIndex);
+
         //根据条件查询分页信息
-        List<Question> questions = questionExtMapper.findByCondition(id, searchValue, tag, offerIndex, pageSize);
+        List<Question> questions = questionExtMapper.findByCondition(queryDto);
+
         //先遍历获取所有的问题
         for (Question question : questions) {
             QuestionDto questionDto = new QuestionDto();
-            //根据问题的发起人id获取user对象
             User user = userMapper.selectByPrimaryKey(question.getCreator());
-            //将数据放到questionDto对象
             BeanUtils.copyProperties(question, questionDto);
             questionDto.setUser(user);
-            //添加到集合
             questionDtos.add(questionDto);
         }
-        //添加问题信息
+
         pageInfo.setList(questionDtos);
+
         return pageInfo;
     }
 
@@ -148,18 +119,13 @@ public class QuestionService {
      * @return
      */
     public QuestionDto findById(Long id) {
-        //查询问题信息
         Question question = questionMapper.selectByPrimaryKey(id);
         if(question == null){
-            //找不到问题，抛出异常及信息
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
         QuestionDto questionDto = new QuestionDto();
-        //放入返回结果对象
         BeanUtils.copyProperties(question, questionDto);
-        //通过创建人id查出用户
         User user = userMapper.selectByPrimaryKey(question.getCreator());
-        //放入返回结果
         questionDto.setUser(user);
         return questionDto;
     }
@@ -226,6 +192,11 @@ public class QuestionService {
         }).collect(Collectors.toList());
     }
 
+    /**
+     * 设为顶置
+     * @param oper
+     * @param id
+     */
     public void setTopQuestion(String oper, Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
         if(question!=null){

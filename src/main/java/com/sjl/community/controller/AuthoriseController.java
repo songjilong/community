@@ -104,7 +104,7 @@ public class AuthoriseController {
         QQUser qqUser = qqProvider.getQQUser(accessToken, openId);
         if (qqUser != null && qqUser.getRet() == 0) {
             String token = UUID.randomUUID().toString();
-            setUserInfo(token, qqUser.getNickname(), qqUser.getFigureurl_qq_1(), "QQ-"+openId, null);
+            setUserInfo(token, qqUser.getNickname(), qqUser.getFigureurl_qq_2(), "QQ-"+openId, null);
             addCookieForToken(response, token);
             //返回首页
             return "redirect:/";

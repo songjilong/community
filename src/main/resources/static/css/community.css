@@ -43,6 +43,10 @@ body {
     float: right;
 }
 
+.red{
+    color: red;
+}
+
 .btn-publish {
     float: right;
     margin: 15px 0;

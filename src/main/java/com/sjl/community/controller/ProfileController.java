@@ -3,6 +3,7 @@ package com.sjl.community.controller;
 import com.sjl.community.dto.NotificationDto;
 import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
+import com.sjl.community.dto.QuestionQueryDto;
 import com.sjl.community.model.User;
 import com.sjl.community.service.NotificationService;
 import com.sjl.community.service.QuestionService;
@@ -46,7 +47,11 @@ public class ProfileController {
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "我的提问");
             //查询当前用户的问题列表
-            PaginationDto<QuestionDto> pageInfo = questionService.findByCreatorId(pageNum, pageSize, user.getId());
+            QuestionQueryDto queryDto = new QuestionQueryDto();
+            queryDto.setPageNum(pageNum);
+            queryDto.setPageSize(pageSize);
+            queryDto.setCreatorId(user.getId());
+            PaginationDto<QuestionDto> pageInfo = questionService.findByCondition(queryDto);
             model.addAttribute("pageInfo", pageInfo);
         } else if ("replies".equals(section)) {
             model.addAttribute("section", "replies");

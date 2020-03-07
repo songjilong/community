@@ -12,5 +12,5 @@ public class QQUser {
     private String msg;//错误信息
     private String nickname;
     private String gender;
-    private String figureurl_qq_1;//头像
+    private String figureurl_qq_2;//头像
 }

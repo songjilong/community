@@ -6,28 +6,28 @@
         <!--首页、上一页-->
         <li th:class="${pageInfo.hasPreviousPage} ? '': 'disabled'">
             <span th:if="!${pageInfo.hasPreviousPage}">&lt;&lt;</span>
-            <a th:if="${pageInfo.hasPreviousPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=1,search=${search},tag=${tag})}" aria-label="Previous">&lt;&lt;</a>
+            <a th:if="${pageInfo.hasPreviousPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=1,search=${search},tag=${tag},sort=${sortType})}" aria-label="Previous">&lt;&lt;</a>
         </li>
         <li th:class="${pageInfo.hasPreviousPage} ? '': 'disabled'">
             <span th:if="!${pageInfo.hasPreviousPage}">&lt;</span>
             <!--/(section=${section}, pageNum=${pageInfo.prePage})-->
-            <a th:if="${pageInfo.hasPreviousPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=${pageInfo.prePage},search=${search},tag=${tag})}" aria-label="Previous">&lt;</a>
+            <a th:if="${pageInfo.hasPreviousPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=${pageInfo.prePage},search=${search},tag=${tag},sort=${sortType})}" aria-label="Previous">&lt;</a>
         </li>
 
         <!--中间页-->
         <li th:class="${nav == pageInfo.page} ? 'active' : ''" th:each="nav : ${pageInfo.pages}">
             <!--不是当前页，正常显示；是当前页，高亮-->
-            <a th:href="@{${#httpServletRequest.requestURI}(pageNum=${nav},search=${search},tag=${tag})}" th:text="${nav}" >...</a>
+            <a th:href="@{${#httpServletRequest.requestURI}(pageNum=${nav},search=${search},tag=${tag},sort=${sortType})}" th:text="${nav}" >...</a>
         </li>
 
         <!--尾页、下一页-->
         <li th:class="${pageInfo.hasNextPage} ? '': 'disabled'">
             <span th:if="!${pageInfo.hasNextPage}">&gt;</span>
-            <a th:if="${pageInfo.hasNextPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=${pageInfo.nextPage},search=${search},tag=${tag})}" aria-label="Next">></a>
+            <a th:if="${pageInfo.hasNextPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=${pageInfo.nextPage},search=${search},tag=${tag},sort=${sortType})}" aria-label="Next">></a>
         </li>
         <li th:class="${pageInfo.hasNextPage} ? '': 'disabled'">
             <span th:if="!${pageInfo.hasNextPage}">&gt;&gt;</span>
-            <a th:if="${pageInfo.hasNextPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=${pageInfo.totalPage},search=${search},tag=${tag})}" aria-label="Next">&gt;&gt;</a>
+            <a th:if="${pageInfo.hasNextPage}" th:href="@{${#httpServletRequest.requestURI}(pageNum=${pageInfo.totalPage},search=${search},tag=${tag},sort=${sortType})}" aria-label="Next">&gt;&gt;</a>
         </li>
     </ul>
 </nav>

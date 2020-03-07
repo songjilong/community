@@ -50,29 +50,32 @@
         order by gmt_create desc limit 20
     </select>
 
-    <select id="countBySearch" parameterType="String" resultType="Integer">
+    <select id="countByCondition" parameterType="com.sjl.community.dto.QuestionQueryDto" resultType="Integer">
         select count(*) from question
         <where>
+            <if test="creatorId != null and creatorId != ''">
+                and creator = #{creatorId}
+            </if>
             <if test="search != null and search != ''">
                 and title regexp #{search}
             </if>
-        </where>
-    </select>
-
-    <select id="countByTag" parameterType="String" resultType="Integer">
-        select count(*) from question
-        <where>
             <if test="tag != null and tag != ''">
                 and tags regexp #{tag}
+            </if>
+            <if test="sort != null and sort != '' and sort == 'no'">
+                and comment_count = 0
+            </if>
+            <if test="time != null and time != ''">
+                and gmt_create > #{time}
             </if>
         </where>
     </select>
 
-    <select id="findByCondition" resultMap="BaseResultMap">
+    <select id="findByCondition" parameterType="com.sjl.community.dto.QuestionQueryDto" resultMap="BaseResultMap">
         select * from question
         <where>
-            <if test="id != null">
-                and creator = #{id}
+            <if test="creatorId != null">
+                and creator = #{creatorId}
             </if>
             <if test="search != null and search != ''">
                 and title regexp #{search}
@@ -80,8 +83,18 @@
             <if test="tag != null and tag != ''">
                 and tags regexp #{tag}
             </if>
+            <if test="sort != null and sort != '' and sort == 'no_comment'">
+                and comment_count = 0
+            </if>
+            <if test="time != null and time != ''">
+                and gmt_create > #{time}
+            </if>
         </where>
-        order by top desc, gmt_create desc
+        order by top desc,
+        <if test="sort != null and sort != '' and (sort == 'hot' || sort == 'hot7' || sort == 'hot30')">
+            comment_count desc,
+        </if>
+        gmt_create desc
         limit #{offerIndex}, #{pageSize}
     </select>
 </mapper>

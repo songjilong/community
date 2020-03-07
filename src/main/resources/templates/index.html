@@ -23,7 +23,25 @@
                 <img src="/icons/display.svg" class="nav-title-icon">
                 &nbsp;发现
             </h3>
-            <hr>
+            <div>
+                <ul class="nav nav-tabs">
+                    <li role="presentation" th:class="${sortType == null || sortType == 'new' ? 'active' : ''}">
+                        <a href="/?sort=new">最新</a>
+                    </li>
+                    <li role="presentation" th:class="${sortType == 'hot7' ? 'active' : ''}">
+                        <a href="/?sort=hot7">7天最热</a>
+                    </li>
+                    <li role="presentation" th:class="${sortType == 'hot30' ? 'active' : ''}">
+                        <a href="/?sort=hot30">30天最热</a>
+                    </li>
+                    <li role="presentation" th:class="${sortType == 'hot' ? 'active' : ''}">
+                        <a href="/?sort=hot">历史最热</a>
+                    </li>
+                    <li role="presentation" th:class="${sortType == 'no_comment' ? 'active' : ''}">
+                        <a href="/?sort=no_comment" class="red">消灭零回复</a>
+                    </li>
+                </ul>
+            </div>
             <!--问题列表-->
             <div th:replace="fragment/question_list::list(false)"></div>
             <!--分页栏-->
@@ -59,7 +77,7 @@
             </h4>
             <div class="hot-tag-list">
                 <span class="label label-primary tag-style" th:each="tag : ${hotTags}">
-                    <a th:href="@{/tag(tag=${tag})}">
+                    <a th:href="@{/(tag=${tag})}">
                         <span class="glyphicon glyphicon-tags"></span>
                         <span th:text="${tag}"></span>
                     </a>

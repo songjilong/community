@@ -49,4 +49,5 @@ logging:
     max-size: 200MB
     max-history: 30
   level:
+    com.sjl.community.mapper: debug
     root: info

@@ -1,5 +1,6 @@
 package com.sjl.community.mapper;
 
+import com.sjl.community.dto.QuestionQueryDto;
 import com.sjl.community.model.Question;
 import java.util.List;
 
@@ -10,9 +11,13 @@ public interface QuestionExtMapper {
 
     List<Question> findByTagsREGEXP(Question question);
 
-    int countBySearch(String search);
+//    int countBySearch(String search);
+//
+//    int countByTag(String tag);
+//
+//    int countBySort(String sort, Long time);
 
-    int countByTag(String tag);
+    int countByCondition(QuestionQueryDto questionQuery);
 
-    List<Question> findByCondition(Long id, String search, String tag, int offerIndex, Integer pageSize);
+    List<Question> findByCondition(QuestionQueryDto questionQuery);
 }
