@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author song
- * @create 2020/2/14 17:50
+ * @create 2020/2/14 17:501
  */
 @Component
 @ConfigurationProperties(prefix = "github")

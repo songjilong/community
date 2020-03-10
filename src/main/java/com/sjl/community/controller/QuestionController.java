@@ -1,6 +1,5 @@
 package com.sjl.community.controller;
 
-import com.github.pagehelper.util.StringUtil;
 import com.sjl.community.dto.CommentDto;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.enums.CommentTypeEnum;
