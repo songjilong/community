@@ -36,7 +36,7 @@ function submit_comment_by_type(parent_id, type, content) {
                 if (result.code === 2004) {
                     const confirm = window.confirm(result.message);
                     if (confirm) {
-                        window.open("https://github.com/login/oauth/authorize?client_id=aeb0d5116950de9541ab&redirect_uri="+getLocalhostPath()+"/callback&scope=user&state=1");
+                        window.open(getLocalhostPath()+"/login");
                         localStorage.setItem('closable', '1');//0：不关闭 1：关闭
                     }
                 } else {

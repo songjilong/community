@@ -104,14 +104,14 @@
                          th:src="${session.user} == null ? '/images/default-avatar.png' : ${session.user.avatarUrl}">
                 </div>
                 <div class="media-body question_text">
-                    发起人：<span class="media-heading" th:text="${session.user} == null ? '匿名用户' : ${session.user.name}"></span>
+                    <span class="media-middle" th:text="${session.user} == null ? '登录后即可评论' : '发起人：'+${session.user.name}"></span>
                 </div>
             </div>
             <input type="hidden" id="question_parent_id" th:value="${questionDto.id}">
             <div class="form-group comment_context_section" id="comment_frame">
-                <textarea class="form-control" rows="10" id="question_comment_content" placeholder="输入评论内容"></textarea>
+                <textarea class="form-control" rows="10" id="question_comment_content" placeholder="输入评论内容" th:if="${session.user} != null"></textarea>
             </div>
-            <button type="button" class="btn btn-success btn-publish" onclick="submit_question_comment()">提交</button>
+            <button type="button" class="btn btn-success btn-publish" onclick="submit_question_comment()" th:if="${session.user} != null">提交</button>
         </div>
         <!--右边栏-->
         <div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -124,8 +124,7 @@
                 <div class="media-left media-middle">
                     <a th:href="@{/user/{id}(id=${questionDto.user.id})}">
                         <img class="media-object img-rounded user_avatar"
-                             th:src="${questionDto.user.avatarUrl} == null ? '' : ${questionDto.user.avatarUrl}"
-                             alt="...">
+                             th:src="${questionDto.user.avatarUrl} == null ? '' : ${questionDto.user.avatarUrl}">
                     </a>
                 </div>
                 <div class="media-body">
