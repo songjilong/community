@@ -43,7 +43,7 @@ body {
     float: right;
 }
 
-.red{
+.red {
     color: red;
 }
 
@@ -225,7 +225,7 @@ body {
     margin-bottom: 5px;
 }
 
-#click-top-btn {
+.click-top-btn {
     font-size: 20px;
     top: unset;
     bottom: 20px;
@@ -234,9 +234,10 @@ body {
     padding: 5px;
     background-color: #eee;
     cursor: pointer;
+    display:none;
 }
 
-#click-top-btn:hover {
+.click-top-btn:hover {
     background-color: #aaa;
 }
 
@@ -344,18 +345,20 @@ body {
     float: left;
 }
 
+.person {
+    background-color: #eee;
+}
+
 .person-info-image {
     background-image: url("/images/person-bg.jpg");
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    height: 300px;
+    height: 400px;
 }
 
 .person-info-main {
     width: 100%;
-    height: 240px;
-    background: #eee;
     margin-bottom: 20px;
 }
 
