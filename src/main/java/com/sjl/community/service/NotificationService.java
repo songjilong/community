@@ -2,13 +2,14 @@ package com.sjl.community.service;
 
 import com.sjl.community.dto.NotificationDto;
 import com.sjl.community.dto.PaginationDto;
-import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.enums.NotificationStatusEnum;
 import com.sjl.community.enums.NotificationTypeEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.NotificationMapper;
-import com.sjl.community.model.*;
+import com.sjl.community.model.Notification;
+import com.sjl.community.model.NotificationExample;
+import com.sjl.community.model.User;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

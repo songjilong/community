@@ -222,3 +222,23 @@ $(function(){
 function notOpen() {
     alert("暂未开放，请使用第三方登录 ^-^")
 }
+
+function checkEmail() {
+    let email = $("#register-email").val();
+    console.log(email);
+    $.ajax({
+        url: "/sendEmail",
+        type: "GET",
+        data: {
+            "email": email
+        },
+        dataType: "json",
+        success: function (data) {
+            if(data.code === 2000){
+                alert("成功")
+            }else{
+                alert(data.message)
+            }
+        }
+    })
+}

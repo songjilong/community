@@ -58,9 +58,9 @@ public class AuthoriseController {
                                  HttpServletResponse response) {
         setAccessTokenDto(code, state, githubParams.getClient_id(), githubParams.getClient_secret(), githubParams.getRedirect_uri());
         //获取access_token
-        String access_token = githubProvider.getAccessToken(accessTokenDto);
+        String accessToken = githubProvider.getAccessToken(accessTokenDto);
         //根据accessToken获取用户信息
-        GithubUser githubUser = githubProvider.getGithubUser(access_token);
+        GithubUser githubUser = githubProvider.getGithubUser(accessToken);
 
         if (githubUser != null && githubUser.getId() != null) {
             String token = UUID.randomUUID().toString();
@@ -126,7 +126,8 @@ public class AuthoriseController {
     //将token添加到cookie
     private void addCookieForToken(HttpServletResponse response, String token) {
         Cookie cookie = new Cookie("token", token);
-        cookie.setMaxAge(60 * 60 * 24 * 7);//7天有效期
+        //7天有效期
+        cookie.setMaxAge(60 * 60 * 24 * 7);
         response.addCookie(cookie);
     }
 

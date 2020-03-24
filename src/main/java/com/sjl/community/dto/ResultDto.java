@@ -37,11 +37,11 @@ public class ResultDto<T> {
         return resultDto;
     }
 
-    public static <T> ResultDto okOf(T t){
-        ResultDto<T> tResultDto = new ResultDto<>();
-        tResultDto.setCode(2000);
-        tResultDto.setMessage("请求成功");
-        tResultDto.setData(t);
-        return  tResultDto;
+    public static <T> ResultDto<T> okOf(T t){
+        ResultDto<T> resultDto = new ResultDto<>();
+        resultDto.setCode(2000);
+        resultDto.setMessage("请求成功");
+        resultDto.setData(t);
+        return  resultDto;
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>登录 - 甲壳虫社区</title>
+    <title>注册 - 甲壳虫社区</title>
     <head th:replace="fragment/import::common"></head>
 </head>
 <body class="login-body">
@@ -13,28 +13,32 @@
                 <div class="login-logo">
                     <b><a class="logo" th:href="@{/}">Beetle Community</a></b>
                 </div>
-                <form class="login-form" ><!--action="/login" method="post"-->
+                <form class="login-form" action="/register" method="post">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">
+                        <label for="register-email">
                             <img src="icons/envelope-open.svg" class="login-icon">&nbsp;邮箱
                         </label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"
+                        <input type="email" class="form-control" id="register-email" placeholder="Email"
                                name="email" data-rule="邮箱: required; email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">
+                        <label for="register-pwd">
                             <img src="icons/lock.svg" class="login-icon">&nbsp;密码
                         </label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-                                name="password" data-rule="密码:required;length(6~16)">
+                        <input type="password" class="form-control" id="register-pwd" placeholder="Password"
+                               name="password" data-rule="密码:required;length(6~16)">
                     </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox">记住我
+                    <div class="form-group">
+                        <label for="register-code">
+                            <img src="icons/lock.svg" class="login-icon">&nbsp;验证码
                         </label>
+                        <input type="text" class="form-control" id="register-code" placeholder="Verification Code" name="code">
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary btn-publish" onclick="notOpen()">登录</button>
+                        <button type="button" class="btn btn-primary btn-publish" onclick="checkEmail()">验证邮箱</button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-publish">注册</button>
                     </div>
                 </form>
             </div>
@@ -62,7 +66,7 @@
         </div>
         <div class="login-page-footer">
             <img src="icons/info.svg" class="login-icon">&nbsp;
-            还没有账号? <a href="/register">立即注册</a>&nbsp;或者&nbsp;<a href="/">以游客身份访问</a>
+            还没有账号? <a href="#">立即注册</a>&nbsp;或者&nbsp;<a href="/">以游客身份访问</a>
         </div>
     </div>
 </div>

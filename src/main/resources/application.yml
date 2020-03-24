@@ -1,16 +1,30 @@
+# 端口
 server:
   port: 8887
-#禁用Thymeleaf模板缓存
+
 spring:
+  #禁用Thymeleaf模板缓存
   thymeleaf:
     cache: false
+  #配置数据源
   datasource:
     url: jdbc:mysql://localhost:3306/db_community?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  # 配置邮件
+  mail:
+    host: smtp.qq.com
+    username: 2606587750@qq.com
+    password: azxhbamiilhxdhjd
+    default-encoding: utf-8
+  # 配置 redis
+  redis:
+    database: 0
+    host: 192.168.9.131
+    port: 6379
 
-# 开启mybatis驼峰标识
+# 开启 mybatis 驼峰标识
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
@@ -51,3 +65,8 @@ logging:
   level:
     com.sjl.community.mapper: debug
     root: info
+
+# 发送者邮箱
+beetle:
+  sender:
+    email: 2606587750@qq.com

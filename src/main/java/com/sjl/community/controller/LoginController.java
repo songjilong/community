@@ -2,6 +2,9 @@ package com.sjl.community.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-    @GetMapping("login")
-    public String login(){
+    @GetMapping("/login")
+    public String toLogin(){
         return "login";
     }
 
+    @PostMapping("/login")
+    public String doLogin(@RequestParam("email") String email,
+                          @RequestParam("password") String password){
+        return null;
+    }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {

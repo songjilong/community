@@ -12,16 +12,12 @@ import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.Question;
 import com.sjl.community.model.QuestionExample;
 import com.sjl.community.model.User;
-import com.sjl.community.model.UserExample;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,9 +47,9 @@ public class QuestionService {
         String sort = queryDto.getSort();
         for(SortEnum sortEnum : SortEnum.values()){
             if(sortEnum.name().toLowerCase().equals(sort)){
-                if(sort.equals("hot7")){
+                if("hot7".equals(sort)){
                     time = System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 7;
-                }else if(sort.equals("hot30")){
+                }else if("hot30".equals(sort)){
                     time = System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 30;
                 }
                 queryDto.setTime(time);

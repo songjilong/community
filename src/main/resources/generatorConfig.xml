@@ -17,6 +17,7 @@
                         connectionURL="${spring.datasource.url}"
                         userId="${spring.datasource.username}"
                         password="${spring.datasource.password}">
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
         <!--类型转换-->
@@ -41,9 +42,9 @@
         </javaClientGenerator>
 
         <!--配置数据库表-->
+        <table tableName="user" domainObjectName="User" />
         <table tableName="question" domainObjectName="Question" />
-        <!--<table tableName="user" domainObjectName="User" />
         <table tableName="comment" domainObjectName="Comment" />
-        <table tableName="notification" domainObjectName="Notification" />-->
+        <table tableName="notification" domainObjectName="Notification" />
     </context>
 </generatorConfiguration>

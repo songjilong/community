@@ -34,8 +34,8 @@ public class NotificationController {
             return "redirect:/profile/replies";
         }
         Notification notification = this.notificationService.read(id, user);
-        if(NotificationTypeEnum.REPLY_COMMENT.getType() == notification.getType() ||
-        NotificationTypeEnum.REPLY_QUESTION.getType() == notification.getType()){
+        if(NotificationTypeEnum.REPLY_COMMENT.getType().equals(notification.getType()) ||
+                NotificationTypeEnum.REPLY_QUESTION.getType().equals(notification.getType())){
             return "redirect:/question/" + notification.getTargetId();
         }else{
             throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);

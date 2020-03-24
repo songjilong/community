@@ -53,7 +53,7 @@ public class CommentService {
             throw new CustomizeException(CustomizeErrorCode.TYPE_NOT_EXIST);
         }
         //问题的回复
-        if (comment.getType() == CommentTypeEnum.TYPE_QUESTION.getType()) {
+        if (comment.getType().equals(CommentTypeEnum.TYPE_QUESTION.getType())) {
             Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (dbQuestion == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
@@ -100,7 +100,7 @@ public class CommentService {
      * @param targetTitle 问题标题
      */
     public void createNotification(Long notifierId, String notifyName, Long receiverId, int type, Long targetId, String targetTitle){
-        if(notifierId == receiverId){
+        if(notifierId.equals(receiverId)){
             return;
         }
         Notification notification = new Notification();
@@ -146,13 +146,11 @@ public class CommentService {
         Map<Long, User> userMap = users.stream().collect(Collectors.toMap(User::getId, user -> user));
 
         //将评论、用户放到传输对象中
-        List<CommentDto> commentDtos = comments.stream().map(comment -> {
+        return comments.stream().map(comment -> {
             CommentDto commentDto = new CommentDto();
             BeanUtils.copyProperties(comment, commentDto);
             commentDto.setUser(userMap.get(comment.getCommentator()));
             return commentDto;
         }).collect(Collectors.toList());
-
-        return commentDtos;
     }
 }
