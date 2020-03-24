@@ -42,7 +42,7 @@ public class RegisterService {
             record.setName("邮箱用户_" + email);
             record.setGmtCreate(System.currentTimeMillis());
             record.setGmtModified(record.getGmtCreate());
-            record.setAvatarUrl("http://thirdqq.qlogo.cn/g?b=oidb&k=ZRetjMVzPxMicx27ianRDCSg&s=100&t=1564116601");
+            record.setAvatarUrl("https://gitee.com/songjilong/FigureBed/raw/master/img/20200324171059.png");
             //生成盐
             String salt = CodecUtils.generateSalt();
             record.setSalt(salt);

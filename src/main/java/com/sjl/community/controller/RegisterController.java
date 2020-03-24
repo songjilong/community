@@ -32,7 +32,7 @@ public class RegisterController {
                          @RequestParam("code") Integer code){
         if(emailService.checkCode(email, code)){
             ResultDto resultDto = registerService.register(email, password);
-            return "login";
+            return "redirect:/login";
         }else{
             return "register";
         }

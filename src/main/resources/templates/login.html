@@ -13,7 +13,7 @@
                 <div class="login-logo">
                     <b><a class="logo" th:href="@{/}">Beetle Community</a></b>
                 </div>
-                <form class="login-form" ><!--action="/login" method="post"-->
+                <form class="login-form" action="/login" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">
                             <img src="icons/envelope-open.svg" class="login-icon">&nbsp;邮箱
@@ -34,7 +34,7 @@
                         </label>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary btn-publish" onclick="notOpen()">登录</button>
+                        <button type="submit" class="btn btn-primary btn-publish">登录</button>
                     </div>
                 </form>
             </div>

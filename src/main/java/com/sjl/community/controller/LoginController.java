@@ -1,12 +1,13 @@
 package com.sjl.community.controller;
 
+import com.sjl.community.service.LoginService;
+import com.sjl.community.utils.CookieUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,15 +18,23 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
+    @Autowired
+    private LoginService loginService;
+
     @GetMapping("/login")
-    public String toLogin(){
+    public String toLogin() {
         return "login";
     }
 
     @PostMapping("/login")
     public String doLogin(@RequestParam("email") String email,
-                          @RequestParam("password") String password){
-        return null;
+                          @RequestParam("password") String password,
+                          HttpServletResponse response) {
+        boolean flag = loginService.checkLogin(email, password, response);
+        if(flag){
+            return "redirect:/";
+        }
+        return "login";
     }
 
     @GetMapping("/logout")
@@ -33,9 +42,7 @@ public class LoginController {
         //清除session
         request.getSession().removeAttribute("user");
         //清除cookie
-        Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
+        CookieUtils.removeCookie(response, "token");
         //返回到主页
         return "redirect:/";
     }

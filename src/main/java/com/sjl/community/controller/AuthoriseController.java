@@ -15,13 +15,13 @@ import com.sjl.community.provider.GiteeProvider;
 import com.sjl.community.provider.GithubProvider;
 import com.sjl.community.provider.QQProvider;
 import com.sjl.community.service.UserService;
+import com.sjl.community.utils.CookieUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -51,6 +51,8 @@ public class AuthoriseController {
 
     private AccessTokenDto accessTokenDto = new AccessTokenDto();
 
+    private static final int COOKIE_EXPIRY = 60 * 60 * 24 * 7;
+
     //Github授权
     @GetMapping("/githubCallback")
     public String githubCallback(@RequestParam("code") String code,
@@ -66,7 +68,7 @@ public class AuthoriseController {
             String token = UUID.randomUUID().toString();
             //设置user信息
             setUserInfo(token, githubUser.getName(), githubUser.getAvatarUrl(), "Github-"+githubUser.getId(), githubUser.getBio());
-            addCookieForToken(response, token);
+            CookieUtils.setCookie(response, "token", token, COOKIE_EXPIRY);
             return "redirect:/";
         } else {
             log.error("githubUser获取失败");
@@ -86,7 +88,7 @@ public class AuthoriseController {
             String token = UUID.randomUUID().toString();
             //设置user信息
             setUserInfo(token, giteeUser.getName(), giteeUser.getAvatarUrl(), "Gitee-"+giteeUser.getId(), giteeUser.getBio());
-            addCookieForToken(response, token);
+            CookieUtils.setCookie(response, "token", token, COOKIE_EXPIRY);
             return "redirect:/";
         } else {
             log.error("giteeUser获取失败");
@@ -105,7 +107,7 @@ public class AuthoriseController {
         if (qqUser != null && qqUser.getRet() == 0) {
             String token = UUID.randomUUID().toString();
             setUserInfo(token, qqUser.getNickname(), qqUser.getFigureurl_qq_2(), "QQ-"+openId, null);
-            addCookieForToken(response, token);
+            CookieUtils.setCookie(response, "token", token, COOKIE_EXPIRY);
             //返回首页
             return "redirect:/";
         } else {
@@ -115,20 +117,12 @@ public class AuthoriseController {
     }
 
 
-    private void setAccessTokenDto(String code, String state, String client_id, String client_secret, String redirect_uri) {
-        accessTokenDto.setClient_id(client_id);
-        accessTokenDto.setClient_secret(client_secret);
+    private void setAccessTokenDto(String code, String state, String clientId, String clientSecret, String redirectUri) {
+        accessTokenDto.setClient_id(clientId);
+        accessTokenDto.setClient_secret(clientSecret);
         accessTokenDto.setCode(code);
-        accessTokenDto.setRedirect_uri(redirect_uri);
+        accessTokenDto.setRedirect_uri(redirectUri);
         accessTokenDto.setState(state);
-    }
-
-    //将token添加到cookie
-    private void addCookieForToken(HttpServletResponse response, String token) {
-        Cookie cookie = new Cookie("token", token);
-        //7天有效期
-        cookie.setMaxAge(60 * 60 * 24 * 7);
-        response.addCookie(cookie);
     }
 
     //设置用户信息
