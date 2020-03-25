@@ -24,6 +24,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String toLogin() {
+
         return "login";
     }
 

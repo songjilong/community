@@ -15,22 +15,22 @@
                 </div>
                 <form class="login-form" action="/login" method="post">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">
+                        <label for="login-email">
                             <img src="/icons/envelope-open.svg" class="login-icon">&nbsp;邮箱
                         </label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"
+                        <input type="email" class="form-control" id="login-email" placeholder="Email"
                                name="email" data-rule="邮箱: required; email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">
+                        <label for="login-pwd">
                             <img src="/icons/lock.svg" class="login-icon">&nbsp;密码
                         </label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                        <input type="password" class="form-control" id="login-pwd" placeholder="Password"
                                 name="password" data-rule="密码:required;length(6~16)">
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox">记住我
+                            <input id="remember-me" type="checkbox" onclick="rememberMe()">记住我
                         </label>
                     </div>
                     <div>
@@ -69,4 +69,8 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>
+<script>
+    $("#login-email").val(localStorage.getItem("email"));
+    $("#login-pwd").val(localStorage.getItem("password"));
+</script>
 </html>

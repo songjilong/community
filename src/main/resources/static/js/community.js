@@ -219,10 +219,6 @@ $(function(){
     })
 });
 
-function notOpen() {
-    alert("暂未开放，请使用第三方登录 ^-^")
-}
-
 function sendEmail() {
     let email = $("#register-email").val();
     if(email == null || email.trim().length === 0){
@@ -238,6 +234,7 @@ function sendEmail() {
         dataType: "json",
         success: function (data) {
             if(data.code === 2000){
+                alert("邮件已发送，验证码 5 分钟内有效，请尽快完成注册");
                 invokeSetTime("#send-email-btn");
             }else{
                 alert(data.message);
@@ -265,5 +262,17 @@ function invokeSetTime(obj){
             countdown--;
         }
         setTimeout(function() {setTime(obj)},1000);
+    }
+}
+
+function rememberMe() {
+    if($("#remember-me").is(':checked')){
+        const email = $("#login-email").val();
+        console.log(email);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", $("#login-pwd").val());
+    }else{
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
     }
 }

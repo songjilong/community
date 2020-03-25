@@ -36,7 +36,6 @@ public class RegisterController {
                 return ResultDto.okOf();
             }
             return ResultDto.errorOf(CustomizeErrorCode.EMAIL_ALREADY_EXISTS);
-
         }
         return ResultDto.errorOf(CustomizeErrorCode.SEND_EMAIL_FAIL);
     }
