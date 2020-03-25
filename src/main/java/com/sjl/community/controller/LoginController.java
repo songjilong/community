@@ -2,6 +2,7 @@ package com.sjl.community.controller;
 
 import com.sjl.community.service.LoginService;
 import com.sjl.community.utils.CookieUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,11 @@ public class LoginController {
     public String doLogin(@RequestParam("email") String email,
                           @RequestParam("password") String password,
                           HttpServletResponse response) {
-        boolean flag = loginService.checkLogin(email, password, response);
-        if(flag){
-            return "redirect:/";
+        if(StringUtils.isNotBlank(email) && StringUtils.isNotBlank(password)){
+            boolean flag = loginService.checkLogin(email, password, response);
+            if(flag){
+                return "redirect:/";
+            }
         }
         return "login";
     }

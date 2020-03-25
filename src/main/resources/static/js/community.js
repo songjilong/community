@@ -223,9 +223,12 @@ function notOpen() {
     alert("暂未开放，请使用第三方登录 ^-^")
 }
 
-function checkEmail() {
+function sendEmail() {
     let email = $("#register-email").val();
-    console.log(email);
+    if(email == null || email.trim().length === 0){
+        alert("请输入邮箱！");
+        return;
+    }
     $.ajax({
         url: "/sendEmail",
         type: "GET",
@@ -235,10 +238,32 @@ function checkEmail() {
         dataType: "json",
         success: function (data) {
             if(data.code === 2000){
-                alert("成功")
+                invokeSetTime("#send-email-btn");
             }else{
-                alert(data.message)
+                alert(data.message);
             }
         }
     })
+}
+
+/**
+ * 发送邮件后定时60秒
+ * @param obj
+ */
+function invokeSetTime(obj){
+    let countdown = 60;
+    setTime(obj);
+    function setTime(obj) {
+        if (countdown === 0) {
+            $(obj).attr("disabled",false);
+            $(obj).text("获取验证码");
+            countdown = 60;
+            return;
+        } else {
+            $(obj).attr("disabled",true);
+            $(obj).text("(" + countdown + ") s 重新发送");
+            countdown--;
+        }
+        setTimeout(function() {setTime(obj)},1000);
+    }
 }

@@ -18,7 +18,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     UPLOAD_FILE_ERROR(2011, "上传出错了，请检查你的文件格式！"),
     IS_NOT_LEGAL(2012, "非法入侵，请停止你的行为"),
     SEND_EMAIL_FAIL(2013, "发送邮件失败"),
-    EMAIL_ALREADY_EXISTS(2014, "邮箱已存在"),
+    EMAIL_ALREADY_EXISTS(2014, "邮箱已注册"),
     ;
 
     private Integer code;

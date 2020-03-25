@@ -393,3 +393,12 @@ body {
 .hot-tag-list {
     word-wrap: break-word;
 }
+
+.send-email-btn{
+    margin-left: 10px;
+}
+
+.cannot-click{
+    pointer-events: none;
+    cursor: none;
+}
