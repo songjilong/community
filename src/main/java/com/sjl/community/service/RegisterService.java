@@ -1,5 +1,7 @@
 package com.sjl.community.service;
 
+import com.sjl.community.exception.CustomizeErrorCode;
+import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.UserMapper;
 import com.sjl.community.model.User;
 import com.sjl.community.model.UserExample;
@@ -58,7 +60,8 @@ public class RegisterService {
                 mailSender.send(simpleMailMessage);
                 return true;
             } catch (MailException e) {
-                log.error("邮件发送出错，{}", e);
+                log.error("邮件发送出错" + e);
+                throw new CustomizeException(CustomizeErrorCode.SEND_EMAIL_FAIL);
             }
         }
         return false;
@@ -72,7 +75,13 @@ public class RegisterService {
      * @return
      */
     public boolean checkCode(String email, Integer code) {
-        Integer redisCode = (Integer) redisTemplate.opsForValue().get(CODE_PRE + email);
+        Integer redisCode = null;
+        try {
+            redisCode = (Integer) redisTemplate.opsForValue().get(CODE_PRE + email);
+        } catch (Exception e) {
+            log.error("从redis中获取验证码失败，异常信息：" + e);
+            throw new CustomizeException(CustomizeErrorCode.SEND_EMAIL_FAIL);
+        }
         return redisCode != null && redisCode.equals(code);
     }
 
