@@ -49,13 +49,13 @@ public class RegisterService {
         if(!registered(email)){
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setTo(email);
-            simpleMailMessage.setSubject("欢迎注册甲壳虫社区");
+            simpleMailMessage.setSubject("甲壳虫社区验证码");
             //生成6位随机数
             int code = (int) ((Math.random() * 9 + 1) * 100000);
             try {
                 //存入redis，过期时间5分钟
                 redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
-                simpleMailMessage.setText("您的验证码是：" + code + "，请在5分钟内完成注册，否则验证码失效，需重新发送。");
+                simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
                 simpleMailMessage.setFrom(senderEmail);
                 mailSender.send(simpleMailMessage);
                 return true;
