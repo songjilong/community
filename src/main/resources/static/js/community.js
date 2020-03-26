@@ -264,15 +264,3 @@ function invokeSetTime(obj){
         setTimeout(function() {setTime(obj)},1000);
     }
 }
-
-function rememberMe() {
-    if($("#remember-me").is(':checked')){
-        const email = $("#login-email").val();
-        console.log(email);
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", $("#login-pwd").val());
-    }else{
-        localStorage.removeItem("email");
-        localStorage.removeItem("password");
-    }
-}

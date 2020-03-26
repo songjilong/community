@@ -30,10 +30,11 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input id="remember-me" type="checkbox" onclick="rememberMe()">记住我
+                            <input id="remember-me" type="checkbox">记住我
                         </label>
                     </div>
                     <div>
+                        <span class="red" th:text="${loginError}"></span>
                         <button type="submit" class="btn btn-primary btn-publish">登录</button>
                     </div>
                 </form>
@@ -69,8 +70,4 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>
-<script>
-    $("#login-email").val(localStorage.getItem("email"));
-    $("#login-pwd").val(localStorage.getItem("password"));
-</script>
 </html>

@@ -5,6 +5,7 @@ import com.sjl.community.utils.CookieUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,12 +32,13 @@ public class LoginController {
     @PostMapping("/login")
     public String doLogin(@RequestParam("email") String email,
                           @RequestParam("password") String password,
-                          HttpServletResponse response) {
+                          HttpServletResponse response, Model model) {
         if(StringUtils.isNotBlank(email) && StringUtils.isNotBlank(password)){
             boolean flag = loginService.checkLogin(email, password, response);
             if(flag){
                 return "redirect:/";
             }
+            model.addAttribute("loginError", "用户名或密码错误！");
         }
         return "login";
     }

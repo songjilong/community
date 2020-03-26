@@ -35,7 +35,7 @@ public class RegisterService {
 
     private static final String CODE_PRE = "code";
 
-    @Value("${beetle.sender.email}")
+    @Value("${sender.email}")
     private String senderEmail;
 
     /**
@@ -47,12 +47,12 @@ public class RegisterService {
         if(!registered(email)){
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setTo(email);
-            simpleMailMessage.setSubject("测试");
+            simpleMailMessage.setSubject("欢迎注册甲壳虫社区");
             //生成6位随机数
             int code = (int) ((Math.random() * 9 + 1) * 100000);
             //存入redis，过期时间5分钟
             redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
-            simpleMailMessage.setText("这是一封测试邮件，验证码：" + code);
+            simpleMailMessage.setText("您的验证码是：" + code + "，请在5分钟内完成注册，否则验证码失效，需重新发送。");
             simpleMailMessage.setFrom(senderEmail);
             try {
                 mailSender.send(simpleMailMessage);
@@ -92,7 +92,7 @@ public class RegisterService {
      * @return
      */
     public Boolean checkEmail(String email) {
-        String eRegEx = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+        String eRegEx = "^([A-Za-z0-9_\\-.])+@([A-Za-z0-9_\\-.])+\\.([A-Za-z]{2,4})$";
         return Pattern.matches(eRegEx, email);
     }
 
@@ -105,8 +105,8 @@ public class RegisterService {
      * @return
      */
     public Boolean checkInfo(String email, String password, Integer code) {
-        String eRegEx = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
-        String pRegEx = "^[a-zA-Z0-9_-]{6,16}$";
+        String eRegEx = "^([A-Za-z0-9_\\-.])+@([A-Za-z0-9_\\-.])+\\.([A-Za-z]{2,4})$";
+        String pRegEx = "^[a-zA-Z0-9_.-]{6,16}$";
         String cRegEx = "^[0-9]{6}$";
         return Pattern.matches(eRegEx, email)
                 && Pattern.matches(pRegEx, password)
@@ -136,7 +136,7 @@ public class RegisterService {
             record.setName("邮箱用户_" + email);
             record.setGmtCreate(System.currentTimeMillis());
             record.setGmtModified(record.getGmtCreate());
-            record.setAvatarUrl("https://gitee.com/songjilong/FigureBed/raw/master/img/20200324171059.png");
+            record.setAvatarUrl("https://gitee.com/songjilong/FigureBed/raw/master/img/20200326163605.png");
             //生成盐
             String salt = CodecUtils.generateSalt();
             record.setSalt(salt);

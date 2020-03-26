@@ -15,14 +15,18 @@ spring:
   # 配置邮件
   mail:
     host: smtp.qq.com
-    username: 2606587750@qq.com
-    password: azxhbamiilhxdhjd
+    username: dbeetle@qq.com
+    password:
     default-encoding: utf-8
   # 配置 redis
   redis:
     database: 0
     host: 192.168.9.131
     port: 6379
+
+# 发送者邮箱
+sender:
+  email: dbeetle@qq.com
 
 # 开启 mybatis 驼峰标识
 mybatis:
@@ -65,8 +69,3 @@ logging:
   level:
     com.sjl.community.mapper: debug
     root: info
-
-# 发送者邮箱
-beetle:
-  sender:
-    email: 2606587750@qq.com
