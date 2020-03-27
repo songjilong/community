@@ -4,37 +4,41 @@
     <meta charset="UTF-8">
     <title>注册 - 甲壳虫社区</title>
     <head th:replace="fragment/import::common"></head>
+    <style>
+        .n-bootstrap .msg-wrap {font-size: 14px; margin-top: 3px}
+    </style>
 </head>
-<body class="login-body">
+<body class="register-body">
 <div class="login-main">
     <div class="login-page container-fluid">
         <div class="row login-page-main">
-            <div class="login-left col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="login-left col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <div class="login-logo">
                     <b><a class="logo" th:href="@{/}">Beetle Community</a></b>
                 </div>
-                <form class="login-form" action="/register" method="post">
+                <form id="register-form" class="login-form" action="/register" method="post"
+                      data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}">
                     <div class="form-group">
                         <label for="register-email">
                             <img src="/icons/envelope-open.svg" class="login-icon">&nbsp;邮箱
                         </label>
-                        <input type="email" class="form-control" id="register-email" placeholder="Email"
-                               name="email" data-rule="邮箱: required; email">
+                        <input type="email" class="form-control" id="register-email" placeholder="Email" name="email"
+                               data-rule="邮箱:required; email">
                     </div>
                     <div class="form-group">
                         <label for="register-pwd">
                             <img src="/icons/lock.svg" class="login-icon">&nbsp;密码
                         </label>
-                        <input type="password" class="form-control" id="register-pwd" placeholder="Password"
-                               name="password" data-rule="密码:required;length(6~16)">
+                        <input type="password" class="form-control" id="register-pwd" placeholder="Password" name="password"
+                               data-rule="密码:required;length(6~16)">
                     </div>
                     <div class="form-group">
                         <label for="register-code">
                             <img src="/images/code.svg" class="login-icon">&nbsp;验证码
                             <button id="send-email-btn" type="button" class="btn btn-success btn-xs send-email-btn" onclick="sendEmail()">获取验证码</button>
                         </label>
-                        <input type="text" class="form-control" id="register-code" placeholder="Verification Code"
-                               name="code" data-rule="验证码:required;length(6)">
+                        <input type="text" class="form-control" id="register-code" placeholder="Verification Code" name="code"
+                               data-rule="验证码:required;length(6)">
                     </div>
                     <div>
                         <span class="red" th:text="${registerInfo}"></span>
@@ -42,7 +46,7 @@
                     </div>
                 </form>
             </div>
-            <div class="login-right col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="login-right col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <div class="login-other-all">
                     <h4>第三方账号登录</h4>
                     <a th:href="@{https://github.com/login/oauth/authorize(client_id=${@environment.getProperty('github.client_id')},redirect_uri=${@environment.getProperty('github.redirect_uri')},scope='user',state='githublogin')}"
@@ -73,4 +77,16 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>
+<script>
+    $(function(){
+        // Custom theme
+        $.validator.setTheme('bootstrap', {
+            validClass: 'has-success',
+            invalidClass: 'has-error',
+            bindClassTo: '.form-group',
+            formClass: 'n-default n-bootstrap',
+            msgClass: 'n-right'
+        });
+    });
+</script>
 </html>

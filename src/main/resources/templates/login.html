@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <title>登录 - 甲壳虫社区</title>
     <head th:replace="fragment/import::common"></head>
+    <style>
+        .n-bootstrap .msg-wrap {font-size: 14px; margin-top: 3px}
+    </style>
 </head>
 <body class="login-body">
 <div class="login-main">
     <div class="login-page container-fluid">
         <div class="row login-page-main">
-            <div class="login-left col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="login-left col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <div class="login-logo">
                     <b><a class="logo" th:href="@{/}">Beetle Community</a></b>
                 </div>
-                <form class="login-form" action="/login" method="post">
+                <form class="login-form" action="/login" method="post"
+                      data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}">
                     <div class="form-group">
                         <label for="login-email">
                             <img src="/icons/envelope-open.svg" class="login-icon">&nbsp;邮箱
@@ -39,7 +43,7 @@
                     </div>
                 </form>
             </div>
-            <div class="login-right col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="login-right col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <div class="login-other-all">
                     <h4>第三方账号登录</h4>
                     <a th:href="@{https://github.com/login/oauth/authorize(client_id=${@environment.getProperty('github.client_id')},redirect_uri=${@environment.getProperty('github.redirect_uri')},scope='user',state='githublogin')}"
@@ -70,4 +74,16 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>
+<script>
+    $(function(){
+        // Custom theme
+        $.validator.setTheme('bootstrap', {
+            validClass: 'has-success',
+            invalidClass: 'has-error',
+            bindClassTo: '.form-group',
+            formClass: 'n-default n-bootstrap',
+            msgClass: 'n-right'
+        });
+    });
+</script>
 </html>

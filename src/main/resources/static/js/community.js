@@ -219,6 +219,9 @@ $(function(){
     })
 });
 
+/**
+ * 发送邮件
+ */
 function sendEmail() {
     let email = $("#register-email").val();
     if(email == null || email.trim().length === 0){

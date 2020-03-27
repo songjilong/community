@@ -6,8 +6,8 @@
 body {
     width: 100%;
     height: 100%;
-    /* background-image: url("/images/bg.jpg");*/
-    background-image: url("/images/bg2.png");
+    /* background-image: url("/images/bg/index-bg1.png");*/
+    background-image: url("/images/bg/index-bg2.png");
 }
 
 .main {
@@ -265,7 +265,7 @@ body {
 }
 
 .login-body {
-    background-image: url("/images/login-bg.jpg");
+    background-image: url("/images/bg/show-bg1.jpg");
 }
 
 .login-logo {
@@ -273,11 +273,11 @@ body {
 }
 
 .login-form {
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 .login-form div {
-    margin-right: 80px;
+    margin-right: 130px;
 }
 
 .login-main {
@@ -297,7 +297,7 @@ body {
 }
 
 .login-page-main {
-    padding: 50px;
+    padding: 40px 0 50px 50px;
     height: 420px
 }
 
@@ -350,7 +350,7 @@ body {
 }
 
 .person-info-image {
-    background-image: url("/images/person-bg.jpg");
+    background-image: url("/images/bg/person-bg.jpg");
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
@@ -401,4 +401,8 @@ body {
 .cannot-click{
     pointer-events: none;
     cursor: none;
+}
+
+.register-body {
+    background-image: url("/images/bg/show-bg2.jpg");
 }
