@@ -12,12 +12,6 @@ public interface QuestionExtMapper {
 
     List<Question> findByTagsREGEXP(Question question);
 
-//    int countBySearch(String search);
-//
-//    int countByTag(String tag);
-//
-//    int countBySort(String sort, Long time);
-
     int countByCondition(QuestionQueryDto questionQuery);
 
     List<Question> findByCondition(QuestionQueryDto questionQuery);
