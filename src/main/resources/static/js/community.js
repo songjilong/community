@@ -270,3 +270,17 @@ function invokeSetTime(obj){
         setTimeout(function() {setTime(obj)},1000);
     }
 }
+
+/**
+ * 表单校验自定义主题
+ */
+function customTheme() {
+    // BootStrap Custom theme
+    $.validator.setTheme('bootstrap', {
+        validClass: 'has-success',
+        invalidClass: 'has-error',
+        bindClassTo: '.form-group',
+        formClass: 'n-default n-bootstrap',
+        msgClass: 'n-right'
+    });
+}

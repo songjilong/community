@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <title>注册 - 甲壳虫社区</title>
     <head th:replace="fragment/import::common"></head>
-    <style>
-        .n-bootstrap .msg-wrap {font-size: 14px; margin-top: 3px}
-    </style>
 </head>
 <body class="register-body">
 <div class="login-main">
@@ -79,14 +76,7 @@
 </body>
 <script>
     $(function(){
-        // Custom theme
-        $.validator.setTheme('bootstrap', {
-            validClass: 'has-success',
-            invalidClass: 'has-error',
-            bindClassTo: '.form-group',
-            formClass: 'n-default n-bootstrap',
-            msgClass: 'n-right'
-        });
+        customTheme();
     });
 </script>
 </html>

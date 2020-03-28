@@ -265,7 +265,7 @@ body {
 }
 
 .login-body {
-    background-image: url("/images/bg/show-bg1.jpg");
+    background-image: url("/images/bg/show-bg3.jpg");
 }
 
 .login-logo {
@@ -405,4 +405,10 @@ body {
 
 .register-body {
     background-image: url("/images/bg/show-bg2.jpg");
+}
+
+.n-bootstrap .msg-wrap{
+    font-size: 14px;
+    margin-top: 3px;
+    font-weight: bold;
 }

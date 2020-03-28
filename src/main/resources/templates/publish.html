@@ -23,24 +23,25 @@
                 </div>
             </div>
             <hr>
-            <form action="/publish" method="post">
+            <form action="/publish" method="post" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}">
                 <input type="hidden" name="id" th:value="${id}"/>
                 <div class="form-group">
                     <label for="title">标题（简明扼要）</label>
                     <input type="text" class="form-control" id="title" name="title" th:value="${title}"
-                           placeholder="请输入标题" autocomplete="off">
+                           placeholder="请输入标题" autocomplete="off" data-rule="标题:required; length(0~25)">
                 </div>
-                <label for="description">描述（如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问。）</label>
+                <label for="description">描述（如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问）</label>
                 <div class="form-group" id="question-editor">
                     <textarea style="display:none;" class="form-control" rows="10" name="description" id="description"
-                              th:text="${description}" placeholder="输入问题描述">
+                              th:text="${description}" data-rule="描述:required;">
                     </textarea>
                 </div>
                 <div class="form-group">
                     <label for="tags_input">选择标签（最多选择 5 个）</label>
                     <div class="tags-input-div">
                         <input type="text" class="form-control" id="tags_input" name="tags" placeholder="请选择标签"
-                               th:value="${tags}" autocomplete="off" th:onclick="showSelectTag([[${tagDtosJson}]])" readonly="readonly">
+                               th:value="${tags}" autocomplete="off" th:onclick="showSelectTag([[${tagDtosJson}]])" readonly="readonly"
+                               data-rule="标签:required;">
                         <span class="glyphicon glyphicon-menu-down input-tag-btn" th:onclick="showSelectTag([[${tagDtosJson}]])"></span>
                         <span class="glyphicon glyphicon-menu-up input-tag-btn" onclick="closeSelectTag()"></span>
                     </div>
@@ -101,4 +102,9 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>
+<script>
+    $(function(){
+        customTheme();
+    });
+</script>
 </html>
