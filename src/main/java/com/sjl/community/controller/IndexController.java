@@ -6,6 +6,7 @@ import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.dto.QuestionQueryDto;
 import com.sjl.community.service.NotificationService;
 import com.sjl.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,9 @@ public class IndexController {
         QuestionQueryDto queryDto = new QuestionQueryDto();
         queryDto.setPageNum(pageNum);
         queryDto.setPageSize(pageSize);
-        queryDto.setSearch(search.replace("+", "").replace("?", "").replace("*", ""));
+        if(StringUtils.isNotBlank(search)){
+            queryDto.setSearch(search.replace("+", "").replace("?", "").replace("*", ""));
+        }
         queryDto.setTag(tag);
         queryDto.setSort(sort);
         PaginationDto<QuestionDto> pageInfo = questionService.findByCondition(queryDto);

@@ -14,22 +14,23 @@
     <script src="/dist/jquery.validator.min.js?local=zh-CN"></script>
 </head>
 <head th:fragment="markdown">
-    <link rel="stylesheet" href="/css/editormd.min.css" />
-    <script src="/js/editormd.min.js"></script>
-    <link rel="stylesheet" href="/css/editormd.preview.min.css"/>
-    <script src="/js/lib/marked.min.js"></script>
-    <script src="/js/lib/prettify.min.js"></script>
+    <link rel="stylesheet" href="/markdown/css/editormd.min.css">
+    <link rel="stylesheet" href="/markdown/css/editormd.preview.min.css">
+    <script src="/markdown/editormd.min.js"></script>
+    <script src="/markdown/lib/marked.min.js"></script>
+    <script src="/markdown/lib/prettify.min.js"></script>
 </head>
 
 <script th:fragment="markdownEdit" type="text/javascript">
     $(function() {
         var editor = editormd("question-editor", {
             width: "100%",
-            height: 500,
-            path: "/js/lib/",
+            height: "600px",
+            path: "/markdown/lib/",
             delay: 0,
-            watch: false,
-            placeholder: "输入你的描述",
+            placeholder: "使用Markdown输入",
+            emoji: true,
+            //图片上传
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL: "/file/upload",

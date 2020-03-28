@@ -2,6 +2,9 @@
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
+$(function () {
+    $('[data-toggle="popover"]').popover()
+});
 
 /*获取当前项目主机地址*/
 function getLocalhostPath() {

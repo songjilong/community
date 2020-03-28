@@ -12,7 +12,7 @@
 <div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="page_left col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="publish-error-nav">
                 <h3>
                     <img src="/icons/cursor.svg" class="nav-title-icon">
@@ -26,20 +26,20 @@
             <form action="/publish" method="post">
                 <input type="hidden" name="id" th:value="${id}"/>
                 <div class="form-group">
-                    <label for="title">问题标题（简单扼要）</label>
+                    <label for="title">标题（简明扼要）</label>
                     <input type="text" class="form-control" id="title" name="title" th:value="${title}"
-                           placeholder="输入问题标题" autocomplete="off">
+                           placeholder="请输入标题" autocomplete="off">
                 </div>
+                <label for="description">描述（如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问。）</label>
                 <div class="form-group" id="question-editor">
-                    <label for="description">问题描述（必填，请根据右侧描述填写）</label>
                     <textarea style="display:none;" class="form-control" rows="10" name="description" id="description"
                               th:text="${description}" placeholder="输入问题描述">
                     </textarea>
                 </div>
                 <div class="form-group">
-                    <label for="tags_input">添加标签</label>
+                    <label for="tags_input">选择标签（最多选择 5 个）</label>
                     <div class="tags-input-div">
-                        <input type="text" class="form-control" id="tags_input" name="tags" placeholder="输入标签，以逗号分隔"
+                        <input type="text" class="form-control" id="tags_input" name="tags" placeholder="请选择标签"
                                th:value="${tags}" autocomplete="off" th:onclick="showSelectTag([[${tagDtosJson}]])" readonly="readonly">
                         <span class="glyphicon glyphicon-menu-down input-tag-btn" th:onclick="showSelectTag([[${tagDtosJson}]])"></span>
                         <span class="glyphicon glyphicon-menu-up input-tag-btn" onclick="closeSelectTag()"></span>
@@ -72,11 +72,11 @@
                         </div>
                     </div>
                 </div>
-                <!---->
                 <button type="submit" class="btn btn-success btn-publish">发布</button>
             </form>
         </div>
-        <div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+        <!--<div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <h3>
                 <img src="/icons/compass.svg" class="nav-title-icon">
                 问题发起指南
@@ -90,7 +90,7 @@
                 <li class="publish-guide-li"><b>选择标签:</b> 选择最多5个符合题意的标签</li>
             </ul>
             <hr>
-        </div>
+        </div>-->
     </div>
 </div>
 <div>
