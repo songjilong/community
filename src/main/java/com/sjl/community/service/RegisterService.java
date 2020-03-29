@@ -55,11 +55,11 @@ public class RegisterService {
             //生成6位随机数
             int code = (int) ((Math.random() * 9 + 1) * 100000);
             try {
-                //存入redis，过期时间5分钟
-                redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
                 simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
                 simpleMailMessage.setFrom(senderEmail);
                 mailSender.send(simpleMailMessage);
+                //存入redis，过期时间5分钟
+                redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
                 return true;
             } catch (MailException e) {
                 log.error("邮件发送出错" + e);
@@ -77,7 +77,7 @@ public class RegisterService {
      * @return
      */
     public boolean checkCode(String email, Integer code) {
-        Integer redisCode = null;
+        Integer redisCode;
         try {
             redisCode = (Integer) redisTemplate.opsForValue().get(CODE_PRE + email);
         } catch (Exception e) {
