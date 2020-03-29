@@ -28,7 +28,7 @@ public class CommentController {
 
     @PostMapping("/comment")
     @ResponseBody
-    public ResultDto insertComment(@RequestBody CommentCreateDto commentDto, HttpServletRequest request){
+    public ResultDto<Object> insertComment(@RequestBody CommentCreateDto commentDto, HttpServletRequest request){
         //获取用户
         User user = (User) request.getSession().getAttribute("user");
         if(user == null){

@@ -2,7 +2,6 @@ package com.sjl.community.dto;
 
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -15,23 +14,23 @@ public class ResultDto<T> {
     private String message;
     private T data;
 
-    public static ResultDto errorOf(Integer code, String message) {
-        ResultDto resultDto = new ResultDto();
+    public static <T> ResultDto<T> errorOf(Integer code, String message) {
+        ResultDto<T> resultDto = new ResultDto<T>();
         resultDto.setCode(code);
         resultDto.setMessage(message);
         return resultDto;
     }
 
-    public static ResultDto errorOf(CustomizeErrorCode errorCode) {
+    public static <T> ResultDto<T> errorOf(CustomizeErrorCode errorCode) {
         return errorOf(errorCode.getCode(), errorCode.getMessage());
     }
 
-    public static ResultDto errorOf(CustomizeException e) {
+    public static <T> ResultDto<T> errorOf(CustomizeException e) {
         return errorOf(e.getCode(), e.getMessage());
     }
 
-    public static ResultDto okOf() {
-        ResultDto resultDto = new ResultDto();
+    public static <T> ResultDto<T> okOf() {
+        ResultDto<T> resultDto = new ResultDto<T>();
         resultDto.setCode(2000);
         resultDto.setMessage("请求成功");
         return resultDto;
