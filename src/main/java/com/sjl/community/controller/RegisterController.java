@@ -30,7 +30,7 @@ public class RegisterController {
 
     @GetMapping("/sendEmail")
     @ResponseBody
-    public ResultDto<Object> sendEmail(@RequestParam(name = "email") String email) {
+    public ResultDto<?> sendEmail(@RequestParam(name = "email") String email) {
         if (registerService.checkEmail(email)) {
             if(registerService.sendEmail(email)){
                 return ResultDto.okOf();

@@ -53,7 +53,6 @@ public class AuthoriseController {
 
     private static final int COOKIE_EXPIRY = 60 * 60 * 24 * 7;
 
-    //Github授权
     @GetMapping("/githubCallback")
     public String githubCallback(@RequestParam("code") String code,
                                  @RequestParam("state") String state,
@@ -76,7 +75,6 @@ public class AuthoriseController {
         }
     }
 
-    //Gitee授权
     @GetMapping("/giteeCallback")
     public String giteeCallback(@RequestParam("code") String code,
                                 @RequestParam("state") String state,
@@ -96,7 +94,6 @@ public class AuthoriseController {
         }
     }
 
-    //QQ授权
     @GetMapping("/qqCallback")
     public String qqCallback(HttpServletResponse response,
                              @RequestParam("code") String code,
@@ -125,7 +122,6 @@ public class AuthoriseController {
         accessTokenDto.setState(state);
     }
 
-    //设置用户信息
     private void setUserInfo(String token, String name, String avatarUrl, String accountId, String bio){
         User user = new User();
         user.setToken(token);
