@@ -7,11 +7,6 @@
     <head th:replace="fragment/import::markdown"></head>
     <head th:replace="fragment/import::markdownEdit"></head>
 </head>
-<script>
-    $(function(){
-        customTheme();
-    });
-</script>
 <body>
 <!--顶部导航栏-->
 <div th:replace="fragment/top_navigation::nav"></div>
@@ -114,5 +109,10 @@
 <div th:replace="fragment/notice::modal"></div>
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
+<script>
+    $(function(){
+        customTheme();
+    });
+</script>
 </body>
 </html>

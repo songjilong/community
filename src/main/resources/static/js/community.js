@@ -278,7 +278,6 @@ function customTheme() {
         validClass: 'has-success',
         invalidClass: 'has-error',
         bindClassTo: '.form-group',
-        formClass: 'n-default n-bootstrap',
         msgClass: 'n-right',
     });
 }
