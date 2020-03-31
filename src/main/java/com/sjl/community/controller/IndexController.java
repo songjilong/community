@@ -6,7 +6,6 @@ import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.dto.QuestionQueryDto;
 import com.sjl.community.service.NotificationService;
 import com.sjl.community.service.QuestionService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,22 +36,20 @@ public class IndexController {
                        @RequestParam(value = "pageSize", defaultValue = "8") Integer pageSize,
                        @RequestParam(value = "search", required = false) String search,
                        @RequestParam(value = "tag", required = false) String tag,
-                       @RequestParam(value = "sort", required = false) String sort){
-        QuestionQueryDto queryDto = new QuestionQueryDto();
-        queryDto.setPageNum(pageNum);
-        queryDto.setPageSize(pageSize);
-        if(StringUtils.isNotBlank(search)){
-            queryDto.setSearch(search.replace("+", "").replace("?", "").replace("*", ""));
-        }
-        queryDto.setTag(tag);
-        queryDto.setSort(sort);
+                       @RequestParam(value = "sort", required = false) String sort) {
+        QuestionQueryDto queryDto = QuestionQueryDto.builder()
+                .pageNum(pageNum)
+                .pageSize(pageSize)
+                .search(search)
+                .tag(tag)
+                .sort(sort)
+                .build();
         PaginationDto<QuestionDto> pageInfo = questionService.findByCondition(queryDto);
+        List<String> topTags = hotTagCache.getTopTags();
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("search", search);
         model.addAttribute("tag", tag);
         model.addAttribute("sortType", queryDto.getSort());
-        //热门标签
-        List<String> topTags = hotTagCache.getTopTags();
         model.addAttribute("hotTags", topTags);
         return "index";
     }

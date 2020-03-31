@@ -5,7 +5,9 @@ package com.sjl.community.enums;
  * @create 2020/2/20 19:35
  */
 public enum CommentTypeEnum {
+    //问题的回复
     TYPE_QUESTION(1),
+    //评论的回复
     TYPE_COMMENT(2);
 
     private Integer type;

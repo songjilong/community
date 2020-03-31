@@ -240,7 +240,6 @@ function sendEmail() {
         dataType: "json",
         success: function (data) {
             if(data.code === 2000){
-                alert("邮件已发送，验证码 5 分钟内有效，请尽快完成注册");
                 invokeSetTime("#send-email-btn");
             }else{
                 alert(data.message);

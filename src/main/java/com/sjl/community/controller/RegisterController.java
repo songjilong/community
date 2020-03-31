@@ -24,18 +24,20 @@ public class RegisterController {
     private RegisterService registerService;
 
     @GetMapping("/register")
-    public String toRegister(){
+    public String toRegister() {
         return "register";
     }
 
     @GetMapping("/sendEmail")
     @ResponseBody
     public ResultDto<?> sendEmail(@RequestParam(name = "email") String email) {
+
         if (registerService.checkEmail(email)) {
-            if(registerService.sendEmail(email)){
+            if (registerService.sendEmail(email)) {
                 return ResultDto.okOf();
+            } else {
+                return ResultDto.errorOf(CustomizeErrorCode.EMAIL_ALREADY_EXISTS);
             }
-            return ResultDto.errorOf(CustomizeErrorCode.EMAIL_ALREADY_EXISTS);
         }
         return ResultDto.errorOf(CustomizeErrorCode.SEND_EMAIL_FAIL);
     }
@@ -44,15 +46,14 @@ public class RegisterController {
     public String register(@RequestParam("email") String email,
                            @RequestParam("password") String password,
                            @RequestParam("code") Integer code,
-                           Model model){
-        if(registerService.checkInfo(email, password, code) &&
-                registerService.checkCode(email, code)){
-            if(registerService.register(email, password)) {
+                           Model model) {
+        if (registerService.checkInfo(email, password, code) && registerService.checkCode(email, code)) {
+            if (registerService.register(email, password)) {
                 model.addAttribute("registerInfo", "注册成功，快去登录吧~");
             } else {
                 model.addAttribute("registerInfo", "该邮箱已注册，换一个试试");
             }
-        }else{
+        } else {
             model.addAttribute("registerInfo", "请输入正确信息");
         }
         return "register";

@@ -24,20 +24,20 @@ public class NotificationController {
     private NotificationService notificationService;
 
     @GetMapping("/notification/{id}")
-    public String readNotify(@PathVariable("id") Long id, HttpServletRequest request){
+    public String readNotify(@PathVariable("id") Long id, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        if(user == null){
+        if (user == null) {
             throw new CustomizeException(CustomizeErrorCode.USER_NOT_LOGIN);
         }
-        if(id == 0){
+        if (id == 0) {
             this.notificationService.readAll(user.getId());
             return "redirect:/profile/replies";
         }
         Notification notification = this.notificationService.read(id, user);
-        if(NotificationTypeEnum.REPLY_COMMENT.getType().equals(notification.getType()) ||
-                NotificationTypeEnum.REPLY_QUESTION.getType().equals(notification.getType())){
+        if (NotificationTypeEnum.REPLY_COMMENT.getType().equals(notification.getType()) ||
+                NotificationTypeEnum.REPLY_QUESTION.getType().equals(notification.getType())) {
             return "redirect:/question/" + notification.getTargetId();
-        }else{
+        } else {
             throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
         }
     }

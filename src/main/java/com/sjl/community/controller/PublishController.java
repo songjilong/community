@@ -41,6 +41,7 @@ public class PublishController {
 
     /**
      * 发布问题
+     *
      * @param id
      * @param title
      * @param description
@@ -50,14 +51,11 @@ public class PublishController {
      * @return
      */
     @PostMapping("/publish")
-    public String doPublish(
-            @RequestParam(value = "id", required = false) Long id,
-            @RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "description", required = false) String description,
-            @RequestParam(value = "tags", required = false) String tags,
-            Model model,
-            HttpServletRequest request) {
-        //从session中获取user
+    public String doPublish(@RequestParam(value = "id") Long id,
+                            @RequestParam(value = "title") String title,
+                            @RequestParam(value = "description") String description,
+                            @RequestParam(value = "tags") String tags,
+                            Model model, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
 
         model.addAttribute("title", title);
@@ -88,14 +86,12 @@ public class PublishController {
             return "publish";
         }
 
-        //添加数据
         Question question = new Question();
         question.setId(id);
         question.setTitle(title.trim());
         question.setDescription(description);
         question.setTags(tags);
         question.setCreator(user.getId());
-
         questionService.createOrUpdateQuestion(question, user);
 
         //发布成功，返回主页面
@@ -105,16 +101,17 @@ public class PublishController {
 
     /**
      * 修改问题
+     *
      * @param id
      * @param model
      * @return
      */
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable("id") Long id, Model model, HttpServletRequest request){
+    public String edit(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         //通过问题id查找问题，存入作用域
         QuestionDto question = questionService.findById(id);
         User user = (User) request.getSession().getAttribute("user");
-        if(user == null || !question.getCreator().equals(user.getId())){
+        if (user == null || !question.getCreator().equals(user.getId())) {
             throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
         }
         model.addAttribute("id", question.getId());

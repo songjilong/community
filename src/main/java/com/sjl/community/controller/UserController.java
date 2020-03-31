@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user/{id}")
-    public String getInformationById(@PathVariable Long id, Model model){
+    public String getInformationById(@PathVariable Long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("userInfo", user);
         return "user";

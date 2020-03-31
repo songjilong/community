@@ -66,7 +66,7 @@ public class AuthoriseController {
         if (githubUser != null && githubUser.getId() != null) {
             String token = UUID.randomUUID().toString();
             //设置user信息
-            setUserInfo(token, githubUser.getName(), githubUser.getAvatarUrl(), "Github-"+githubUser.getId(), githubUser.getBio());
+            setUserInfo(token, githubUser.getName(), githubUser.getAvatarUrl(), "Github-" + githubUser.getId(), githubUser.getBio());
             CookieUtils.setCookie(response, "token", token, COOKIE_EXPIRY);
             return "redirect:/";
         } else {
@@ -85,7 +85,7 @@ public class AuthoriseController {
         if (giteeUser != null && giteeUser.getId() != null) {
             String token = UUID.randomUUID().toString();
             //设置user信息
-            setUserInfo(token, giteeUser.getName(), giteeUser.getAvatarUrl(), "Gitee-"+giteeUser.getId(), giteeUser.getBio());
+            setUserInfo(token, giteeUser.getName(), giteeUser.getAvatarUrl(), "Gitee-" + giteeUser.getId(), giteeUser.getBio());
             CookieUtils.setCookie(response, "token", token, COOKIE_EXPIRY);
             return "redirect:/";
         } else {
@@ -103,7 +103,7 @@ public class AuthoriseController {
         QQUser qqUser = qqProvider.getQQUser(accessToken, openId);
         if (qqUser != null && qqUser.getRet() == 0) {
             String token = UUID.randomUUID().toString();
-            setUserInfo(token, qqUser.getNickname(), qqUser.getFigureurl_qq_2(), "QQ-"+openId, null);
+            setUserInfo(token, qqUser.getNickname(), qqUser.getFigureurl_qq_2(), "QQ-" + openId, null);
             CookieUtils.setCookie(response, "token", token, COOKIE_EXPIRY);
             //返回首页
             return "redirect:/";
@@ -122,7 +122,7 @@ public class AuthoriseController {
         accessTokenDto.setState(state);
     }
 
-    private void setUserInfo(String token, String name, String avatarUrl, String accountId, String bio){
+    private void setUserInfo(String token, String name, String avatarUrl, String accountId, String bio) {
         User user = new User();
         user.setToken(token);
         user.setName(name);

@@ -15,8 +15,8 @@
         <h4 class="media-heading">
             <a th:href="@{'/question/'+${info.id}}" th:text="${info.title}" class="a-no-line">怎么学习spring boot</a>
             <span class="to-right question-top" th:if="${!canEdit && session.user != null && (session.user.id == 1 || session.user.id == 2)}">
-                <a th:if="${info.top == 0}" th:href="@{question/{oper}/{id}(id=${info.id}, oper='setTop')}">设为顶置</a>
-                <a th:if="${info.top == 1}" th:href="@{question/{oper}/{id}(id=${info.id}, oper='cancelTop')}">取消顶置</a>
+                <a th:if="${info.top == 0}" th:href="@{question/{oper}/{id}(id=${info.id}, oper=1)}">设为顶置</a>
+                <a th:if="${info.top == 1}" th:href="@{question/{oper}/{id}(id=${info.id}, oper=0)}">取消顶置</a>
             </span>
         </h4>
         <span class="label label-danger" th:if="${info.top == 1}">顶置</span>

@@ -33,13 +33,13 @@ public class LoginController {
     public String doLogin(@RequestParam("email") String email,
                           @RequestParam("password") String password,
                           HttpServletResponse response, Model model) {
-        if(StringUtils.isNotBlank(email) && StringUtils.isNotBlank(password)){
+        if (StringUtils.isNotBlank(email) && StringUtils.isNotBlank(password)) {
             boolean flag = loginService.checkLogin(email, password, response);
-            if(flag){
+            if (flag) {
                 return "redirect:/";
             }
-            model.addAttribute("loginError", "用户名或密码错误！");
         }
+        model.addAttribute("loginError", "用户名或密码错误！");
         return "login";
     }
 

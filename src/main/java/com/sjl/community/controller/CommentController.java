@@ -9,6 +9,7 @@ import com.sjl.community.model.Comment;
 import com.sjl.community.model.User;
 import com.sjl.community.service.CommentService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +29,17 @@ public class CommentController {
 
     @PostMapping("/comment")
     @ResponseBody
-    public ResultDto<?> insertComment(@RequestBody CommentCreateDto commentDto, HttpServletRequest request){
+    public ResultDto<?> insertComment(@RequestBody CommentCreateDto commentDto, HttpServletRequest request) {
         //获取用户
         User user = (User) request.getSession().getAttribute("user");
-        if(user == null){
+        if (user == null) {
             return ResultDto.errorOf(CustomizeErrorCode.USER_NOT_LOGIN);
         }
-        if(commentDto == null || StringUtils.isBlank(commentDto.getContent())){
+        if (commentDto == null || StringUtils.isBlank(commentDto.getContent())) {
             return ResultDto.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
         }
         Comment comment = new Comment();
-        comment.setParentId(commentDto.getParentId());
-        comment.setContent(commentDto.getContent());
-        comment.setType(commentDto.getType());
+        BeanUtils.copyProperties(commentDto, comment);
         comment.setCommentator(user.getId());
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(comment.getGmtCreate());
@@ -51,12 +50,13 @@ public class CommentController {
 
     /**
      * 获取回复下的评论
+     *
      * @param id
      * @return
      */
     @ResponseBody
     @GetMapping("/comment/{id}")
-    public ResultDto<List<CommentDto>> getComments(@PathVariable("id") Long id){
+    public ResultDto<List<CommentDto>> getComments(@PathVariable("id") Long id) {
         List<CommentDto> commentDtos = this.commentService.findByQuestionId(id, CommentTypeEnum.TYPE_COMMENT);
         return ResultDto.okOf(commentDtos);
     }

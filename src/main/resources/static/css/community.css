@@ -234,7 +234,7 @@ body {
     padding: 5px;
     background-color: #eee;
     cursor: pointer;
-    display:none;
+    display: none;
 }
 
 .click-top-btn:hover {
@@ -394,11 +394,11 @@ body {
     word-wrap: break-word;
 }
 
-.send-email-btn{
+.send-email-btn {
     margin-left: 10px;
 }
 
-.cannot-click{
+.cannot-click {
     pointer-events: none;
     cursor: none;
 }
@@ -407,8 +407,11 @@ body {
     background-image: url("/images/bg/show-bg2.jpg");
 }
 
-.n-bootstrap .msg-wrap{
+.n-bootstrap .msg-wrap {
     font-size: 14px;
     margin-top: 3px;
+}
+
+.bold-font {
     font-weight: bold;
 }

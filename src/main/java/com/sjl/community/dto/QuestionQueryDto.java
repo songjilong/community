@@ -1,5 +1,6 @@
 package com.sjl.community.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  * @create 2020/3/6 17:56
  */
 @Data
+@Builder
 public class QuestionQueryDto {
     private Integer offerIndex;
     private Integer pageNum;

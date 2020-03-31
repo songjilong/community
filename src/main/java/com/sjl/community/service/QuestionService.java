@@ -4,6 +4,7 @@ import com.sjl.community.dto.PaginationDto;
 import com.sjl.community.dto.QuestionDto;
 import com.sjl.community.dto.QuestionQueryDto;
 import com.sjl.community.enums.SortEnum;
+import com.sjl.community.enums.TopEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.QuestionExtMapper;
@@ -39,17 +40,22 @@ public class QuestionService {
 
     /**
      * 根据条件查询
+     *
      * @param queryDto
      * @return
      */
     public PaginationDto<QuestionDto> findByCondition(QuestionQueryDto queryDto) {
+        //将特殊字符去掉
+        if (queryDto.getSearch() != null) {
+            queryDto.setSearch(queryDto.getSearch().replace("+", "").replace("?", "").replace("*", ""));
+        }
         Long time = null;
         String sort = queryDto.getSort();
-        for(SortEnum sortEnum : SortEnum.values()){
-            if(sortEnum.name().toLowerCase().equals(sort)){
-                if("hot7".equals(sort)){
+        for (SortEnum sortEnum : SortEnum.values()) {
+            if (sortEnum.name().toLowerCase().equals(sort)) {
+                if ("hot7".equals(sort)) {
                     time = System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 7;
-                }else if("hot30".equals(sort)){
+                } else if ("hot30".equals(sort)) {
                     time = System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 30;
                 }
                 queryDto.setTime(time);
@@ -63,6 +69,7 @@ public class QuestionService {
 
     /**
      * 获取分页信息
+     *
      * @param totalCount
      * @param queryDto
      * @return
@@ -116,7 +123,7 @@ public class QuestionService {
      */
     public QuestionDto findById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
-        if(question == null){
+        if (question == null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
         QuestionDto questionDto = new QuestionDto();
@@ -139,14 +146,14 @@ public class QuestionService {
         } else {
 
             Question q = questionMapper.selectByPrimaryKey(question.getId());
-            if(!q.getCreator().equals(user.getId())){
+            if (!q.getCreator().equals(user.getId())) {
                 throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
             }
             question.setGmtModified(System.currentTimeMillis());
             QuestionExample questionExample = new QuestionExample();
             questionExample.createCriteria().andIdEqualTo(question.getId());
             int updated = questionMapper.updateByExampleSelective(question, questionExample);
-            if(updated != 1){
+            if (updated != 1) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
@@ -166,11 +173,12 @@ public class QuestionService {
 
     /**
      * 将tags转为正则表达式后查询问题
+     *
      * @param queryQuestionDto
      * @return
      */
     public List<QuestionDto> findByTags(QuestionDto queryQuestionDto) {
-        if(StringUtils.isBlank(queryQuestionDto.getTags())){
+        if (StringUtils.isBlank(queryQuestionDto.getTags())) {
             return new ArrayList<>();
         }
         Question question = new Question();
@@ -190,20 +198,20 @@ public class QuestionService {
 
     /**
      * 设为顶置
+     *
      * @param oper
      * @param id
      */
-    public void setTopQuestion(String oper, Long id) {
+    public void setTopQuestion(int oper, Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
-        if(question!=null){
-            if(StringUtils.equals(oper, "setTop")){
-                question.setTop(1);
-            }else{
-                question.setTop(0);
-            }
-            questionMapper.updateByPrimaryKeySelective(question);
-        }else{
+        if (question == null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
+        if (oper == TopEnum.SET_TOP.getType()) {
+            question.setTop(1);
+        } else {
+            question.setTop(0);
+        }
+        questionMapper.updateByPrimaryKeySelective(question);
     }
 }

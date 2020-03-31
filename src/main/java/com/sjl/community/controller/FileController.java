@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @author song
@@ -32,7 +33,7 @@ public class FileController {
         FileDto fileDto = new FileDto();
         try {
             assert file != null;
-            String url = aliyunProvider.fileUpload(file.getInputStream(), file.getOriginalFilename());
+            String url = aliyunProvider.fileUpload(file.getInputStream(), Objects.requireNonNull(file.getOriginalFilename()));
             fileDto.setUrl(url);
             fileDto.setSuccess(1);
             fileDto.setMessage("上传成功");

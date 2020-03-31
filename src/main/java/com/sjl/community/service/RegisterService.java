@@ -48,7 +48,7 @@ public class RegisterService {
      */
     @Async
     public Boolean sendEmail(String email) {
-        if(!registered(email)){
+        if (!registered(email)) {
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setTo(email);
             simpleMailMessage.setSubject("甲壳虫社区验证码");
@@ -124,7 +124,13 @@ public class RegisterService {
                 && Pattern.matches(cRegEx, String.valueOf(code));
     }
 
-    public Boolean registered(String email){
+    /**
+     * 邮箱是否已注册
+     *
+     * @param email
+     * @return
+     */
+    public Boolean registered(String email) {
         UserExample example = new UserExample();
         example.createCriteria().andAccountIdEqualTo(email);
         List<User> users = userMapper.selectByExample(example);
