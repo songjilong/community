@@ -7,6 +7,11 @@
     <head th:replace="fragment/import::markdown"></head>
     <head th:replace="fragment/import::markdownEdit"></head>
 </head>
+<script>
+    $(function(){
+        customTheme();
+    });
+</script>
 <body>
 <!--顶部导航栏-->
 <div th:replace="fragment/top_navigation::nav"></div>
@@ -24,7 +29,7 @@
             </div>
             <hr>
             <form action="/publish" method="post"
-                  data-validator-option="{theme:'yellow_right_effect', timely:2, stopOnError:true}">
+                  data-validator-option="{theme:'yellow_right_effect', stopOnError:true}">
                 <input type="hidden" name="id" th:value="${id}"/>
                 <div class="form-group">
                     <label for="title">标题（简明扼要）</label>
@@ -110,9 +115,4 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>
-<script>
-    $(function(){
-        customTheme();
-    });
-</script>
 </html>

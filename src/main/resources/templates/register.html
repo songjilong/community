@@ -5,6 +5,11 @@
     <title>注册 - 甲壳虫社区</title>
     <head th:replace="fragment/import::common"></head>
 </head>
+<script>
+    $(function(){
+        customTheme();
+    });
+</script>
 <body class="register-body">
 <div class="login-main">
     <div class="login-page container-fluid">
@@ -14,7 +19,7 @@
                     <b><a class="logo" th:href="@{/}">Beetle Community</a></b>
                 </div>
                 <form id="register-form" class="login-form" action="/register" method="post"
-                      data-validator-option="{theme:'yellow_right_effect', timely:2, stopOnError:true}">
+                      data-validator-option="{theme:'yellow_right_effect', stopOnError:true}">
                     <div class="form-group">
                         <label for="register-email">
                             <img src="/icons/envelope-open.svg" class="login-icon">&nbsp;邮箱
@@ -74,9 +79,4 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>
-<script>
-    $(function(){
-        customTheme();
-    });
-</script>
 </html>
