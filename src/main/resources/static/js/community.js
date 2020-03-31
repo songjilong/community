@@ -274,12 +274,11 @@ function invokeSetTime(obj){
  * 表单校验自定义主题
  */
 function customTheme() {
-    // BootStrap Custom theme
-    $.validator.setTheme('bootstrap', {
+    $.validator.setTheme('yellow_right_effect', {
         validClass: 'has-success',
         invalidClass: 'has-error',
         bindClassTo: '.form-group',
         formClass: 'n-default n-bootstrap',
-        msgClass: 'n-right'
+        msgClass: 'n-right',
     });
 }

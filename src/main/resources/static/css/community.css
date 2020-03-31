@@ -19,8 +19,8 @@ body {
 }
 
 .top-nav {
-    padding-left: 198px;
-    padding-right: 179px;
+    padding-left: 185px;
+    padding-right: 165px;
     margin-bottom: 0;
 }
 
@@ -204,6 +204,7 @@ body {
 
 .publish-tag-remove:hover {
     color: #db2d20;
+    cursor: pointer;
 }
 
 .reply-list {
@@ -410,8 +411,4 @@ body {
 .n-bootstrap .msg-wrap {
     font-size: 14px;
     margin-top: 3px;
-}
-
-.bold-font {
-    font-weight: bold;
 }

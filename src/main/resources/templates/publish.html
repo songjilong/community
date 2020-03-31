@@ -23,12 +23,13 @@
                 </div>
             </div>
             <hr>
-            <form action="/publish" method="post" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}">
+            <form action="/publish" method="post"
+                  data-validator-option="{theme:'yellow_right_effect', timely:2, stopOnError:true}">
                 <input type="hidden" name="id" th:value="${id}"/>
                 <div class="form-group">
                     <label for="title">标题（简明扼要）</label>
                     <input type="text" class="form-control" id="title" name="title" th:value="${title}"
-                           placeholder="请输入标题" autocomplete="off" data-rule="标题:required; length(0~25)">
+                           placeholder="请输入标题" autocomplete="off" data-rule="标题:required; length(0~30)">
                 </div>
                 <label for="description">描述（如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问）</label>
                 <div class="form-group" id="question-editor">
@@ -40,9 +41,11 @@
                     <label for="tags_input">选择标签（最多选择 5 个）</label>
                     <div class="tags-input-div">
                         <input type="text" class="form-control" id="tags_input" name="tags" placeholder="请选择标签"
-                               th:value="${tags}" autocomplete="off" th:onclick="showSelectTag([[${tagDtosJson}]])" readonly="readonly"
+                               th:value="${tags}" autocomplete="off" th:onclick="showSelectTag([[${tagDtosJson}]])"
+                               readonly="readonly"
                                data-rule="标签:required;">
-                        <span class="glyphicon glyphicon-menu-down input-tag-btn" th:onclick="showSelectTag([[${tagDtosJson}]])"></span>
+                        <span class="glyphicon glyphicon-menu-down input-tag-btn"
+                              th:onclick="showSelectTag([[${tagDtosJson}]])"></span>
                         <span class="glyphicon glyphicon-menu-up input-tag-btn" onclick="closeSelectTag()"></span>
                     </div>
 
@@ -52,7 +55,8 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" th:each="tagDto,interStat : ${tagDtos}"
                                 th:classappend="${interStat.first} ? 'active' : ''">
-                                <a th:href="'#'+${tagDto.categoryName}" aria-controls="home" role="tab" data-toggle="tab"
+                                <a th:href="'#'+${tagDto.categoryName}" aria-controls="home" role="tab"
+                                   data-toggle="tab"
                                    th:text="${tagDto.categoryName}">
                                 </a>
                             </li>
@@ -60,13 +64,17 @@
 
                         <!-- 标签内容 -->
                         <div class="tab-content publish-tab-tags">
-                            <div role="tabpanel" class="tab-pane fade" th:classappend="${interStat.first} ? 'in active' : ''"
+                            <div role="tabpanel" class="tab-pane fade"
+                                 th:classappend="${interStat.first} ? 'in active' : ''"
                                  th:each="tagDto,interStat : ${tagDtos}" th:id="${tagDto.categoryName}">
                              <span th:each="tag : ${tagDto.tags}">
                                  <span th:id="'all-'+${tag}" class="label label-primary tag-style select">
-                                    <span class="glyphicon glyphicon-tags" onclick="selectTag(this)" th:data-tag="${tag}"></span>
-                                    <span th:id="${tag}" th:text="${tag}" onclick="selectTag(this)" th:data-tag="${tag}"></span>
-                                    <span class="glyphicon glyphicon-remove publish-tag-remove" th:id="'remove-'+${tag}" onclick="deleteTag(this)" th:data-tag="${tag}"></span>
+                                    <span class="glyphicon glyphicon-tags" onclick="selectTag(this)"
+                                          th:data-tag="${tag}"></span>
+                                    <span th:id="${tag}" th:text="${tag}" onclick="selectTag(this)"
+                                          th:data-tag="${tag}"></span>
+                                    <span class="glyphicon glyphicon-remove publish-tag-remove" th:id="'remove-'+${tag}"
+                                          onclick="deleteTag(this)" th:data-tag="${tag}"></span>
                                 </span>
                              </span>
                             </div>

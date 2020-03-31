@@ -22,7 +22,6 @@ public class RedisConfig {
 
     /**
      * 由于原生的redis自动装配，在存储key和value时，没有设置序列化方式，故自己创建redisTemplate实例
-     *
      * @param factory
      * @return
      */
