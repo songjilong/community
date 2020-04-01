@@ -56,8 +56,7 @@
                             <li role="presentation" th:each="tagDto,interStat : ${tagDtos}"
                                 th:classappend="${interStat.first} ? 'active' : ''">
                                 <a th:href="'#'+${tagDto.categoryName}" aria-controls="home" role="tab"
-                                   data-toggle="tab"
-                                   th:text="${tagDto.categoryName}">
+                                   data-toggle="tab" th:text="${tagDto.categoryName}">
                                 </a>
                             </li>
                         </ul>
@@ -110,7 +109,7 @@
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 <script>
-    $(function(){
+    $(function () {
         customTheme();
     });
 </script>
