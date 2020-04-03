@@ -62,7 +62,7 @@
             <if test="tag != null and tag != ''">
                 and tags regexp #{tag}
             </if>
-            <if test="sort != null and sort != '' and sort == 'no'">
+            <if test="sort != null and sort != '' and sort == 'no_comment'">
                 and comment_count = 0
             </if>
             <if test="time != null and time != ''">
