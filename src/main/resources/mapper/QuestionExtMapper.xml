@@ -50,7 +50,7 @@
         order by gmt_create desc limit 20
     </select>
 
-    <select id="countByCondition" parameterType="com.sjl.community.dto.QuestionQueryDto" resultType="Integer">
+    <select id="countByCondition" parameterType="com.sjl.community.dto.QuestionQueryDto" resultType="java.lang.Integer">
         select count(*) from question
         <where>
             <if test="creatorId != null and creatorId != ''">
@@ -92,7 +92,7 @@
         </where>
         order by top desc,
         <if test="sort != null and sort != '' and (sort == 'hot' || sort == 'hot7' || sort == 'hot30')">
-            comment_count desc,
+            (comment_count + view_count / 10) desc,
         </if>
         gmt_create desc
         limit #{offerIndex}, #{pageSize}

@@ -18,9 +18,12 @@ public class PaginationDto<T> {
     private boolean isLastPage;
     private int prePage;
     private int nextPage;
-    private int page; //当前页码
+    private int page;
     private int totalPage;
-    private List<Integer> pages = new ArrayList<>();//页码列表
+    /**
+     * 当前分页结果的页码集
+     */
+    private List<Integer> pages = new ArrayList<>();
 
     public void setInfo(int totalCount, Integer pageNum, Integer pageSize) {
         //总页数

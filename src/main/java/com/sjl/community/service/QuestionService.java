@@ -74,7 +74,7 @@ public class QuestionService {
      * @param queryDto
      * @return
      */
-    public PaginationDto<QuestionDto> getPageInfo(Integer totalCount, QuestionQueryDto queryDto) {
+    public PaginationDto<QuestionDto> getPageInfo(int totalCount, QuestionQueryDto queryDto) {
 
         List<QuestionDto> questionDtos = new ArrayList<>();
         PaginationDto<QuestionDto> pageInfo = new PaginationDto<>();
