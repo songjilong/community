@@ -1,4 +1,6 @@
-/*未登录提示*/
+/**
+ * 未登录提示
+ */
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
@@ -6,16 +8,24 @@ $(function () {
     $('[data-toggle="popover"]').popover()
 });
 
-/*获取当前项目主机地址*/
+/**
+ * 获取当前项目主机地址
+ * @returns {string}
+ */
 function getLocalhostPath() {
     const curWwwPath = window.document.location.href;
-    const pathName=window.document.location.pathname;
-    const pos=curWwwPath.indexOf(pathName);
+    const pathName = window.document.location.pathname;
+    const pos = curWwwPath.indexOf(pathName);
     //获取主机地址，如： http://localhost:8083
-    return curWwwPath.substring(0,pos);
+    return curWwwPath.substring(0, pos);
 }
 
-/*根据传递的类型提交评论*/
+/**
+ * 根据传递的类型提交评论
+ * @param parent_id
+ * @param type
+ * @param content
+ */
 function submit_comment_by_type(parent_id, type, content) {
     if (!content) {
         alert("不能输入空的内容哦~");
@@ -39,7 +49,7 @@ function submit_comment_by_type(parent_id, type, content) {
                 if (result.code === 2004) {
                     const confirm = window.confirm(result.message);
                     if (confirm) {
-                        window.open(getLocalhostPath()+"/login");
+                        window.open(getLocalhostPath() + "/login");
                         localStorage.setItem('closable', '1');//0：不关闭 1：关闭
                     }
                 } else {
@@ -50,21 +60,29 @@ function submit_comment_by_type(parent_id, type, content) {
     });
 }
 
-/*提交问题的回复*/
+/**
+ * 提交问题的回复
+ */
 function submit_question_comment() {
     const id = $("#question_parent_id").val();
     const content = $("#question_comment_content").val();
     submit_comment_by_type(id, 1, content);
 }
 
-/*提交评论的回复*/
+/**
+ * 提交评论的回复
+ * @param e
+ */
 function submit_comment_comment(e) {
     const id = e.getAttribute("data-id");//获得回复的id
     const content = $("#input-" + id).val();//根据id获得评论内容
     submit_comment_by_type(id, 2, content);
 }
 
-/*显示或收起回复的评论*/
+/**
+ * 显示或收起回复的评论
+ * @param e
+ */
 function show_subComment(e) {
     const id = e.getAttribute("data-id");//获取评论id
     $('#sub_comment_btn-' + id).toggleClass("active");
@@ -77,7 +95,7 @@ function show_subComment(e) {
                 const mediaLeftElement = $("<div/>", {
                     "class": "media-left"
                 }).append($("<a/>", {
-                    "href": "/user/"+comment.user.id
+                    "href": "/user/" + comment.user.id
                 })).append($("<img/>", {
                     "class": "media-object img-rounded user_avatar",
                     "src": comment.user.avatarUrl
@@ -129,6 +147,7 @@ function showSelectTag() {
     selectedList.forEach(selected => $('#all-' + selected).addClass("publish-tag-selected"));
     $("#tag-list").show();
 }
+
 /**
  * 关闭标签集
  */
@@ -136,11 +155,15 @@ function closeSelectTag() {
     $("#tag-list").hide();
 }
 
-let count = 0;//选择的标签数
-/*添加标签*/
+let count = 0;//已选择的标签数
+/**
+ * 添加标签
+ * @param e
+ */
 function selectTag(e) {
     const value = e.getAttribute("data-tag");//获取标签的值
-    const content = $("#tags_input").val();//获取输入框的值
+    let $tagsInput = $("#tags_input");
+    const content = $tagsInput.val();//获取输入框的值
     //防止字串干扰
     let arr = content.split(',');
     count = arr.length;
@@ -149,18 +172,21 @@ function selectTag(e) {
             alert("最多选择5个标签");
             return;
         }
-        $('#all-' + value).addClass("publish-tag-selected");
+        $(document.getElementById('all' + value)).addClass("publish-tag-selected");
         if (content) {
-            $("#tags_input").val(content + ',' + value);
+            $tagsInput.val(content + ',' + value);
         } else {
-            $("#tags_input").val(value);
+            $tagsInput.val(value);
         }
     } else {
         alert('不要再点啦，我已经选过了')
     }
 }
 
-/*删除标签*/
+/**
+ * 删除标签
+ * @param e
+ */
 function deleteTag(e) {
     const removeValue = e.getAttribute("data-tag");//获取待删除的值
     const content = $("#tags_input").val();//获取输入框的值
@@ -171,7 +197,7 @@ function deleteTag(e) {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === removeValue) {
                 arr.splice(i, 1);
-                $('#all-' + removeValue).removeClass("publish-tag-selected");
+                $(document.getElementById('all' + removeValue)).removeClass("publish-tag-selected");
                 count--;
                 break;
             }
@@ -182,31 +208,35 @@ function deleteTag(e) {
     }
 }
 
-/*每日一句*/
+/**
+ * 每日一句
+ */
 $.getJSON("https://api.ooopn.com/ciba/api.php?type=json",
-    function(data){
+    function (data) {
         $("#one-day-text-cn").text(data.ciba);
         $("#one-day-time").text(data.date);
         $("#one-day-img").attr("src", data.imgurl);
     });
-$(function(){
-    $("#one-day-text-cn").click(function() {
+$(function () {
+    $("#one-day-text-cn").click(function () {
         $(this).select();
     })
 });
 
-/*页面顶置*/
-$(function(){
-    $(window).scroll(function(){
+/**
+ * 页面顶置
+ */
+$(function () {
+    $(window).scroll(function () {
         var scrollTop = $(this).scrollTop();
-        if(scrollTop>=300){
+        if (scrollTop >= 300) {
             $("#returnTop").show();
-        }else{
+        } else {
             $("#returnTop").hide();
         }
     });
-    $("#returnTop").click(function(){
-        $('html,body').animate({scrollTop:0},200);
+    $("#returnTop").click(function () {
+        $('html,body').animate({scrollTop: 0}, 200);
     })
 });
 
@@ -215,7 +245,7 @@ $(function(){
  */
 function sendEmail() {
     let email = $("#register-email").val();
-    if(email == null || email.trim().length === 0){
+    if (email == null || email.trim().length === 0) {
         alert("请输入邮箱！");
         return;
     }
@@ -227,9 +257,9 @@ function sendEmail() {
         },
         dataType: "json",
         success: function (data) {
-            if(data.code === 2000){
+            if (data.code === 2000) {
                 invokeSetTime("#send-email-btn");
-            }else{
+            } else {
                 alert(data.message);
             }
         }
@@ -240,21 +270,24 @@ function sendEmail() {
  * 发送邮件后定时60秒
  * @param obj
  */
-function invokeSetTime(obj){
+function invokeSetTime(obj) {
     let countdown = 60;
     setTime(obj);
+
     function setTime(obj) {
         if (countdown === 0) {
-            $(obj).attr("disabled",false);
+            $(obj).attr("disabled", false);
             $(obj).text("获取验证码");
             countdown = 60;
             return;
         } else {
-            $(obj).attr("disabled",true);
+            $(obj).attr("disabled", true);
             $(obj).text("(" + countdown + ") s 重新发送");
             countdown--;
         }
-        setTimeout(function() {setTime(obj)},1000);
+        setTimeout(function () {
+            setTime(obj)
+        }, 1000);
     }
 }
 

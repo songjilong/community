@@ -65,10 +65,10 @@
                                  th:classappend="${interStat.first} ? 'in active' : ''"
                                  th:each="tagDto,interStat : ${tagDtos}" th:id="${tagDto.categoryName}">
                              <span th:each="tag : ${tagDto.tags}">
-                                 <span th:id="'all-'+${tag}" class="label label-primary tag-style select">
+                                 <span th:id="'all'+${tag}" class="label label-primary tag-style select">
                                     <span class="glyphicon glyphicon-tags" onclick="selectTag(this)"
                                           th:data-tag="${tag}"></span>
-                                    <span th:id="${tag}" th:text="${tag}" onclick="selectTag(this)"
+                                    <span class="tag-text" th:id="${tag}" th:text="${tag}" onclick="selectTag(this)"
                                           th:data-tag="${tag}"></span>
                                     <span class="glyphicon glyphicon-remove publish-tag-remove" th:id="'remove-'+${tag}"
                                           onclick="deleteTag(this)" th:data-tag="${tag}"></span>
@@ -81,22 +81,6 @@
                 <button type="submit" class="btn btn-success btn-publish">发布</button>
             </form>
         </div>
-
-        <!--<div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
-            <h3>
-                <img src="/icons/compass.svg" class="nav-title-icon">
-                问题发起指南
-            </h3>
-            <hr>
-            <b>※ 如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问。</b>
-            <hr>
-            <ul class="publish-guide-ul">
-                <li class="publish-guide-li"><b>问题标题:</b> 请用精简的语言描述您发布的问题，不超过25字</li>
-                <li class="publish-guide-li"><b>问题补充:</b> 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料</li>
-                <li class="publish-guide-li"><b>选择标签:</b> 选择最多5个符合题意的标签</li>
-            </ul>
-            <hr>
-        </div>-->
     </div>
 </div>
 <div>

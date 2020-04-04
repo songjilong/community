@@ -16,12 +16,12 @@ public class TagCache {
         List<TagDto> tagDtos = new ArrayList<>();
         TagDto program = new TagDto();
         program.setCategoryName("开发语言");
-        program.setTags(Arrays.asList("javascript", "css", "html", "html5", "php", "java", "node·js", "python", "c艹", "c", "golang", "objective-c", "typescript", "shell", "swift", "c井", "sass", "ruby", "bash", "less", "asp·net", "lua", "scala", "coffeescript", "actionscript", "rust", "erlang", "perl"));
+        program.setTags(Arrays.asList("java", "c/c++", "python", "golang", "c#", "php", "javascript", "scala", "html", "html5", "css", "node·js", "objective-c", "typescript", "shell", "swift", "sass", "ruby", "bash", "less", "asp·net", "lua", "coffeescript", "actionscript", "rust", "erlang", "perl"));
         tagDtos.add(program);
 
         TagDto framework = new TagDto();
         framework.setCategoryName("平台框架");
-        framework.setTags(Arrays.asList("laravel", "spring", "mybatis", "express", "django", "flask", "yii", "ruby-on-rails", "tornado", "koa", "struts"));
+        framework.setTags(Arrays.asList("spring", "springmvc", "springboot", "springcloud", "mybatis", "bootstrap", "express", "django", "flask", "yii", "ruby-on-rails", "tornado", "koa", "struts", "laravel"));
         tagDtos.add(framework);
 
 
@@ -32,12 +32,12 @@ public class TagCache {
 
         TagDto db = new TagDto();
         db.setCategoryName("数据库");
-        db.setTags(Arrays.asList("mysql", "redis", "mongodb", "sql", "oracle", "nosql", "memcached", "sqlserver", "postgresql", "sqlite", "elasticsearch"));
+        db.setTags(Arrays.asList("mysql", "redis", "mongodb", "sql", "oracle", "nosql", "memcached", "elasticsearch", "sqlserver", "postgresql", "sqlite"));
         tagDtos.add(db);
 
         TagDto tool = new TagDto();
         tool.setCategoryName("开发工具");
-        tool.setTags(Arrays.asList("git", "github", "visual-studio-code", "vim", "sublime-text", "xcode", "intellij-idea", "eclipse", "maven", "ide", "svn", "visual-studio", "atom", "emacs", "textmate", "hg"));
+        tool.setTags(Arrays.asList("intellij-idea", "git", "github", "vscode", "vim", "sublime", "eclipse", "xcode", "maven", "ide", "svn", "android-studio", "atom", "emacs", "textmate", "hg"));
         tagDtos.add(tool);
 
         TagDto other = new TagDto();
