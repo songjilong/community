@@ -121,29 +121,17 @@ function show_subComment(e) {
     }
 }
 
-/*展示关闭标签*/
-function showSelectTag(tagDtosJson) {
-    const content = $("#tags_input").val();//获取输入框的值
-    let arr = content.split(",");
-    let list = Array.from(eval(tagDtosJson));
-    let map = list.map(Object.values);
-    console.log(map);
-    for(let i = 0; i < map.length; i++){
-        let temp = map[i];
-        for(let j = 1; j < temp.length; j++){
-            let tagArr = temp[j];
-            for(let k = 0; k < tagArr.length; k++){
-                for(let n = 0; n < arr.length; n++){
-                    if(arr[n] === tagArr[k]){
-                        $('#all-' + arr[n]).addClass("publish-tag-selected");
-                    }
-                }
-            }
-        }
-    }
+/**
+ * 展示标签集
+ */
+function showSelectTag() {
+    let selectedList = $("#tags_input").val().split(",");
+    selectedList.forEach(selected => $('#all-' + selected).addClass("publish-tag-selected"));
     $("#tag-list").show();
 }
-
+/**
+ * 关闭标签集
+ */
 function closeSelectTag() {
     $("#tag-list").hide();
 }

@@ -41,11 +41,9 @@
                     <label for="tags_input">选择标签（最多选择 5 个）</label>
                     <div class="tags-input-div">
                         <input type="text" class="form-control" id="tags_input" name="tags" placeholder="请选择标签"
-                               th:value="${tags}" autocomplete="off" th:onclick="showSelectTag([[${tagDtosJson}]])"
-                               readonly="readonly"
+                               th:value="${tags}" autocomplete="off" onclick="showSelectTag()" readonly="readonly"
                                data-rule="标签:required;">
-                        <span class="glyphicon glyphicon-menu-down input-tag-btn"
-                              th:onclick="showSelectTag([[${tagDtosJson}]])"></span>
+                        <span class="glyphicon glyphicon-menu-down input-tag-btn" onclick="showSelectTag()"></span>
                         <span class="glyphicon glyphicon-menu-up input-tag-btn" onclick="closeSelectTag()"></span>
                     </div>
 
