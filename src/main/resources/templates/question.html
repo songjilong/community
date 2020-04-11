@@ -12,7 +12,7 @@
 <div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="page_left col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <div class="page_left col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <!--问题详情-->
             <h3>
                 <img src="/icons/book.svg" class="nav-title-icon">
@@ -114,7 +114,7 @@
             <button type="button" class="btn btn-success btn-publish" onclick="submit_question_comment()" th:if="${session.user} != null">提交</button>
         </div>
         <!--右边栏-->
-        <div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="page_right col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
             <h4>
                 <img src="/icons/person.svg" class="nav-title-icon">

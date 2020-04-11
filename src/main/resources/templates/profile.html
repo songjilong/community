@@ -10,7 +10,7 @@
 <div th:replace="fragment/top_navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="page_left col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <div class="page_left col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <h3>
                 <img th:if="${section=='questions'}" src="/icons/question-square.svg" class="nav-title-icon">
                 <img th:if="${section=='replies'}" src="/icons/bell.svg" class="nav-title-icon">
@@ -32,7 +32,7 @@
             <!--分页栏-->
             <div th:replace="fragment/page_navigation::nav"></div>
         </div>
-        <div class="page_right col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="page_right col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <h4>
                 <img src="/icons/images.svg" class="nav-title-icon">
                 每日一图

@@ -144,7 +144,7 @@ function show_subComment(e) {
  */
 function showSelectTag() {
     let selectedList = $("#tags_input").val().split(",");
-    selectedList.forEach(selected => $('#all-' + selected).addClass("publish-tag-selected"));
+    selectedList.forEach(selected => $(document.getElementById('all' + selected)).addClass("publish-tag-selected"));
     $("#tag-list").show();
 }
 
