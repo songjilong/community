@@ -48,7 +48,7 @@
             <div th:replace="fragment/page_navigation::nav"></div>
         </div>
         <div class="page_right col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <h4>
+            <!--<h4>
                 <img src="/icons/images.svg" class="nav-title-icon">
                 每日一图
             </h4>
@@ -63,6 +63,29 @@
                             </p>
                         </div>
                     </div>
+                </div>
+            </div>-->
+            <h4>
+                <img src="/icons/book.svg" class="nav-title-icon">
+                每日一文
+            </h4>
+            <div class="panel panel-warning">
+                <div class="panel-heading article-tag">
+                    <span class="label label-success">
+                        <span class="glyphicon glyphicon-bookmark"></span>
+                        <span id="article-title"></span>
+                    </span>
+                    &nbsp;
+                    <span class="label label-warning">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span id="article-author"></span>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <p id="article-digest"></p>
+                    <a type="button" class="to-right" data-toggle="modal" data-target="#article-read-all" style="cursor:pointer;">
+                        阅读全文
+                    </a>
                 </div>
             </div>
             <hr>
@@ -91,6 +114,29 @@
 </div>
 <div>
     <span class="glyphicon glyphicon-menu-up click-top-btn" id="returnTop"></span>
+</div>
+<!--每日一文模态框-->
+<div class="modal fade bs-example-modal-lg" id="article-read-all" tabindex="-1" role="dialog" aria-labelledby="articleModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content article-modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-article-title">
+                    <img src="/icons/bookmark.svg" class="nav-title-icon">
+                </h4>
+                <span style="display:flex;" class="to-right">
+                    作者：<p id="modal-article-author"></p>&emsp;/&emsp;
+                    <span id="modal-article-wc"></span>
+                </span>
+            </div>
+            <div class="modal-body">
+                <p id="modal-article-content"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!--模态框-->
 <div th:replace="fragment/notice::modal"></div>

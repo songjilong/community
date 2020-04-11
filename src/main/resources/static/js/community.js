@@ -211,7 +211,7 @@ function deleteTag(e) {
 /**
  * 每日一句
  */
-$.getJSON("https://api.ooopn.com/ciba/api.php?type=json",
+/*$.getJSON("https://api.ooopn.com/ciba/api.php?type=json",
     function (data) {
         $("#one-day-text-cn").text(data.ciba);
         $("#one-day-time").text(data.date);
@@ -221,6 +221,20 @@ $(function () {
     $("#one-day-text-cn").click(function () {
         $(this).select();
     })
+});*/
+
+/**
+ * 每日一文
+ */
+$.getJSON("https://interface.meiriyiwen.com/article/today?dev=1",
+    function ({data}) {
+        $("#article-title").text(data.title);
+        $("#article-author,#modal-article-author").text(data.author);
+        $("#article-digest").html("&emsp;&emsp;"+data.digest+"...");
+
+        $("#modal-article-title").append(data.title);
+        $("#modal-article-content").html(data.content);
+        $("#modal-article-wc").text("共"+data.wc+"字");
 });
 
 /**

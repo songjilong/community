@@ -6,7 +6,7 @@
 body {
     width: 100%;
     height: 100%;
-    /* background-image: url("/images/bg/index-bg1.png");*/
+    /* background-image: url("/images/bg/index-bg1.jpg");*/
     background-image: url("/images/bg/index-bg2.png");
 }
 
@@ -416,4 +416,13 @@ body {
 .n-bootstrap .msg-wrap {
     font-size: 14px;
     margin-top: 3px;
+}
+
+.article-tag {
+    font-size: 18px;
+    text-align: center;
+}
+
+.article-modal-content{
+    background-color: #eee;
 }
