@@ -15,10 +15,20 @@ Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL等
 [moment：JavaScript日期处理类库](http://momentjs.cn/)  
 [免费开源markdown编辑器](https://pandao.github.io/editor.md/)  
 [前端校验脚本](https://validator.niceue.com/)  
+[聊天室DaoVoice](http://dashboard.daovoice.io/)  
 
 ## 执行命令
 运行Flyway：`mvn flyway:migrate -P dev`  
 Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
+
+## 更新日志
+2020.4.11
+- 将每日一图换为每日一文
+
+2020.4.15 
+- 添加聊天室功能
+- 修复邮件发送不提示问题
+
 
 ## 参考文档
 - [Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/)  
