@@ -13,7 +13,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,7 +45,6 @@ public class RegisterService {
      *
      * @param email
      */
-    @Async
     public Boolean sendEmail(String email) {
         if (!registered(email)) {
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -57,9 +55,9 @@ public class RegisterService {
             try {
                 simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
                 simpleMailMessage.setFrom(senderEmail);
-                mailSender.send(simpleMailMessage);
                 //存入redis，过期时间5分钟
                 redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
+                mailSender.send(simpleMailMessage);
                 return true;
             } catch (MailException e) {
                 log.error("邮件发送出错" + e);
