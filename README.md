@@ -1,36 +1,67 @@
-## 网站说明
-甲壳虫社区（Beetle Community） 线上地址：[http://www.dbeetle.cn/](http://www.dbeetle.cn/)  
-一个开源的问答社区、论坛博客，您可以提出自己的问题、发布自己的文章、和其他用户交流  
-目前功能有第三方登陆、查看、发布、评论、消息通知、顶置、一键已读、搜索等
-后续会不断更新完善，欢迎大家提供更好的建议
+# 网站说明
+甲壳虫社区（Beetle Community）是一个开源的问答社区、论坛、博客，您可以提出自己的问题、发布自己的文章、和其他用户交流。
 
-## 使用技术
-Spring Boot、Mybatis、Thymeleaf、BootStrap、MySQL等
+目前功能有第三方登陆、邮箱注册登录、查看、发布、评论、消息通知、顶置、搜索、热门问题和标签... ...
 
-## 使用工具
-[Git](https://git-scm.com/)  
-[Lombok](https://projectlombok.org/)  
-[Flyway](https://flywaydb.org/)  
-[postman（插件版）：可以共享浏览器session，比较方便](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
-[moment：JavaScript日期处理类库](http://momentjs.cn/)  
-[免费开源markdown编辑器](https://pandao.github.io/editor.md/)  
-[前端校验脚本](https://validator.niceue.com/)  
-[聊天室DaoVoice](http://dashboard.daovoice.io/)  
+后续会不断的更新完善，欢迎大家提供更好的建议
 
-## 执行命令
-运行Flyway：`mvn flyway:migrate -P dev`  
-Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
+线上地址：[http://www.dbeetle.cn/](http://www.dbeetle.cn/)
 
-## 更新日志
+# 使用技术
+### 后端：
+- Spring Boot
+- Mybatis
+- Thymeleaf
+
+### 前端：
+- JavaScript
+- Jquery
+- BootStrap
+
+### 数据库：
+- MySQL
+- Redis
+
+# 开发环境
+- JDK 1.8.0_131
+- Maven 3.52
+- MySQL 5.6.46
+- Git 2.24.0
+- IntelliJ IDEA 2019.3.3
+- Redis 5.0.8
+
+# 快速部署
+1. clone 本项目到本地：`git clone git@github.com:songjilong/community.git`，并导入到自己的 ide
+2. 在本地创建数据库，命名为 db_community，字符集设置为 utf8mb4
+3. 打开 pom.xml、application.yml、application.properties，修改数据库连接信息
+4. 执行命令：`mvn flyway:migrate -P dev` 创建数据库表
+5. 点击运行即可
+6. 如果想要使用邮件注册功能，需要安装redis，修改配置文件里的连接信息
+7. 如果想要使用第三方登录功能（GitHub、Gitee、QQ），需要自行注册第三方应用，官网上有开发文档
+----
+其他：
+- Mybatis Generator代码生成命令：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
+
+# 更新日志
+
+2020.4.15 
+- 添加聊天室
+- 添加音乐播放器
+- 修复邮件发送不提示问题
+
 2020.4.11
 - 将每日一图换为每日一文
 
-2020.4.15 
-- 添加聊天室功能
-- 修复邮件发送不提示问题
+# 第三方工具
+- [Lombok](https://projectlombok.org/)  
+- [Flyway](https://flywaydb.org/)  
+- [postman（浏览器插件版） 可以共享浏览器session](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
+- [moment：JavaScript日期处理类库](http://momentjs.cn/)  
+- [markdown编辑器](https://pandao.github.io/editor.md/)  
+- [前端校验](https://validator.niceue.com/)  
+- [聊天室DaoVoice](http://dashboard.daovoice.io/)  
 
-
-## 参考文档
+# 参考文档
 - [Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/)  
 - [BootStrap官方教程](https://v3.bootcss.com/components/)  
 - [Github第三方登录官方教程](https://developer.github.com/apps/)  
@@ -39,11 +70,10 @@ Mybatis Generator：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:ge
 - [Mybatis Generator官方文档](http://mybatis.org/generator/)   
 - [MySQL菜鸟教程](https://www.runoob.com/mysql/mysql-tutorial.html)  
 - [Lombok官网](https://projectlombok.org/)   
-- [springboot_learn，一个大佬写的关于Spring Boot各种实践demo](https://gitee.com/dalaoyang/springboot_learn)  
 - [阿里云OSS使用教程](https://help.aliyun.com/document_detail/31883.html?spm=5176.8466010.bucket.4.7c451450a0B80C)  
 - [Spring Boot 日志配置](https://blog.csdn.net/Inke88/article/details/75007649)  
 
-## 常见问题解决
+# 常见问题解决
 - [Github登录流程分析](https://www.cnblogs.com/songjilong/p/12309552.html)  
 - [Github更新官方推荐的使用access_token安全访问API的方式](https://blog.csdn.net/kuaileky/article/details/104217757)  
 - [Mybatis Generator配置文件内容详解](https://www.jianshu.com/p/a8bfc14a3534)     
