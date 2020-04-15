@@ -1,21 +1,24 @@
+线上地址：[http://www.dbeetle.cn](http://www.dbeetle.cn)，欢迎大家访问
+
 # 网站说明
-甲壳虫社区（Beetle Community）是一个开源的问答社区、论坛、博客，您可以提出自己的问题、发布自己的文章、和其他用户交流。
 
-目前功能有第三方登陆、邮箱注册登录、查看、发布、评论、消息通知、顶置、搜索、热门问题和标签... ...
+问答社区更像是一个社交网络，以社区形式来帮助用户解惑。社交问答弥补了对隐性知识（根据知识能否清晰地表述和有效的转移，可以把知识分为显性知识和隐性知识）的即时搜索。通过用户的不断讨论，实现了问题向知识的转化。我们在学习或者生活中，肯定会遇到各种问题、困惑，搜索引擎也许不会很好的解决你的问题，问答社区的诞生可以很好的解决这一问题，就像是一群人坐在一起聊天，你可以向他人提问，也可以回答别人的问题，又或者发表一些文章，相互交流、共同进步。
 
-后续会不断的更新完善，欢迎大家提供更好的建议
+甲壳虫社区（Beetle Community）就是这样的问答社区、论坛或博客，开源免费，您可以提出自己的问题、发布自己的文章、和其他用户交流。
 
-线上地址：[http://www.dbeetle.cn/](http://www.dbeetle.cn/)
+目前功能有第三方登陆、邮箱注册登录、查看、发布、评论、消息通知、顶置、搜索、热门问题、热门标签等，后续会不断的更新完善，欢迎大家提供更好的建议。
 
 # 使用技术
 ### 后端：
+- Java
 - Spring Boot
 - Mybatis
 - Thymeleaf
 
 ### 前端：
+- HTML、CSS
 - JavaScript
-- Jquery
+- JQuery
 - BootStrap
 
 ### 数据库：
@@ -36,20 +39,24 @@
 3. 打开 pom.xml、application.yml、application.properties，修改数据库连接信息
 4. 执行命令：`mvn flyway:migrate -P dev` 创建数据库表
 5. 点击运行即可
-6. 如果想要使用邮件注册功能，需要安装redis，修改配置文件里的连接信息
-7. 如果想要使用第三方登录功能（GitHub、Gitee、QQ），需要自行注册第三方应用，官网上有开发文档
-----
+6. 想要使用邮件注册功能，需要安装redis，修改配置文件里的连接信息
+7. 想要使用第三方登录功能（GitHub、Gitee、QQ），需要自行注册第三方应用，官网上有开发文档
+8. 想要使用聊天室需要去[此处](http://dashboard.daovoice.io)注册一个账号，修改/templates/fragment/chatroom.html中的app_id
+
 其他：
-- Mybatis Generator代码生成命令：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
+- Mybatis Generator逆向生成代码：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
 
 # 更新日志
 
-2020.4.15 
+### 2020.4.15
+
 - 添加聊天室
+
 - 添加音乐播放器
 - 修复邮件发送不提示问题
 
-2020.4.11
+### 2020.4.11
+
 - 将每日一图换为每日一文
 
 # 第三方工具
