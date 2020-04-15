@@ -43,6 +43,10 @@ body {
     float: right;
 }
 
+.to-left {
+    float: left;
+}
+
 .red {
     color: red;
 }
@@ -208,7 +212,7 @@ body {
     cursor: pointer;
 }
 
-.tag-text{
+.tag-text {
     margin-left: 3px;
 }
 
@@ -232,7 +236,7 @@ body {
 }
 
 .click-top-btn {
-    font-size: 25px;
+    font-size: 17px;
     top: unset;
     bottom: 20px;
     right: 20px;
@@ -423,6 +427,6 @@ body {
     text-align: center;
 }
 
-.article-modal-content{
+.article-modal-content {
     background-color: #eee;
 }
