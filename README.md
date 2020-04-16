@@ -34,16 +34,20 @@
 - Redis 5.0.8
 
 # 快速部署
+### 使用基本功能
 1. clone 本项目到本地：`git clone git@github.com:songjilong/community.git`，并导入到自己的 ide
 2. 在本地创建数据库，命名为 db_community，字符集设置为 utf8mb4
 3. 打开 pom.xml、application.yml、application.properties，修改数据库连接信息
 4. 执行命令：`mvn flyway:migrate -P dev` 创建数据库表
 5. 点击运行即可
-6. 想要使用邮件注册功能，需要安装redis，修改配置文件里的连接信息
-7. 想要使用第三方登录功能（GitHub、Gitee、QQ），需要自行注册第三方应用，官网上有开发文档
-8. 想要使用聊天室需要去[此处](http://dashboard.daovoice.io)注册一个账号，修改/templates/fragment/chatroom.html中的app_id
 
-其他：
+### 使用其他功能
+6. 邮件注册：需要安装 redis，并修改配置文件里的连接信息
+7. 第三方登录：（GitHub、Gitee、QQ），请自行注册第三方应用，官网上有开发文档
+8. 上传图片：需要去阿里云开通 OOS，并修改 application.yml 中对应的配置
+9. 聊天室：需要去[此处](http://dashboard.daovoice.io)注册一个账号，修改 /templates/fragment/chatroom.html 中的 app_id
+
+### 其他：
 - Mybatis Generator逆向生成代码：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`
 
 # 更新日志
