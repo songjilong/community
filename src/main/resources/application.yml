@@ -15,8 +15,8 @@ spring:
   # 配置邮件
   mail:
     host: smtp.qq.com
-    username: # 邮箱地址
-    password: # 邮箱密码
+    username: dbeetle@qq.com
+    password: fcmhkelyfkwrbiec
     port: 465
     protocol: smtp
     default-encoding: utf-8
@@ -36,7 +36,7 @@ spring:
   # 配置 redis
   redis:
     database: 0
-    host: # redis地址
+    host: 127.0.0.1
     port: 6379
 
 # 发送者邮箱
