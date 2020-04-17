@@ -15,8 +15,8 @@ spring:
   # 配置邮件
   mail:
     host: smtp.qq.com
-    username: dbeetle@qq.com
-    password:
+    username: # 邮箱地址
+    password: # 邮箱密码
     port: 465
     protocol: smtp
     default-encoding: utf-8
@@ -36,12 +36,12 @@ spring:
   # 配置 redis
   redis:
     database: 0
-    host: 192.168.9.131
+    host: # redis地址
     port: 6379
 
 # 发送者邮箱
 sender:
-  email: dbeetle@qq.com
+  email: # 邮箱地址
 
 # 开启 mybatis 驼峰标识
 mybatis:
@@ -50,30 +50,30 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.sjl.community.mapper
 
-# Github登录需要的参数
+# GitHub登录需要的参数
 github:
-  client_id: e15804a8ca66dfd118c3
-  client_secret:
+  client_id: # GitHub第三方应用id
+  client_secret: # GitHub第三方应用密码
   redirect_uri: http://localhost:8887/githubCallback
 
 # Gitee登录需要的参数
 gitee:
-  client_id: c7980442637435986a47c38feeee1aa3c9c714e2532a94e0ad57ad9bc596aed0
-  client_secret:
+  client_id: # Gitee第三方应用id
+  client_secret: # Gitee第三方应用密码
   redirect_uri: http://localhost:8887/giteeCallback
 
 # QQ登录需要的参数
 qq:
-  client_id: 101858012
-  client_secret:
+  client_id: # QQ第三方应用id
+  client_secret: # QQ第三方应用密码
   redirect_uri: http://127.0.0.1:8887/qqCallback
 
 # 阿里云图片上传需要的参数
 aliyun:
-  endpoint:
-  accessKeyId:
-  accessKeySecret:
-  bucketName:
+  endpoint: # oos地址
+  accessKeyId: # 阿里云用户id
+  accessKeySecret: # 阿里云用户密码
+  bucketName: # Bucket名称
 
 # 日志配置
 logging:
@@ -84,3 +84,7 @@ logging:
   level:
     com.sjl.community.mapper: debug
     root: info
+
+# 默认头像链接
+beetle:
+  defaultAvatar: https://beetle-community.oss-cn-hangzhou.aliyuncs.com/default-avatar.png

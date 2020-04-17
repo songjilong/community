@@ -15,7 +15,7 @@ public class ResultDto<T> {
     private T data;
 
     public static <T> ResultDto<T> errorOf(Integer code, String message) {
-        ResultDto<T> resultDto = new ResultDto<T>();
+        ResultDto<T> resultDto = new ResultDto<>();
         resultDto.setCode(code);
         resultDto.setMessage(message);
         return resultDto;

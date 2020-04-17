@@ -39,6 +39,8 @@ public class RegisterService {
 
     @Value("${sender.email}")
     private String senderEmail;
+    @Value("${beetle.defaultAvatar}")
+    private String defaultAvatar;
 
     /**
      * 发送邮件
@@ -52,11 +54,16 @@ public class RegisterService {
             simpleMailMessage.setSubject("甲壳虫社区验证码");
             //生成6位随机数
             int code = (int) ((Math.random() * 9 + 1) * 100000);
+            simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
+            simpleMailMessage.setFrom(senderEmail);
             try {
-                simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
-                simpleMailMessage.setFrom(senderEmail);
                 //存入redis，过期时间5分钟
                 redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
+            } catch (MailException e) {
+                log.error("redis存入数据出错" + e);
+                throw new CustomizeException(CustomizeErrorCode.SYSTEM_ERROR);
+            }
+            try {
                 mailSender.send(simpleMailMessage);
                 return true;
             } catch (MailException e) {
@@ -151,7 +158,7 @@ public class RegisterService {
             record.setName("邮箱用户_" + email);
             record.setGmtCreate(System.currentTimeMillis());
             record.setGmtModified(record.getGmtCreate());
-            record.setAvatarUrl("https://gitee.com/songjilong/FigureBed/raw/master/img/20200326163605.png");
+            record.setAvatarUrl(defaultAvatar);
             //生成盐
             String salt = CodecUtils.generateSalt();
             record.setSalt(salt);
