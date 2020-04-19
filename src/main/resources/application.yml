@@ -14,9 +14,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   # 配置邮件
   mail:
-    host: smtp.qq.com
-    username: dbeetle@qq.com
-    password: fcmhkelyfkwrbiec
+    host: smtp.qq.com # 邮箱服务器地址
+    username: # 邮箱地址
+    password: # 邮箱密码
     port: 465
     protocol: smtp
     default-encoding: utf-8
@@ -70,7 +70,7 @@ qq:
 
 # 阿里云图片上传需要的参数
 aliyun:
-  endpoint: # oos地址
+  endpoint: # oss地址
   accessKeyId: # 阿里云用户id
   accessKeySecret: # 阿里云用户密码
   bucketName: # Bucket名称
