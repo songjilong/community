@@ -184,7 +184,7 @@ public class QuestionService {
         Question question = new Question();
         question.setId(queryQuestionDto.getId());
         //将，转为|
-        String replaceTags = queryQuestionDto.getTags().replace(",", "|");
+        String replaceTags = queryQuestionDto.getTags().replace("+", "").replace(",", "|");
         question.setTags(replaceTags);
         //查出所有符合表达式的question
         List<Question> questionList = questionExtMapper.findByTagsREGEXP(question);
@@ -213,5 +213,19 @@ public class QuestionService {
             question.setTop(0);
         }
         questionMapper.updateByPrimaryKeySelective(question);
+    }
+
+    /**
+     * 删除问题
+     *
+     * @param id
+     */
+    public void deleteQuestion(Long id, Long userId) {
+        Question question = questionMapper.selectByPrimaryKey(id);
+        if (question.getCreator().equals(userId)) {
+            questionMapper.deleteByPrimaryKey(id);
+        } else {
+            throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
+        }
     }
 }

@@ -6,6 +6,7 @@ import com.sjl.community.enums.CommentTypeEnum;
 import com.sjl.community.enums.TopEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
+import com.sjl.community.model.User;
 import com.sjl.community.service.CommentService;
 import com.sjl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -67,5 +69,20 @@ public class QuestionController {
             return "redirect:/";
         }
         throw new CustomizeException(CustomizeErrorCode.IS_NOT_LEGAL);
+    }
+
+    /**
+     * 删除问题
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("question/delete/{id}")
+    public String deleteQuestion(@PathVariable("id") Long id, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            questionService.deleteQuestion(id, user.getId());
+        }
+        return "redirect:/";
     }
 }

@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <title>甲壳虫社区</title>
     <head th:replace="fragment/import::common"></head>
+    <script>
+        /**
+         * 每日一文
+         */
+        $.getJSON("https://interface.meiriyiwen.com/article/today?dev=1",
+            function ({data}) {
+                $("#article-title").text(data.title);
+                $("#article-author,#modal-article-author").text(data.author);
+                $("#article-digest").html("&emsp;&emsp;"+data.digest+"...");
+
+                $("#modal-article-title").append(data.title);
+                $("#modal-article-content").html(data.content);
+                $("#modal-article-wc").text("共"+data.wc+"字");
+            });
+    </script>
 </head>
-<script type="application/javascript">
-    const closable = localStorage.getItem("closable");
-    if (closable == 1) {
-        //关闭
-        window.close();
-        localStorage.removeItem("closable");
-    }
-</script>
 <body>
 <!--顶部导航栏-->
 <div th:replace="fragment/top_navigation::nav"></div>
@@ -116,7 +123,7 @@
     <span class="glyphicon glyphicon-menu-up click-top-btn" id="returnTop"></span>
 </div>
 <!--每日一文模态框-->
-<div class="modal fade bs-example-modal-lg" id="article-read-all" tabindex="-1" role="dialog" aria-labelledby="articleModalLabel">
+<div class="modal fade bs-example-modal-lg" id="article-read-all" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content article-modal-content">
             <div class="modal-header">

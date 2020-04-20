@@ -46,15 +46,7 @@ function submit_comment_by_type(parent_id, type, content) {
                 window.location.reload();
                 $("#comment_frame").hide();
             } else {
-                if (result.code === 2004) {
-                    const confirm = window.confirm(result.message);
-                    if (confirm) {
-                        window.open(getLocalhostPath() + "/login");
-                        localStorage.setItem('closable', '1');//0：不关闭 1：关闭
-                    }
-                } else {
-                    alert(result.message);
-                }
+                alert(result.message);
             }
         }
     });
@@ -224,20 +216,6 @@ $(function () {
 });*/
 
 /**
- * 每日一文
- */
-$.getJSON("https://interface.meiriyiwen.com/article/today?dev=1",
-    function ({data}) {
-        $("#article-title").text(data.title);
-        $("#article-author,#modal-article-author").text(data.author);
-        $("#article-digest").html("&emsp;&emsp;"+data.digest+"...");
-
-        $("#modal-article-title").append(data.title);
-        $("#modal-article-content").html(data.content);
-        $("#modal-article-wc").text("共"+data.wc+"字");
-});
-
-/**
  * 页面顶置
  */
 $(function () {
@@ -315,4 +293,21 @@ function customTheme() {
         bindClassTo: '.form-group',
         msgClass: 'n-right',
     });
+}
+
+/**
+ * 删除问题
+ */
+function deleteQuestion(qid) {
+    console.log("qid", qid);
+    if (confirm("此操作不可逆，你确定要删除吗？")) {
+        $.ajax({
+            type: "GET",
+            url: "/question/delete/"+qid,
+            success: function () {
+                alert("删除成功");
+                window.location.href="/";
+            }
+        });
+    }
 }
