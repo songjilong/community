@@ -27,15 +27,55 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 person-info-main">
+            <div class="page_left col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <h3>
+                    <img th:if="${section=='questions'}" src="/icons/question-square.svg" class="nav-title-icon">
+                    <img th:if="${section=='replies'}" src="/icons/bell.svg" class="nav-title-icon">
+                    &nbsp;[[${sectionName}]]
+                </h3>
+                <span class="to-right">
+            <img src="/icons/check-circle.svg" class="user-oper-icon">
+            <a href="/notification/0" th:if="${section=='replies'}" class="a-no-line">一键已读</a>
+            </span>
+                <hr>
+                <!--问题列表-->
+                <div th:if="${section} == 'questions'">
+                    <div th:replace="fragment/question_list::list(true)"></div>
+                </div>
+                <!--通知列表-->
+                <div th:if="${section} == 'replies'">
+                    <div th:replace="fragment/reply_list::list"></div>
+                </div>
+                <!--分页栏-->
+                <div th:replace="fragment/page_navigation::nav"></div>
+            </div>
+            <div class="page_right col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <div class="list-group">
+                    <a th:href="@{/user/{id}/{section}(id=${userInfo.id},section='questions')}"
+                       th:classappend="${section=='questions'?'active':''}"
+                       class="list-group-item">
+                        我的问题
+                    </a>
+                    <a th:href="@{/user/{id}/{section}(id=${userInfo.id},section='replies')}"
+                       th:classappend="${section=='replies'?'active':''}"
+                       class="list-group-item">
+                        最新回复
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <span class="glyphicon glyphicon-menu-up click-top-btn" id="returnTop"></span>
-    </div>
+</div>
+<div>
+    <span class="glyphicon glyphicon-menu-up click-top-btn" id="returnTop"></span>
 </div>
 <!--顶部须知 模态框-->
 <div th:replace="fragment/notice::modal"></div>
 <!--聊天室-->
 <div th:replace="fragment/chatroom::chatroom"></div>
+<!--音乐播放器-->
+<div th:replace="fragment/music_player::musicPlyer"></div>
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 </body>

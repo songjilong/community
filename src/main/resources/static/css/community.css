@@ -315,12 +315,10 @@ body {
 .login-left {
     height: 100%;
     border-right: 1px solid #D2D2D2;
-    /*background-color: #eee;*/
 }
 
 .login-right {
     height: 100%;
-    /*background-color: #eee;*/
 }
 
 .login-other-all {
@@ -345,7 +343,6 @@ body {
     height: 70px;
     line-height: 70px;
     padding: 0 45px;
-    /*background-color: #eee;*/
 }
 
 .login-page-footer a:hover {
@@ -357,7 +354,7 @@ body {
 }
 
 .person {
-    background-color: #eee;
+    /*background-color: #eee;*/
 }
 
 .person-info-image {

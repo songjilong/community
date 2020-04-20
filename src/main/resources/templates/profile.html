@@ -34,20 +34,26 @@
         </div>
         <div class="page_right col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <h4>
-                <img src="/icons/images.svg" class="nav-title-icon">
-                每日一图
+                <img src="/icons/book.svg" class="nav-title-icon">
+                每日一文
             </h4>
-            <div class="row one-day-module">
-                <div class="col-sm-12 col-md-12">
-                    <div class="thumbnail">
-                        <img id="one-day-img">
-                        <div class="caption">
-                            <p><img src="/icons/calendar.svg">
-                            <p class="question_text" id="one-day-time"></p></p>
-                            <p id="one-day-text-cn"></p>
-                            </p>
-                        </div>
-                    </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading article-tag">
+                    <span class="label label-success">
+                        <span class="glyphicon glyphicon-bookmark"></span>
+                        <span id="article-title"></span>
+                    </span>
+                    &nbsp;
+                    <span class="label label-warning">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span id="article-author"></span>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <p id="article-digest"></p>
+                    <a type="button" class="to-right" data-toggle="modal" data-target="#article-read-all" style="cursor:pointer;">
+                        阅读全文
+                    </a>
                 </div>
             </div>
         </div>
@@ -56,6 +62,8 @@
 <div>
     <span class="glyphicon glyphicon-menu-up click-top-btn" id="returnTop"></span>
 </div>
+<!--每日一文模态框-->
+<div th:replace="fragment/article::article"></div>
 <!--顶部须知 模态框-->
 <div th:replace="fragment/notice::modal"></div>
 <!--聊天室-->

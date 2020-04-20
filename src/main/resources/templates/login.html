@@ -27,16 +27,18 @@
                             <img src="/icons/lock.svg" class="login-icon">&nbsp;密码
                         </label>
                         <input type="password" class="form-control" id="login-pwd" placeholder="Password"
-                                name="password" data-rule="密码:required;length(6~16)">
+                               name="password" data-rule="密码:required;length(6~16)">
                     </div>
                     <div class="checkbox">
                         <label>
                             <input id="remember-me" type="checkbox">记住我
                         </label>
-                        <a class="to-right a-no-line" data-toggle="modal" data-target="#forget-pwd" style="cursor:pointer;">忘记密码？</a>
+                        <a class="to-right a-no-line" data-toggle="modal" data-target="#forget-pwd"
+                           style="cursor:pointer;">忘记密码？</a>
                     </div>
                     <div>
                         <span class="red" th:text="${loginError}"></span>
+                        <span class="red" th:text="${updatePwdInfo}"></span>
                         <button type="submit" class="btn btn-primary btn-publish">登录</button>
                     </div>
                 </form>
@@ -45,7 +47,7 @@
                 <div class="login-other-all">
                     <h4>第三方账号登录</h4>
                     <a th:href="@{https://github.com/login/oauth/authorize(client_id=${@environment.getProperty('github.client_id')},redirect_uri=${@environment.getProperty('github.redirect_uri')},scope='user',state='githublogin')}"
-                        class="login-other">
+                       class="login-other">
                         <img src="/images/github.svg" class="login-icon">
                         Github登录
                     </a>
@@ -69,12 +71,61 @@
         </div>
     </div>
 </div>
+<!--忘记密码模态框-->
+<div class="modal fade" id="forget-pwd" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <img src="/icons/clock.svg" class="nav-title-icon">
+                    找回密码
+                </h4>
+            </div>
+            <form action="/updatePwd" method="post"
+                  data-validator-option="{theme:'yellow_right_effect', stopOnError:true}">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="find-email">我的邮箱</label>
+                        <input type="email" class="form-control" id="find-email" placeholder="Email"
+                               name="email" data-rule="邮箱: required; email">
+                    </div>
+                    <div class="form-group">
+                        <label for="find-code">验证码
+                            <button id="send-email-btn" type="button" class="btn btn-success btn-xs send-email-btn"
+                                    onclick="sendFindEmail()">获取验证码
+                            </button>
+                        </label>
+                        <input type="text" class="form-control" id="find-code" placeholder="Verification Code"
+                               name="code"
+                               data-rule="验证码:required;length(6)">
+                    </div>
+                    <div class="form-group">
+                        <label for="find-pwd1">新的密码</label>
+                        <input type="password" class="form-control" id="find-pwd1" placeholder="Password"
+                               name="pwd1" data-rule="新的密码:required;length(6~16)">
+                    </div>
+                    <div class="form-group">
+                        <label for="find-pwd2">确认密码</label>
+                        <input type="password" class="form-control" id="find-pwd2" placeholder="Verify Password"
+                               name="pwd2" data-rule="确认密码:required; match(pwd1)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" onclick="updatePwd()">确认修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!--聊天室-->
 <div th:replace="fragment/chatroom::chatroom"></div>
 <!--页尾-->
 <div th:replace="fragment/footer::beetle_footer"></div>
 <script>
-    $(function(){
+    $(function () {
         customTheme();
     });
 </script>

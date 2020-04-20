@@ -47,9 +47,9 @@
                             <span class="caret"></span>
                             <ul class="dropdown-menu user-oper-list">
                                 <li>
-                                    <a th:href="@{/user/{id}(id=${session.user.id})}">
+                                    <a th:href="@{/user/{id}/{section}(id=${session.user.id},section='questions')}">
                                         <img class="user-oper-icon" src="/icons/person.svg">
-                                        我的资料
+                                        我的主页
                                     </a>
                                 </li>
                                 <li>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--每日一文模态框-->
+<div th:fragment="article" class="modal fade bs-example-modal-lg" id="article-read-all" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content article-modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-article-title">
+                    <img src="/icons/bookmark.svg" class="nav-title-icon">
+                </h4>
+                <span style="display:flex;" class="to-right">
+                作者：<p id="modal-article-author"></p>&emsp;/&emsp;
+                <span id="modal-article-wc"></span>
+            </span>
+            </div>
+            <div class="modal-body">
+                <p id="modal-article-content"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

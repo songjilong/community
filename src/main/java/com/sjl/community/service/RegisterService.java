@@ -1,5 +1,6 @@
 package com.sjl.community.service;
 
+import com.sjl.community.enums.SendEmailEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.exception.CustomizeException;
 import com.sjl.community.mapper.UserMapper;
@@ -47,31 +48,31 @@ public class RegisterService {
      *
      * @param email
      */
-    public Boolean sendEmail(String email) {
-        if (!registered(email)) {
-            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-            simpleMailMessage.setTo(email);
-            simpleMailMessage.setSubject("甲壳虫社区验证码");
-            //生成6位随机数
-            int code = (int) ((Math.random() * 9 + 1) * 100000);
-            simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
-            simpleMailMessage.setFrom(senderEmail);
-            try {
-                //存入redis，过期时间5分钟
-                redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
-            } catch (MailException e) {
-                log.error("redis存入数据出错" + e);
-                throw new CustomizeException(CustomizeErrorCode.SYSTEM_ERROR);
-            }
-            try {
-                mailSender.send(simpleMailMessage);
-                return true;
-            } catch (MailException e) {
-                log.error("邮件发送出错" + e);
-                throw new CustomizeException(CustomizeErrorCode.SEND_EMAIL_FAIL);
-            }
+    public Boolean sendEmail(String email, int type) {
+        if(registered(email) && type == SendEmailEnum.REGISTER.getCode()){
+            return false;
         }
-        return false;
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(email);
+        simpleMailMessage.setSubject("甲壳虫社区验证码");
+        //生成6位随机数
+        int code = (int) ((Math.random() * 9 + 1) * 100000);
+        simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
+        simpleMailMessage.setFrom(senderEmail);
+        try {
+            //存入redis，过期时间5分钟
+            redisTemplate.opsForValue().set(CODE_PRE + email, code, 5, TimeUnit.MINUTES);
+        } catch (MailException e) {
+            log.error("redis存入数据出错" + e);
+            throw new CustomizeException(CustomizeErrorCode.SYSTEM_ERROR);
+        }
+        try {
+            mailSender.send(simpleMailMessage);
+            return true;
+        } catch (MailException e) {
+            log.error("邮件发送出错" + e);
+            throw new CustomizeException(CustomizeErrorCode.SEND_EMAIL_FAIL);
+        }
     }
 
     /**

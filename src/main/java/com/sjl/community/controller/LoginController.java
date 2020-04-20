@@ -1,6 +1,8 @@
 package com.sjl.community.controller;
 
 import com.sjl.community.service.LoginService;
+import com.sjl.community.service.RegisterService;
+import com.sjl.community.service.UserService;
 import com.sjl.community.utils.CookieUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,13 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RegisterService registerService;
 
     @GetMapping("/login")
-    public String toLogin() {
-
+    public String toLogin(Model model) {
         return "login";
     }
 
@@ -51,5 +56,22 @@ public class LoginController {
         CookieUtils.removeCookie(response, "token");
         //返回到主页
         return "redirect:/";
+    }
+
+    @PostMapping("/updatePwd")
+    public String updatePwd(@RequestParam("email") String email,
+                            @RequestParam("code") Integer code,
+                            @RequestParam("pwd1") String pwd1,
+                            @RequestParam("pwd2") String pwd2,
+                            Model model) {
+        if (!registerService.checkEmail(email) || !registerService.checkCode(email, code)) {
+            model.addAttribute("updatePwdInfo", "输入信息有误");
+        } else if (!StringUtils.equals(pwd1, pwd2)) {
+            model.addAttribute("updatePwdInfo", "两次输入的密码不一致");
+        } else {
+            userService.updatePwd(email, pwd1);
+            model.addAttribute("updatePwdInfo", "密码修改成功");
+        }
+        return "login";
     }
 }

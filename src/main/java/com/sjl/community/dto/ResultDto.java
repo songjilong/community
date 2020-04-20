@@ -30,7 +30,7 @@ public class ResultDto<T> {
     }
 
     public static <T> ResultDto<T> okOf() {
-        ResultDto<T> resultDto = new ResultDto<T>();
+        ResultDto<T> resultDto = new ResultDto<>();
         resultDto.setCode(2000);
         resultDto.setMessage("请求成功");
         return resultDto;

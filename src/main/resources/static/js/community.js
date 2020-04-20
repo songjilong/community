@@ -216,6 +216,20 @@ $(function () {
 });*/
 
 /**
+ * 每日一文
+ */
+$.getJSON("https://interface.meiriyiwen.com/article/today?dev=1",
+    function ({data}) {
+        $("#article-title").text(data.title);
+        $("#article-author,#modal-article-author").text(data.author);
+        $("#article-digest").html("&emsp;&emsp;"+data.digest+"...");
+
+        $("#modal-article-title").append(data.title);
+        $("#modal-article-content").html(data.content);
+        $("#modal-article-wc").text("共"+data.wc+"字");
+    });
+
+/**
  * 页面顶置
  */
 $(function () {
@@ -232,11 +246,18 @@ $(function () {
     })
 });
 
+function sendRegisterEmail() {
+    sendEmail($("#register-email").val(), 0);
+}
+
+function sendFindEmail() {
+    sendEmail($("#find-email").val(), 1);
+}
+
 /**
  * 发送邮件
  */
-function sendEmail() {
-    let email = $("#register-email").val();
+function sendEmail(email, type) {
     if (email == null || email.trim().length === 0) {
         alert("请输入邮箱！");
         return;
@@ -245,7 +266,8 @@ function sendEmail() {
         url: "/sendEmail",
         type: "GET",
         data: {
-            "email": email
+            "email": email,
+            "type": type
         },
         dataType: "json",
         success: function (data) {
@@ -281,6 +303,29 @@ function invokeSetTime(obj) {
             setTime(obj)
         }, 1000);
     }
+}
+
+function updatePwd() {
+    let email = $("#find-email").val();
+    let code = $("#find-code").val();
+    let pwd1 = $("#find-pwd1").val();
+    let pwd2  = $("#find-pwd2").val();
+    console.log(pwd1, pwd2);
+    /*$.ajax({
+        url: "/updatePwd",
+        type: "POST",
+        data: {
+            "email": email,
+            "code": code,
+            "pwd1": pwd1,
+            "pwd2": pwd2,
+        },
+        dataType: "json",
+        success: function (data) {
+            console.log("返回数据：", data);
+        }
+    });*/
+    $.post("/updatePwd", {"email": email,"code": code,"pwd1": pwd1,"pwd2": pwd2});
 }
 
 /**

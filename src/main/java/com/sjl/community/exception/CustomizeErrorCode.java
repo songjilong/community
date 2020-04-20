@@ -19,6 +19,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     IS_NOT_LEGAL(2012, "非法入侵，请停止你的行为"),
     SEND_EMAIL_FAIL(2013, "邮件发送失败"),
     EMAIL_ALREADY_EXISTS(2014, "邮箱已注册"),
+    PWD_NOT_EQUAL(2015, "两次输入的密码不一致"),
     ;
 
     private Integer code;
