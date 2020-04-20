@@ -15,8 +15,8 @@ spring:
   # 配置邮件
   mail:
     host: smtp.qq.com # 邮箱服务器地址
-    username: dbeetle@qq.com # 邮箱地址
-    password: fcmhkelyfkwrbiec # 邮箱密码
+    username: # 邮箱地址
+    password: # 邮箱密码
     port: 465
     protocol: smtp
     default-encoding: utf-8
@@ -36,12 +36,12 @@ spring:
   # 配置 redis
   redis:
     database: 0
-    host: 192.168.9.131
+    host: 127.0.0.1 # redis地址
     port: 6379
 
 # 发送者邮箱
 sender:
-  email: dbeetle@qq.com # 邮箱地址
+  email: # 邮箱地址
 
 # 开启 mybatis 驼峰标识
 mybatis:
