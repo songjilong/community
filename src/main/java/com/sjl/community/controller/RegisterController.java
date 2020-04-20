@@ -1,6 +1,7 @@
 package com.sjl.community.controller;
 
 import com.sjl.community.dto.ResultDto;
+import com.sjl.community.enums.SendEmailEnum;
 import com.sjl.community.exception.CustomizeErrorCode;
 import com.sjl.community.service.RegisterService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,15 +32,21 @@ public class RegisterController {
     @GetMapping("/sendEmail")
     @ResponseBody
     public ResultDto<?> sendEmail(@RequestParam("email") String email,
-                                  @RequestParam("type") Integer type) {
+                                  @RequestParam("type") int type) {
         if (!registerService.checkEmail(email)) {
             return ResultDto.errorOf(CustomizeErrorCode.SEND_EMAIL_FAIL);
         }
-        if (registerService.sendEmail(email, type)) {
-            return ResultDto.okOf();
+        if (registerService.registered(email)) {
+            if (type == SendEmailEnum.REGISTER.getCode()) {
+                return ResultDto.errorOf(CustomizeErrorCode.EMAIL_ALREADY_EXISTS);
+            }
         } else {
-            return ResultDto.errorOf(CustomizeErrorCode.EMAIL_ALREADY_EXISTS);
+            if (type == SendEmailEnum.UPDATE_PWD.getCode()) {
+                return ResultDto.errorOf(CustomizeErrorCode.EMAIL_NOT_EXISTS);
+            }
         }
+        registerService.sendEmail(email, type);
+        return ResultDto.okOf();
     }
 
     @PostMapping("/register")

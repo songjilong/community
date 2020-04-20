@@ -36,7 +36,7 @@ spring:
   # 配置 redis
   redis:
     database: 0
-    host: 127.0.0.1 # redis地址
+    host: # redis地址
     port: 6379
 
 # 发送者邮箱

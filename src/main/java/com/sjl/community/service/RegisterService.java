@@ -45,19 +45,18 @@ public class RegisterService {
 
     /**
      * 发送邮件
-     *
-     * @param email
      */
-    public Boolean sendEmail(String email, int type) {
-        if(registered(email) && type == SendEmailEnum.REGISTER.getCode()){
-            return false;
-        }
+    public void sendEmail(String email, int type) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(email);
         simpleMailMessage.setSubject("甲壳虫社区验证码");
         //生成6位随机数
         int code = (int) ((Math.random() * 9 + 1) * 100000);
-        simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
+        if (type == SendEmailEnum.REGISTER.getCode()) {
+            simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
+        } else {
+            simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成密码修改。");
+        }
         simpleMailMessage.setFrom(senderEmail);
         try {
             //存入redis，过期时间5分钟
@@ -68,7 +67,6 @@ public class RegisterService {
         }
         try {
             mailSender.send(simpleMailMessage);
-            return true;
         } catch (MailException e) {
             log.error("邮件发送出错" + e);
             throw new CustomizeException(CustomizeErrorCode.SEND_EMAIL_FAIL);

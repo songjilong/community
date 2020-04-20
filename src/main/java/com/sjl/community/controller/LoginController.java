@@ -64,14 +64,16 @@ public class LoginController {
                             @RequestParam("pwd1") String pwd1,
                             @RequestParam("pwd2") String pwd2,
                             Model model) {
-        if (!registerService.checkEmail(email) || !registerService.checkCode(email, code)) {
-            model.addAttribute("updatePwdInfo", "输入信息有误");
-        } else if (!StringUtils.equals(pwd1, pwd2)) {
+        if (!StringUtils.equals(pwd1, pwd2)) {
             model.addAttribute("updatePwdInfo", "两次输入的密码不一致");
-        } else {
-            userService.updatePwd(email, pwd1);
-            model.addAttribute("updatePwdInfo", "密码修改成功");
+            return "login";
         }
+        if (!registerService.checkEmail(email) || !registerService.checkCode(email, code)) {
+            model.addAttribute("updatePwdInfo", "信息输入有误，修改失败");
+            return "login";
+        }
+        userService.updatePwd(email, pwd1);
+        model.addAttribute("updatePwdInfo", "密码修改成功");
         return "login";
     }
 }
