@@ -22,7 +22,7 @@
                 <div class="person-content">
                     <div>
                         <h3 th:text="${userInfo.name}"></h3>
-                        <h4 th:text="${userInfo.bio == null ? '什么都没留下' : userInfo.bio}"></h4>
+                        <h4 th:text="${userInfo.bio == null ? '' : userInfo.bio}"></h4>
                     </div>
                 </div>
             </div>

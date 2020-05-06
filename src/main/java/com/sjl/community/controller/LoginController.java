@@ -68,12 +68,12 @@ public class LoginController {
             model.addAttribute("updatePwdInfo", "两次输入的密码不一致");
             return "login";
         }
-        if (!registerService.checkEmail(email) || !registerService.checkCode(email, code)) {
-            model.addAttribute("updatePwdInfo", "信息输入有误，修改失败");
+        if (registerService.checkEmail(email) && registerService.checkCode(email, code)) {
+            userService.updatePwd(email, pwd1);
+            model.addAttribute("updatePwdInfo", "密码修改成功");
             return "login";
         }
-        userService.updatePwd(email, pwd1);
-        model.addAttribute("updatePwdInfo", "密码修改成功");
+        model.addAttribute("updatePwdInfo", "信息输入有误，修改失败");
         return "login";
     }
 }
