@@ -49,13 +49,14 @@ public class RegisterService {
     public void sendEmail(String email, int type) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(email);
-        simpleMailMessage.setSubject("甲壳虫社区验证码");
         //生成6位随机数
         int code = (int) ((Math.random() * 9 + 1) * 100000);
         if (type == SendEmailEnum.REGISTER.getCode()) {
+            simpleMailMessage.setSubject("注册甲壳虫社区账号");
             simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成注册。");
-        } else {
-            simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成密码修改。");
+        } else if(type == SendEmailEnum.UPDATE_PWD.getCode()) {
+            simpleMailMessage.setSubject("甲壳虫社区密码找回");
+            simpleMailMessage.setText("欢迎加入甲壳虫社区！ 您的验证码是：" + code + "，请在5分钟内完成密码的修改。");
         }
         simpleMailMessage.setFrom(senderEmail);
         try {
