@@ -8,6 +8,28 @@
 
 目前功能有第三方登陆、邮箱注册登录、查看、发布、评论、消息通知、顶置、搜索、热门问题、热门标签等，后续会不断的更新完善，欢迎大家提供更好的建议。
 
+# 网站预览
+
+## 首页
+
+![首页](./img/1.png)
+
+## 登录界面
+
+![登录页](./img/2.png)
+
+## 问题详情
+
+![问题详情页](./img/3.png)
+
+## 问题发布
+
+![问题发布页](./img/4.png)
+
+## 标签选择
+
+![标签选择](./img/5.png)
+
 # 使用技术
 ### 后端：
 - Java
@@ -139,4 +161,3 @@
 - [阿里云OSS上传Object后如何获取访问URL？](https://www.alibabacloud.com/help/zh/doc-detail/39607.htm)
 - [CentOs防火墙设置](https://support.huaweicloud.com/trouble-ecs/ecs_trouble_0402.html)
 - [git同步代码至github和gitee(码云)](https://zhuanlan.zhihu.com/p/71163868)
-
