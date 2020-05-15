@@ -6,7 +6,7 @@
         <span class="glyphicon glyphicon-comment"></span>
         <span class="label label-danger" th:if="${info.status == 0}">未读</span>
         <span class="label label-success" th:unless="${info.status == 0}">已读</span>
-        <a th:href="@{/user/{id}/{section}(id=${info.notifierId},section='replies')}" th:text="${info.notifyName}"></a>
+        <a th:href="@{/user/{id}(id=${info.notifierId})}" th:text="${info.notifyName}"></a>
         <span th:text="${info.typeDescription}"></span>
         <a th:text="${info.targetTitle}" th:href="@{'/notification/'+${info.id}}"></a>
         <span class="time question_text" th:text="${'time : '+#dates.format(info.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}"></span>

@@ -61,7 +61,7 @@
 2. 在本地创建数据库，命名为 db_community，字符集设置为 utf8mb4
 3. 打开 pom.xml、application.yml、application.properties，修改数据库连接信息
 4. 执行命令：`mvn flyway:migrate -P dev` 创建数据库表
-5. 点击运行即可（你的 IDE 需要安装 Lombok 插件）
+5. 点击运行即可（你的 IDE 需要安装 Lombok 插件，否则编译出错）
 
 ### 使用其他功能
 6. 邮件注册：需要安装 redis，并修改配置文件里的连接信息

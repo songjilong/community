@@ -64,6 +64,7 @@ body {
 .user_avatar {
     width: 40px;
     height: 40px;
+    border: 1px #eee solid;
 }
 
 .question_info {

@@ -155,7 +155,7 @@ public class RegisterService {
             User record = new User();
             record.setAccountId(email);
             record.setToken(UUID.randomUUID().toString());
-            record.setName("邮箱用户_" + email);
+            record.setName(email);
             record.setGmtCreate(System.currentTimeMillis());
             record.setGmtModified(record.getGmtCreate());
             record.setAvatarUrl(defaultAvatar);
