@@ -101,7 +101,7 @@
             </h4>
             <hr>
             <div class="media creator_card">
-                <div class="media-left media-middle">
+                <div class="media-left">
                     <img class="media-object img-rounded user_avatar"
                          th:src="${session.user} == null ? '/images/default-avatar.png' : ${session.user.avatarUrl}">
                 </div>
@@ -129,7 +129,7 @@
                              th:src="${questionDto.user.avatarUrl} == null ? '' : ${questionDto.user.avatarUrl}">
                     </a>
                 </div>
-                <div class="media-body">
+                <div class="media-body question_text">
                     用户名：<span class="media-heading" th:text="${questionDto.user.name}"></span>
                     <br>
                     个人描述：<span th:text="${questionDto.user.bio}"></span>
