@@ -61,7 +61,7 @@
             <div th:each="commentDto : ${commentDtos}">
                 <div class="media">
                     <div class="media-left">
-                        <a th:href="@{/user/{id}(id=${commentDto.commentator}}">
+                        <a th:href="@{/user/{id}(id=${commentDto.commentator})}">
                             <img class="media-object img-rounded user_avatar"
                                  th:src="${commentDto.user.avatarUrl} == null ? '' : ${commentDto.user.avatarUrl}"
                                  alt="...">
