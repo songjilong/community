@@ -38,7 +38,7 @@ public class RegisterService {
 
     private static final String CODE_PRE = "code";
 
-    @Value("${sender.email}")
+    @Value("${beetle.senderEmail}")
     private String senderEmail;
     @Value("${beetle.defaultAvatar}")
     private String defaultAvatar;
