@@ -131,7 +131,7 @@
 # 第三方工具
 - [Lombok](https://projectlombok.org/)  
 - [Flyway](https://flywaydb.org/)  
-- [postman（浏览器插件版） 可以共享浏览器session](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
+- [postman（浏览器插件版）](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
 - [moment：JavaScript日期处理类库](http://momentjs.cn/)  
 - [markdown编辑器](https://pandao.github.io/editor.md/)  
 - [前端校验](https://validator.niceue.com/)  

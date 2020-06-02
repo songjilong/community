@@ -47,7 +47,10 @@ public class QuestionService {
     public PaginationDto<QuestionDto> findByCondition(QuestionQueryDto queryDto) {
         //将特殊字符去掉
         if (queryDto.getSearch() != null) {
-            queryDto.setSearch(queryDto.getSearch().replace("+", "").replace("?", "").replace("*", ""));
+            queryDto.setSearch(filterIllegal(queryDto.getSearch()));
+        }
+        if (queryDto.getTag() != null) {
+            queryDto.setTag(filterIllegal(queryDto.getTag()));
         }
         Long time = null;
         String sort = queryDto.getSort();
@@ -65,6 +68,10 @@ public class QuestionService {
         //根据条件获取记录数
         int totalCount = questionExtMapper.countByCondition(queryDto);
         return getPageInfo(totalCount, queryDto);
+    }
+
+    private String filterIllegal(String str) {
+        return str.replace("+", "").replace("?", "").replace("*", "");
     }
 
     /**

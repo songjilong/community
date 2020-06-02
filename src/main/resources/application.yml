@@ -3,10 +3,10 @@ server:
   port: 8887
 
 spring:
-  #禁用Thymeleaf模板缓存
+  # 禁用 Thymeleaf 模板缓存
   thymeleaf:
     cache: false
-  #配置数据源
+  # 配置数据源信息
   datasource:
     url: jdbc:mysql://localhost:3306/db_community?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
@@ -15,8 +15,8 @@ spring:
   # 配置邮件
   mail:
     host: smtp.qq.com # 邮箱服务器地址
-    username:  # 邮箱地址
-    password:  # 邮箱密码
+    username: # 邮箱地址
+    password: # 邮箱密码（QQ邮箱填授权码）
     port: 465
     protocol: smtp
     default-encoding: utf-8
