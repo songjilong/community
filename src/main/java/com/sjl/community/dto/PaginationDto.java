@@ -2,6 +2,7 @@ package com.sjl.community.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @create 2020/2/17 20:27
  */
 @Data
-public class PaginationDto<T> {
+public class PaginationDto<T> implements Serializable {
     private List<T> list;
     private boolean hasPreviousPage;
     private boolean hasNextPage;

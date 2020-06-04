@@ -16,6 +16,8 @@ import com.sjl.community.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -128,7 +130,9 @@ public class QuestionService {
      * @param id
      * @return
      */
+    @Cacheable(cacheNames = "questionById", key = "'question' + #root.args[0]")
     public QuestionDto findById(Long id) {
+        System.out.println("查询：" + id);
         Question question = questionMapper.selectByPrimaryKey(id);
         if (question == null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
@@ -145,6 +149,7 @@ public class QuestionService {
      *
      * @param question
      */
+    @CacheEvict(cacheNames = "questionById", key = "'question' + #root.args[0].getId()")
     public void createOrUpdateQuestion(Question question, User user) {
         if (question.getId() == null) {
             question.setGmtCreate(System.currentTimeMillis());
@@ -227,6 +232,7 @@ public class QuestionService {
      *
      * @param id
      */
+    @CacheEvict(cacheNames = "questionById", key = "'question' + #root.args[0]")
     public void deleteQuestion(Long id, Long userId) {
         Question question = questionMapper.selectByPrimaryKey(id);
         if (question.getCreator().equals(userId)) {

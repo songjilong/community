@@ -112,12 +112,14 @@ body {
     padding: 0;
 }
 
-.oper-btn:hover {
-    color: #499EF3;
+.unactive {
+    color: #aaa;
+    cursor: pointer;
 }
 
 .comment_operating .active {
     color: #499EF3;
+    cursor: pointer;
 }
 
 .comment_count, .comment_commit {

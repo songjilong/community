@@ -46,7 +46,7 @@
                     编辑
                 </a>
                 <a class="question_text profile-canEdit a-no-line" th:onclick="deleteQuestion([[${questionDto.id}]])">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer"></span>
                     删除
                 </a>
             </div>
@@ -75,12 +75,15 @@
                 </div>
                 <!--问题评论的操作-->
                 <div class="comment_operating">
-                    <span class="glyphicon glyphicon-thumbs-up btn oper-btn"></span>
-                    <span class="glyphicon glyphicon-comment btn oper-btn"
-                          th:id="'sub_comment_btn-'+${commentDto.id}" th:data-id="${commentDto.id}"
-                          onclick="show_subComment(this)">
+                    <!--<span th:id="'like-'+${commentDto.id}" th:data-id="${commentDto.id}" onclick="click_like(this)" class="unactive">
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                        <span class="question_text" th:text="${commentDto.likeCount}+'个赞同'"></span>
                     </span>
-                    <span class="question_text" th:text="${commentDto.commentCount}+'条回复'"></span>
+                    &emsp;-->
+                    <span th:id="'sub_comment_btn-'+${commentDto.id}" th:data-id="${commentDto.id}" onclick="show_subComment(this)" class="unactive">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        <span class="question_text" th:text="${commentDto.commentCount}+'条回复'"></span>
+                    </span>
                     <span class="question_text to-right" th:text="${#dates.format(commentDto.gmtModified, 'yyyy-MM-dd HH:mm:ss')}">评论时间</span>
                 </div>
                 <!--子评论的内容-->

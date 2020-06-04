@@ -110,8 +110,6 @@ function show_subComment(e) {
                 const operatingElement = $("<div/>", {
                     "class": "comment_operating"
                 }).append($("<span/>", {
-                    "class": "glyphicon glyphicon-thumbs-up btn"
-                })).append($("<span/>", {
                     "class": "question_text to-right",
                     "html": moment(time, "YYYYMMDD HHmmss").fromNow()
                 }));
@@ -121,14 +119,29 @@ function show_subComment(e) {
                 });
 
                 const commentElement = $("<div/>")
-                    .append(mediaElement)
                     .append(operatingElement)
+                    .append(mediaElement)
                     .append(lineElement);
 
                 subCommentContainer.prepend(commentElement);
             });
         });
     }
+}
+
+function click_like(e) {
+    const id = e.getAttribute("data-id");//获取评论id
+    let $like = $('#like-' + id);
+    $like.toggleClass("active");
+    $like.toggleClass("unactive");
+    if($like.hasClass("active")){
+        //TODO 异步请求增加点赞数
+        //TODO 页面点赞数+1
+    }else{
+        //TODO 异步请求减少点赞数
+        //TODO 页面点赞数-1
+    }
+
 }
 
 /**
@@ -222,11 +235,11 @@ $.getJSON("https://interface.meiriyiwen.com/article/today?dev=1",
     function ({data}) {
         $("#article-title").text(data.title);
         $("#article-author,#modal-article-author").text(data.author);
-        $("#article-digest").html("&emsp;&emsp;"+data.digest+"...");
+        $("#article-digest").html("&emsp;&emsp;" + data.digest + "...");
 
         $("#modal-article-title").append(data.title);
         $("#modal-article-content").html(data.content);
-        $("#modal-article-wc").text("共"+data.wc+"字");
+        $("#modal-article-wc").text("共" + data.wc + "字");
     });
 
 /**
@@ -309,7 +322,7 @@ function updatePwd() {
     let email = $("#find-email").val();
     let code = $("#find-code").val();
     let pwd1 = $("#find-pwd1").val();
-    let pwd2  = $("#find-pwd2").val();
+    let pwd2 = $("#find-pwd2").val();
     console.log(pwd1, pwd2);
     /*$.ajax({
         url: "/updatePwd",
@@ -325,7 +338,7 @@ function updatePwd() {
             console.log("返回数据：", data);
         }
     });*/
-    $.post("/updatePwd", {"email": email,"code": code,"pwd1": pwd1,"pwd2": pwd2});
+    $.post("/updatePwd", {"email": email, "code": code, "pwd1": pwd1, "pwd2": pwd2});
 }
 
 /**
@@ -348,10 +361,10 @@ function deleteQuestion(qid) {
     if (confirm("此操作不可逆，你确定要删除吗？")) {
         $.ajax({
             type: "GET",
-            url: "/question/delete/"+qid,
+            url: "/question/delete/" + qid,
             success: function () {
                 alert("删除成功");
-                window.location.href="/";
+                window.location.href = "/";
             }
         });
     }
