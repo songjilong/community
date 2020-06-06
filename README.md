@@ -58,16 +58,18 @@
 # 快速部署
 ### 使用基本功能
 1. clone 本项目到本地：`git clone git@github.com:songjilong/community.git`，并导入到自己的IDE
-2. 在本地创建数据库，命名为 db_community，字符集设置为 utf8mb4
-3. 打开 pom.xml、application.yml、application.properties，修改数据库连接信息
-4. 执行命令：`mvn flyway:migrate -P dev` 创建数据库表
-5. 点击运行即可（你的 IDE 需要安装 Lombok 插件，否则编译出错）
+2. 确保你的 IDE 中 Lombok 插件能正常使用
+3. 上面的开发环境你需要安装配置好，版本不一定得一致，但 JDK 1.8 及以上是必须的
+4. 在本地创建数据库，命名为 db_community，字符集设置为 utf8mb4
+5. 打开 pom.xml、application.yml、application.properties，修改数据库连接信息
+6. 执行命令：`mvn flyway:migrate -P dev` 创建数据库表
+7. 点击运行即可
 
 ### 使用其他功能
 6. 邮件注册：需要安装 redis，并修改配置文件里的连接信息
 7. 第三方登录：（GitHub、Gitee、QQ），请自行注册第三方应用，官网上有开发文档
-8. markdown编辑器上传图片：需要去阿里云开通 OOS，并修改 application.yml 中对应的配置
-9. 聊天室：需要去 [此处](http://dashboard.daovoice.io) 注册一个账号，修改 /templates/fragment/chatroom.html 中的 app_id
+8. markdown编辑器上传图片：需要去阿里云开通 OSS，并修改 application.yml 中 aliyun 对应的配置
+9. 聊天室：需要去 [此处](http://dashboard.daovoice.io) 注册一个账号，配置 application.yml 中的 beetle.app_id 的值
 
 ### 其他：
 - Mybatis Generator逆向生成代码：`mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -P dev`

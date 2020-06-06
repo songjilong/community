@@ -15,8 +15,8 @@ spring:
   # 配置邮件
   mail:
     host: smtp.qq.com # 邮箱服务器地址
-    username: dbeetle@qq.com # 邮箱地址
-    password: fcmhkelyfkwrbiec # 邮箱密码（QQ邮箱需填授权码）
+    username:  # 邮箱地址
+    password:  # 邮箱密码（QQ邮箱需填授权码）
     port: 465
     protocol: smtp
     default-encoding: utf-8
@@ -90,6 +90,6 @@ beetle:
   # 默认头像链接
   defaultAvatar: https://beetle-community.oss-cn-hangzhou.aliyuncs.com/default-avatar.png
   # 发送者邮箱地址
-  senderEmail: dbeetle@qq.com
+  senderEmail:
   # 聊天室id，需要去 http://dashboard.daovoice.io 注册账号，根据官方说明获取 app_id
-  app_id: d5259c83
+  app_id:
