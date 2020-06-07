@@ -42,7 +42,7 @@ public class QuestionController {
         //根据问题id查询详情
         QuestionDto questionDto = questionService.findById(id);
         //根据问题id查询评论详情
-        List<CommentDto> commentDtos = commentService.findByQuestionId(id, CommentTypeEnum.TYPE_QUESTION);
+        List<CommentDto> commentDtos = commentService.findByParentId(id, CommentTypeEnum.TYPE_QUESTION);
         //根据问题tags查询相关问题
         List<QuestionDto> questionByTags = questionService.findByTags(questionDto);
 

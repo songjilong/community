@@ -57,7 +57,7 @@ public class CommentController {
     @ResponseBody
     @GetMapping("/comment/{id}")
     public ResultDto<List<CommentDto>> getComments(@PathVariable("id") Long id) {
-        List<CommentDto> commentDtos = this.commentService.findByQuestionId(id, CommentTypeEnum.TYPE_COMMENT);
+        List<CommentDto> commentDtos = this.commentService.findByParentId(id, CommentTypeEnum.TYPE_COMMENT);
         return ResultDto.okOf(commentDtos);
     }
 }

@@ -10,6 +10,8 @@ import com.sjl.community.mapper.*;
 import com.sjl.community.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +45,7 @@ public class CommentService {
     private NotificationMapper notificationMapper;
 
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(cacheNames = "commentByParentId", key = "'comment-type' + comment.getType() + '-pid' + comment.getParentId()")
     public void insertComment(Comment comment, User user) {
         //评论的父级不存在
         if (comment.getParentId() == 0 || comment.getParentId() == null) {
@@ -121,7 +124,8 @@ public class CommentService {
      * @param id
      * @return
      */
-    public List<CommentDto> findByQuestionId(Long id, CommentTypeEnum typeEnum) {
+    @Cacheable(cacheNames = "commentByParentId", key = "'comment-type' + #root.args[1].getType() + '-pid' + #root.args[0]")
+    public List<CommentDto> findByParentId(Long id, CommentTypeEnum typeEnum) {
         //获取该问题的评论列表
         CommentExample example = new CommentExample();
         example.createCriteria()
