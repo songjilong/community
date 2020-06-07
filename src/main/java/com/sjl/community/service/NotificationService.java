@@ -29,7 +29,7 @@ public class NotificationService {
     private NotificationMapper notificationMapper;
 
     /**
-     * 根绝接收者id查出所有通知
+     * 根据接收者id查出所有通知
      *
      * @param pageNum
      * @param pageSize

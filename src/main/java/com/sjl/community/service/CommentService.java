@@ -42,7 +42,7 @@ public class CommentService {
     @Autowired
     private NotificationMapper notificationMapper;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void insertComment(Comment comment, User user) {
         //评论的父级不存在
         if (comment.getParentId() == 0 || comment.getParentId() == null) {
