@@ -11,6 +11,7 @@ import com.sjl.community.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +46,7 @@ public class CommentService {
     private NotificationMapper notificationMapper;
 
     @Transactional(rollbackFor = Exception.class)
-    @CacheEvict(cacheNames = "commentByParentId", key = "'comment-type' + comment.getType() + '-pid' + comment.getParentId()")
+    @CacheEvict(cacheNames = "commentByParentId", allEntries = true)
     public void insertComment(Comment comment, User user) {
         //评论的父级不存在
         if (comment.getParentId() == 0 || comment.getParentId() == null) {
